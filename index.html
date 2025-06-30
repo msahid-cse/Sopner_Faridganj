@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>স্বপ্নের ফরিদগঞ্জ - সামাজিক সংগঠন</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Google Font: Noto Sans Bengali for Bengali text */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans Bengali', sans-serif;
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for dark/light mode */
+        }
+        /* Custom scroll-margin-top for sticky header */
+        section {
+            scroll-margin-top: 80px; /* Adjust this value based on your header height */
+        }
+        /* Custom underline for section titles */
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: #10B981; /* Teal 600 - Primary color for underline */
+            margin: 10px auto 0;
+            border-radius: 9999px; /* Fully rounded */
+        }
+        /* Custom styling for donation list items */
+        .donation-info ul li {
+            border-left: 5px solid #10B981; /* Teal 600 - Primary color */
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #1a202c; /* Dark background */
+            color: #e2e8f0; /* Light text */
+        }
+        .dark-mode header {
+            background-color: #2d3748; /* Darker teal for header in dark mode */
+            color: #fff;
+        }
+        .dark-mode nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .dark-mode section {
+            background-color: #2d3748; /* Darker section background */
+            color: #e2e8f0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .dark-mode section h2 {
+            color: #4fd1c5; /* Lighter teal for dark mode headings */
+        }
+        .dark-mode section h2::after {
+            background-color: #4fd1c5; /* Lighter teal for dark mode underline */
+        }
+        .dark-mode .fund-item {
+            background-color: #4a5568; /* Darker fund item background */
+            border-color: #4a5568;
+        }
+        .dark-mode .fund-item h3 {
+            color: #bee3f8; /* Lighter blue for dark mode fund headings */
+        }
+        .dark-mode .fund-item p {
+            color: #81e6d9; /* Lighter teal for dark mode fund amounts */
+        }
+        .dark-mode .donation-info ul li {
+            background-color: #4a5568; /* Darker donation list item background */
+            border-left-color: #4fd1c5; /* Lighter teal for dark mode border */
+        }
+        .dark-mode .contact-form input,
+        .dark-mode .contact-form textarea {
+            background-color: #4a5568; /* Darker input background */
+            border-color: #616e7f; /* Darker border */
+            color: #e2e8f0;
+        }
+        .dark-mode .contact-form button {
+            background-color: #4fd1c5; /* Lighter teal for dark mode button */
+            color: #2d3748;
+        }
+        .dark-mode .contact-form button:hover {
+            background-color: #38b2ac; /* Even lighter teal on hover */
+        }
+        .dark-mode footer {
+            background-color: #1a202c; /* Darker footer */
+            color: #e2e8f0;
+        }
+        .dark-mode .text-teal-600 {
+            color: #4fd1c5; /* Adjust teal color for dark mode */
+        }
+        .dark-mode .text-teal-700 {
+            color: #81e6d9; /* Adjust teal color for dark mode */
+        }
+        .dark-mode .hover\:bg-teal-800:hover {
+            background-color: #319795; /* Darker teal for hover in dark mode */
+        }
+
+        /* Dark mode for new sidebar elements */
+        .dark-mode #mobile-sidebar {
+            background-color: #2d3748; /* Darker sidebar background */
+            border-color: #4a5568;
+        }
+        .dark-mode #mobile-sidebar nav a:hover {
+            background-color: #4a5568; /* Darker hover for sidebar links */
+        }
+        .dark-mode #mobile-menu-button,
+        .dark-mode #theme-toggle-mobile {
+            background-color: #4a5568;
+            color: #e2e8f0;
+        }
+        .dark-mode #mobile-menu-button:hover,
+        .dark-mode #theme-toggle-mobile:hover {
+            background-color: #616e7f;
+        }
+
+        /* Dark mode styles for "আমাদের অনুপ্রেরণা" text */
+        .dark-mode .our-inspiration h4 {
+            color: #e2e8f0; /* Lighter color for name in dark mode */
+        }
+        .dark-mode .our-inspiration p {
+            color: #a0aec0; /* Lighter color for birth-death info in dark mode */
+        }
+
+        /* Styles for image navigation buttons */
+        .activity-card:hover .prev-image-btn,
+        .activity-card:hover .next-image-btn {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header Section -->
+    <header class="bg-teal-700 text-white py-3 text-center shadow-lg sticky top-0 z-50 rounded-b-lg">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <!-- Mobile Menu Button (left for mobile) -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="p-2 rounded-full bg-white text-gray-800 shadow-md hover:bg-gray-200 transition duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Logo and Title (centered for mobile, left for desktop) -->
+            <div class="flex items-center flex-grow justify-center md:justify-start cursor-pointer" onclick="scrollToSection('about')">
+                <img src="uploaded:Untitled design (6).jpg-18bc21ee-cb1e-4cd9-af51-2a5a868ecbf6" alt="স্বপ্নের ফরিদগঞ্জ সামাজিক সংগঠন লোগো" class="h-16 w-16 rounded-full mr-3 object-cover">
+                <h1 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-center md:text-left">
+                    <span class="text-blue-400">স্বপ্নের</span> <span class="text-red-500">ফরিদগঞ্জ</span>
+                </h1>
+            </div>
+
+            <!-- Desktop Navigation & Dark Mode Toggle (right for desktop) -->
+            <div class="hidden md:flex items-center space-x-8">
+                <nav>
+                    <ul class="flex space-x-4">
+                        <li><a href="#about" class="text-lg font-semibold hover:bg-teal-800 px-3 py-1 rounded-lg transition duration-300">আমাদের সম্পর্কে</a></li>
+                        <li><a href="#activities" class="text-lg font-semibold hover:bg-teal-800 px-3 py-1 rounded-lg transition duration-300">আমাদের কার্যক্রম</a></li>
+                        <li><a href="#gallery" class="text-lg font-semibold hover:bg-teal-800 px-3 py-1 rounded-lg transition duration-300">আমাদের গ্যালারি</a></li>
+                        <li><a href="#fund" class="text-lg font-semibold hover:bg-teal-800 px-3 py-1 rounded-lg transition duration-300">ফান্ড</a></li>
+                        <li><a href="#donation" class="text-lg font-semibold hover:bg-teal-800 px-3 py-1 rounded-lg transition duration-300">ডোনেশন</a></li>
+                        <li><a href="#contact" class="text-lg font-semibold hover:bg-teal-800 px-3 py-1 rounded-lg transition duration-300">যোগাযোগ</a></li>
+                    </ul>
+                </nav>
+                <button id="theme-toggle" class="p-2 rounded-full bg-white text-gray-800 shadow-md hover:bg-gray-200 transition duration-300">
+                    <!-- Sun Icon (Light Mode) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sun-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M4 12H3m15.325-4.757l-.707-.707M6.343 6.343l-.707-.707m12.728 12.728l-.707-.707M6.343 17.657l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <!-- Moon Icon (Dark Mode) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 moon-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Dark Mode Toggle (right for mobile) -->
+            <div class="md:hidden">
+                <button id="theme-toggle-mobile" class="p-2 rounded-full bg-white text-gray-800 shadow-md hover:bg-gray-200 transition duration-300">
+                    <!-- Sun Icon (Light Mode) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sun-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M4 12H3m15.325-4.757l-.707-.707M6.343 6.343l-.707-.707m12.728 12.728l-.707-.707M6.343 17.657l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <!-- Moon Icon (Dark Mode) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 moon-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Sidebar (Off-canvas menu) -->
+    <div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 bg-teal-800 text-white transform -translate-x-full md:hidden transition-transform duration-300 ease-in-out z-50 shadow-lg">
+        <div class="p-4 flex justify-between items-center border-b border-teal-700">
+            <h2 class="text-xl font-bold">মেনু</h2>
+            <button id="close-sidebar-button" class="text-white hover:text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <nav class="p-4">
+            <ul class="flex flex-col space-y-4">
+                <li><a href="#about" class="block text-lg font-semibold hover:bg-teal-700 px-4 py-2 rounded-lg transition duration-300">আমাদের সম্পর্কে</a></li>
+                <li><a href="#activities" class="block text-lg font-semibold hover:bg-teal-700 px-4 py-2 rounded-lg transition duration-300">আমাদের কার্যক্রম</a></li>
+                <li><a href="#gallery" class="block text-lg font-semibold hover:bg-teal-700 px-4 py-2 rounded-lg transition duration-300">আমাদের গ্যালারি</a></li>
+                <li><a href="#fund" class="block text-lg font-semibold hover:bg-teal-700 px-4 py-2 rounded-lg transition duration-300">ফান্ড</a></li>
+                <li><a href="#donation" class="block text-lg font-semibold hover:bg-teal-700 px-4 py-2 rounded-lg transition duration-300">ডোনেশন</a></li>
+                <li><a href="#contact" class="block text-lg font-semibold hover:bg-teal-700 px-4 py-2 rounded-lg transition duration-300">যোগাযোগ</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Overlay for when sidebar is open -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-4 py-8">
+
+        <!-- About Us Section -->
+        <section id="about" class="bg-white p-8 mb-6 rounded-xl shadow-md">
+            <h2 class="text-3xl font-bold text-teal-600 text-center mb-6">আমাদের সম্পর্কে</h2>
+            <p class="text-lg leading-relaxed mb-4">স্বপ্নের ফরিদগঞ্জ" একটি স্বপ্ন, একটি অঙ্গীকার, যা ২০২৪ সালে চাঁদপুর জেলার ফরিদগঞ্জ উপজেলায় যাত্রা শুরু করে। এটি নিছকই একটি সামাজিক সংগঠন নয়, বরং ফরিদগঞ্জের মানুষের সম্মিলিত প্রচেষ্টার এক মূর্ত প্রতীক, যা সমাজের প্রতিটি স্তরে ইতিবাচক পরিবর্তন আনার লক্ষ্যে কাজ করে চলেছে।</p>
+            <p class="text-lg leading-relaxed">আমরা বিশ্বাস করি, প্রতিটি মানুষের জীবনে সম্ভাবনা রয়েছে এবং সঠিক সুযোগ ও সহায়তার মাধ্যমে সেই সম্ভাবনাকে বিকশিত করা সম্ভব। এই বিশ্বাসকে ধারণ করে, "স্বপ্নের ফরিদগঞ্জ" শিক্ষা, স্বাস্থ্য, পরিবেশ সুরক্ষা, এবং মানবিক সহায়তা সহ বিভিন্ন ক্ষেত্রে কাজ করে যাচ্ছে। আমাদের মূল উদ্দেশ্য হলো সমাজের পিছিয়ে পড়া জনগোষ্ঠীর পাশে দাঁড়ানো, তাদের মৌলিক চাহিদা পূরণে সহায়তা করা এবং একটি সুন্দর ও সমৃদ্ধ ফরিদগঞ্জ গড়ে তোলার পথে অবদান রাখা।</p>
+            <p class="text-lg leading-relaxed">আমাদের স্বেচ্ছাসেবক এবং শুভাকাঙ্ক্ষীদের অক্লান্ত পরিশ্রম ও নিঃস্বার্থ ভালোবাসাই আমাদের প্রধান শক্তি। আমরা স্বচ্ছতা ও জবাবদিহিতার সাথে কাজ করি, যাতে আমাদের প্রতিটি কার্যক্রম সমাজের প্রকৃত উন্নয়নে সহায়ক হয়। "স্বপ্নের ফরিদগঞ্জ" শুধু বর্তমানের জন্য নয়, ভবিষ্যতের জন্য একটি সুস্থ, শিক্ষিত এবং মানবিক সমাজ গড়ার স্বপ্ন দেখে। আমরা এই মহৎ যাত্রায় আপনাদের সহযোগিতা ও সমর্থন কামনা করি।</p>
+
+            <!-- New sub-section: আমাদের অনুপ্রেরণা -->
+            <div class="our-inspiration mt-8 pt-8 border-t border-gray-200">
+                <h3 class="text-2xl font-bold text-teal-600 text-center mb-6">আমাদের অনুপ্রেরণা</h3>
+                <div class="flex flex-col md:flex-row items-center md:space-x-8">
+                    <div class="flex-shrink-0 mb-4 md:mb-0">
+                        <img src="https://placehold.co/150x150/E0F2F7/000000?text=ব্যক্তি+ছবি" alt="অনুপ্রেরণা ছবি" class="w-40 h-40 rounded-full object-cover shadow-lg mx-auto md:mx-0">
+                    </div>
+                    <div class="text-center md:text-left flex-grow">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2">নাম: <span class="dark-mode:text-e2e8f0">মোঃ সাইদুল ইসলাম রনি</span></h4>
+                        <p class="text-md text-gray-600 mb-3">জন্ম: <span class="dark-mode:text-a0aec0">[জন্ম তারিখ]</span> - মৃত্যু: <span class="dark-mode:text-a0aec0">[মৃত্যু তারিখ]</span></p>
+                        <p class="text-lg leading-relaxed">
+                            <span class="dark-mode:text-a0aec0">মোঃ সাইদুল ইসলাম রনি ছিলেন একজন নিবেদিতপ্রাণ সামাজিক সংগঠক, যিনি তাঁর কর্মময় জীবন উৎসর্গ করেছিলেন মানবসেবায়। সমাজের পিছিয়ে পড়া ও অসহায় মানুষের কল্যাণে তিনি নিরলসভাবে কাজ করে গেছেন। শিক্ষা, স্বাস্থ্য, পরিবেশ সুরক্ষা সহ নানান ধরনের সামাজিক কার্যক্রমে তাঁর সক্রিয় অংশগ্রহণ ছিল চোখে পড়ার মতো।</span>
+                        </p>
+                        <p class="text-lg leading-relaxed mt-2">
+                            <span class="dark-mode:text-a0aec0">তাঁর নিঃস্বার্থ প্রচেষ্টা, অসাধারণ নেতৃত্ব এবং মানবিক মূল্যবোধ অসংখ্য মানুষের জীবনে ইতিবাচক পরিবর্তন এনেছে। তিনি ছিলেন সকলের কাছে এক উজ্জ্বল দৃষ্টান্ত, যিনি মানুষের পাশে দাঁড়াতে এবং বাস্তবতার সাথে মিশে কাজ করতে সর্বদা অনুপ্রাণিত করতেন। স্বপ্নের ফরিদগঞ্জ সামাজিক সংগঠনের প্রতিটি সদস্যের কাছে মোঃ সাইদুল ইসলাম রনি এক অফুরন্ত অনুপ্রেরণার উৎস। তাঁর আদর্শ এবং দেখানো পথ আমাদের ভবিষ্যতেও সমাজের উন্নয়নে কাজ করে যেতে নিরন্তর সাহস যোগাবে।</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Activities Section -->
+        <section id="activities" class="bg-white p-8 mb-6 rounded-xl shadow-md">
+            <h2 class="text-3xl font-bold text-teal-600 text-center mb-6">আমাদের কার্যক্রম</h2>
+            <p class="text-lg leading-relaxed mb-4">এই অংশে আপনার সংগঠনের প্রধান কার্যক্রমগুলো বিস্তারিতভাবে বর্ণনা করুন। ছবি বা ছোট আইকন ব্যবহার করে প্রতিটি কার্যক্রমকে আরও আকর্ষণীয় করে তুলতে পারেন।</p>
+            <ul class="list-disc list-inside space-y-3 text-lg">
+                <li><strong class="text-teal-600">শিক্ষা সহায়তা প্রোগ্রাম:</strong> গরীব ও মেধাবী শিক্ষার্থীদের জন্য বৃত্তি প্রদান, শিক্ষা উপকরণ বিতরণ, এবং কোচিং-এর ব্যবস্থা।</li>
+                <li><strong class="text-teal-600">স্বাস্থ্যসেবা ক্যাম্প:</strong> নিয়মিত স্বাস্থ্য পরীক্ষা, বিনামূল্যে ঔষধ বিতরণ, এবং স্বাস্থ্য সচেতনতা বৃদ্ধি কার্যক্রম।</li>
+                <li><strong class="text-teal-600">পরিবেশ সংরক্ষণ:</strong> বৃক্ষরোপণ অভিযান, বর্জ্য ব্যবস্থাপনা, এবং পরিবেশ দূষণ রোধে সচেতনতা বৃদ্ধি।</li>
+                <li><strong class="text-teal-600">ত্রাণ ও দুর্যোগ ব্যবস্থাপনা:</b> প্রাকৃতিক দুর্যোগে ক্ষতিগ্রস্তদের পাশে দাঁড়ানো, খাদ্য, বস্ত্র, এবং আশ্রয় প্রদান।</li>
+                <li><strong class="text-teal-600">দক্ষতা উন্নয়ন প্রশিক্ষণ:</strong> যুবকদের জন্য বিভিন্ন কারিগরি ও বৃত্তিমূলক প্রশিক্ষণের আয়োজন।</li>
+            </ul>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="bg-white p-8 mb-6 rounded-xl shadow-md">
+            <h2 class="text-3xl font-bold text-teal-600 text-center mb-6">আমাদের গ্যালারি</h2>
+            <p class="text-lg leading-relaxed mb-6 text-center">আমাদের আগের কিছু কার্যক্রমের ছবি ও ভিডিও এখানে দেখুন।</p>
+            
+            <!-- Image Gallery with Click-to-Change -->
+            <h3 class="text-2xl font-semibold text-teal-700 mb-4 border-b pb-2">ছবি গ্যালারি</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Activity Card 1: Education Support with multiple clickable images -->
+                <div class="bg-gray-50 rounded-lg shadow-sm overflow-hidden relative activity-card" data-activity-id="education-support">
+                    <img src="https://placehold.co/400x250/E0F2F7/000000?text=শিক্ষা+১" alt="শিক্ষা কার্যক্রম ছবি ১" class="w-full h-48 object-cover activity-image">
+                    <div class="absolute inset-0 flex items-center justify-between px-2">
+                        <button class="prev-image-btn bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button class="next-image-btn bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="p-4 text-center text-gray-700">শিক্ষা সহায়তা কার্যক্রম</p>
+                </div>
+
+                <!-- Activity Card 2: Healthcare Camp with multiple clickable images -->
+                <div class="bg-gray-50 rounded-lg shadow-sm overflow-hidden relative activity-card" data-activity-id="healthcare-camp">
+                    <img src="https://placehold.co/400x250/E0F2F7/000000?text=স্বাস্থ্য+১" alt="স্বাস্থ্য ক্যাম্প ছবি ১" class="w-full h-48 object-cover activity-image">
+                    <div class="absolute inset-0 flex items-center justify-between px-2">
+                        <button class="prev-image-btn bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button class="next-image-btn bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="p-4 text-center text-gray-700">স্বাস্থ্যসেবা ক্যাম্প</p>
+                </div>
+
+                <!-- Activity Card 3: বৃক্ষরোপণ অভিযান (Single image for example, can be expanded) -->
+                <div class="bg-gray-50 rounded-lg shadow-sm overflow-hidden relative activity-card" data-activity-id="tree-plantation">
+                    <img src="https://placehold.co/400x250/E0F2F7/000000?text=বৃক্ষরোপণ" alt="বৃক্ষরোপণ অভিযান" class="w-full h-48 object-cover activity-image">
+                    <div class="absolute inset-0 flex items-center justify-between px-2">
+                        <button class="prev-image-btn bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button class="next-image-btn bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="p-4 text-center text-gray-700">বৃক্ষরোপণ অভিযান</p>
+                </div>
+
+                <!-- Activity Card 4: ত্রাণ বিতরণ (Single image for example, can be expanded) -->
+                <div class="bg-gray-50 rounded-lg shadow-sm overflow-hidden relative activity-card" data-activity-id="relief-distribution">
+                    <img src="https://placehold.co/400x250/E0F2F7/000000?text=ত্রাণ+বিতরণ" alt="ত্রাণ বিতরণ" class="w-full h-48 object-cover activity-image">
+                    <div class="absolute inset-0 flex items-center justify-between px-2">
+                        <button class="prev-image-btn bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button class="next-image-btn bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="p-4 text-center text-gray-700">ত্রাণ বিতরণ</p>
+                </div>
+
+                <!-- Activity Card 5: দক্ষতা উন্নয়ন প্রশিক্ষণ (Single image for example, can be expanded) -->
+                <div class="bg-gray-50 rounded-lg shadow-sm overflow-hidden relative activity-card" data-activity-id="skill-training">
+                    <img src="https://placehold.co/400x250/E0F2F7/000000?text=প্রশিক্ষণ" alt="দক্ষতা উন্নয়ন প্রশিক্ষণ" class="w-full h-48 object-cover activity-image">
+                    <div class="absolute inset-0 flex items-center justify-between px-2">
+                        <button class="prev-image-btn bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button class="next-image-btn bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="p-4 text-center text-gray-700">দক্ষতা উন্নয়ন প্রশিক্ষণ</p>
+                </div>
+
+                <!-- Activity Card 6: গ্রাম উন্নয়ন প্রকল্প (Single image for example, can be expanded) -->
+                <div class="bg-gray-50 rounded-lg shadow-sm overflow-hidden relative activity-card" data-activity-id="rural-development">
+                    <img src="https://placehold.co/400x250/E0F2F7/000000?text=গ্রাম+উন্নয়ন" alt="গ্রাম উন্নয়ন প্রকল্প" class="w-full h-48 object-cover activity-image">
+                    <div class="absolute inset-0 flex items-center justify-between px-2">
+                        <button class="prev-image-btn bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button class="next-image-btn bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="p-4 text-center text-gray-700">গ্রাম উন্নয়ন প্রকল্প</p>
+                </div>
+            </div>
+
+            <!-- Video Gallery -->
+            <h3 class="text-2xl font-semibold text-teal-700 mb-4 border-b pb-2">ভিডিও গ্যালারি</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gray-50 rounded-lg shadow-sm overflow-hidden">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <!-- Placeholder YouTube video embed -->
+                        <iframe class="w-full h-full rounded-t-lg" src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p class="p-4 text-center text-gray-700">আমাদের একটি কার্যক্রমের ভিডিও</p>
+                </div>
+                <div class="bg-gray-50 rounded-lg shadow-sm overflow-hidden">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <!-- Placeholder YouTube video embed -->
+                        <iframe class="w-full h-full rounded-t-lg" src="https://www.youtube.com/embed/some_other_video_id?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p class="p-4 text-center text-gray-700">সংগঠনের পরিচিতি ভিডিও</p>
+                </div>
+            </div>
+            <p class="text-center text-sm text-gray-500 mt-4">ভিডিওগুলি দেখতে প্লে বাটনে ক্লিক করুন।</p>
+        </section>
+
+        <!-- Fund Section -->
+        <section id="fund" class="bg-white p-8 mb-6 rounded-xl shadow-md">
+            <h2 class="text-3xl font-bold text-teal-600 text-center mb-6">ফান্ড</h2>
+            <div class="flex flex-col md:flex-row justify-around items-center gap-6">
+                <div class="bg-teal-50 p-6 rounded-xl shadow-sm flex-1 w-full md:w-auto text-center border border-teal-200">
+                    <h3 class="text-2xl font-semibold text-teal-700 mb-2">বর্তমান ফান্ড</h3>
+                    <p class="text-4xl font-bold text-teal-600">৳ ১০,৫০,০০০</p>
+                    <small class="text-gray-500">(আজকের তারিখ পর্যন্ত)</small>
+                </div>
+                <div class="bg-teal-50 p-6 rounded-xl shadow-sm flex-1 w-full md:w-auto text-center border border-teal-200">
+                    <h3 class="text-2xl font-semibold text-teal-700 mb-2">মোট খরচ</h3>
+                    <p class="text-4xl font-bold text-teal-600">৳ ৮,০০,০০০</p>
+                    <small class="text-gray-500">(প্রতিষ্ঠা থেকে আজ পর্যন্ত)</small>
+                </div>
+            </div>
+            <p class="text-center text-lg mt-6 text-gray-600">ফান্ডের স্বচ্ছতা নিশ্চিত করতে আমরা নিয়মিত আপডেট প্রদান করি।</p>
+        </section>
+
+        <!-- Donation Section -->
+        <section id="donation" class="bg-white p-8 mb-6 rounded-xl shadow-md">
+            <h2 class="text-3xl font-bold text-teal-600 text-center mb-6">ডোনেশন</h2>
+            <div class="donation-info">
+                <p class="text-lg leading-relaxed mb-4">আপনারা চাইলে আমাদের কার্যক্রমে সহায়তা করার জন্য ডোনেশন পাঠাতে পারেন। আপনার প্রতিটি ছোট সাহায্যও আমাদের জন্য অনেক মূল্যবান।</p>
+                <p class="text-lg leading-relaxed mb-4">ডোনেশন পাঠানোর জন্য নিচের পদ্ধতিগুলো অনুসরণ করুন:</p>
+                <ul class="space-y-3">
+                    <li class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                        <strong class="text-teal-600">বিকাশ:</strong> <code>+8801XXXXXXXXX</code> (মার্চেন্ট অ্যাকাউন্ট)
+                    </li>
+                    <li class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                        <strong class="text-teal-600">নগদ:</strong> <code>+8801XXXXXXXXX</code> (ব্যক্তিগত)
+                    </li>
+                    <li class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                        <strong class="text-teal-600">রকেট:</strong> <code>+8801XXXXXXXXX</code> (ব্যক্তিগত)
+                    </li>
+                    <li class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                        <strong class="text-teal-600">ব্যাংক অ্যাকাউন্ট:</strong>
+                        <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                            <li>ব্যাংকের নাম: [আপনার ব্যাংকের নাম]</li>
+                            <li>অ্যাকাউন্ট নাম: [আপনার সংগঠনের নাম]</li>
+                            <li>অ্যাকাউন্ট নম্বর: [আপনার অ্যাকাউন্ট নম্বর]</li>
+                            <li>শাখা: [ব্যাংকের শাখা]</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p class="text-lg leading-relaxed mt-6">ডোনেশনের পরে অনুগ্রহ করে আমাদের <a href="#contact" class="text-teal-600 hover:underline font-semibold">যোগাযোগ</a> সেকশনে ফর্ম পূরণ করে অথবা প্রদত্ত নম্বরে কল করে জানিয়ে দিন।</p>
+            </div>
+        </section>
+
+        <!-- Contact Us Section -->
+        <section id="contact" class="bg-white p-8 mb-6 rounded-xl shadow-md">
+            <h2 class="text-3xl font-bold text-teal-600 text-center mb-6">যোগাযোগ</h2>
+            <p class="text-center text-lg leading-relaxed mb-6">আমাদের সাথে যোগাযোগ করতে নিচের ফর্মটি পূরণ করুন অথবা সরাসরি ফোন করুন।</p>
+            <div class="contact-form max-w-lg mx-auto">
+                <form action="#" method="POST" class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-lg font-semibold mb-2">আপনার নাম:</label>
+                        <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-lg font-semibold mb-2">আপনার ইমেইল:</label>
+                        <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-lg font-semibold mb-2">বিষয়:</label>
+                        <input type="text" id="subject" name="subject" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-lg font-semibold mb-2">আপনার বার্তা:</label>
+                        <textarea id="message" name="message" rows="5" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 resize-y"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-teal-600 text-white py-3 rounded-lg text-xl font-semibold hover:bg-teal-700 transition duration-300 shadow-md">বার্তা পাঠান</button>
+                </form>
+                <p class="text-sm text-gray-500 mt-4 text-center">দ্রষ্টব্য: এটি একটি স্ট্যাটিক ওয়েবসাইট। ফর্ম জমা দেওয়ার জন্য একটি ব্যাকএন্ড সার্ভিস (যেমন Formspree, Netlify Forms, অথবা কাস্টম সার্ভার) প্রয়োজন হবে।</p>
+            </div>
+            <div class="text-center mt-8 text-lg">
+                <p class="mb-2"><strong class="text-teal-600">ঠিকানা:</strong> আপনার সংগঠনের সম্পূর্ণ ঠিকানা</p>
+                <p class="mb-2"><strong class="text-teal-600">ফোন:</strong> +880XXXXXXXXXX</p>
+                <p><strong class="text-teal-600">ইমেইল:</strong> info@yourorganization.org</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white p-6 text-center rounded-t-lg mt-8">
+        <div class="container mx-auto px-4">
+            <p class="text-sm">&copy; ২০২৫ আপনার সংগঠনের নাম। সর্বস্বত্ব সংরক্ষিত।</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling function
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default anchor click behavior
+                const targetId = this.getAttribute('href').substring(1); // Remove '#'
+                scrollToSection(targetId);
+            });
+        });
+
+        // Dark/Light Mode Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile'); // New mobile theme toggle button
+        const body = document.body;
+
+        // Function to update icon visibility
+        const updateThemeIcons = () => {
+            const sunIcons = document.querySelectorAll('.sun-icon');
+            const moonIcons = document.querySelectorAll('.moon-icon');
+
+            if (body.classList.contains('dark-mode')) {
+                sunIcons.forEach(icon => icon.classList.add('hidden'));
+                moonIcons.forEach(icon => icon.classList.remove('hidden'));
+            } else {
+                sunIcons.forEach(icon => icon.classList.remove('hidden'));
+                moonIcons.forEach(icon => icon.classList.add('hidden'));
+            }
+        };
+
+        // Check for saved theme in localStorage or default to light
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            body.classList.add('dark-mode');
+        }
+        updateThemeIcons(); // Set initial icon based on theme
+
+        // Function to toggle theme and save to localStorage
+        const toggleTheme = () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+            updateThemeIcons(); // Update icons after theme change
+        };
+
+        // Event listeners for both desktop and mobile theme toggles
+        themeToggleBtn.addEventListener('click', toggleTheme);
+        themeToggleMobileBtn.addEventListener('click', toggleTheme);
+
+
+        // Mobile Sidebar functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileSidebar = document.getElementById('mobile-sidebar');
+        const closeSidebarButton = document.getElementById('close-sidebar-button');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const mobileNavLinks = document.querySelectorAll('#mobile-sidebar nav a');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileSidebar.classList.remove('-translate-x-full'); 
+            sidebarOverlay.classList.remove('hidden');
+            body.classList.add('overflow-hidden'); // Prevent scrolling body when sidebar is open
+        });
+
+        closeSidebarButton.addEventListener('click', () => {
+            mobileSidebar.classList.add('-translate-x-full'); 
+            sidebarOverlay.classList.add('hidden');
+            body.classList.remove('overflow-hidden');
+        });
+
+        sidebarOverlay.addEventListener('click', () => {
+            mobileSidebar.classList.add('-translate-x-full'); 
+            sidebarOverlay.classList.add('hidden');
+            body.classList.remove('overflow-hidden');
+        });
+
+        // Close sidebar when a navigation link is clicked
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileSidebar.classList.add('-translate-x-full'); 
+                sidebarOverlay.classList.add('hidden');
+                body.classList.remove('overflow-hidden');
+            });
+        });
+
+        // Image Gallery Click-to-Change Functionality
+        const activityImagesData = {
+            'education-support': [
+                'https://placehold.co/400x250/E0F2F7/000000?text=শিক্ষা+১',
+                'https://placehold.co/400x250/E0F2F7/000000?text=শিক্ষা+২',
+                'https://placehold.co/400x250/E0F2F7/000000?text=শিক্ষা+৩'
+            ],
+            'healthcare-camp': [
+                'https://placehold.co/400x250/E0F2F7/000000?text=স্বাস্থ্য+১',
+                'https://placehold.co/400x250/E0F2F7/000000?text=স্বাস্থ্য+২',
+                'https://placehold.co/400x250/E0F2F7/000000?text=স্বাস্থ্য+৩'
+            ],
+            'tree-plantation': [
+                'https://placehold.co/400x250/E0F2F7/000000?text=বৃক্ষরোপণ+১',
+                'https://placehold.co/400x250/E0F2F7/000000?text=বৃক্ষরোপণ+২'
+            ],
+            'relief-distribution': [
+                'https://placehold.co/400x250/E0F2F7/000000?text=ত্রাণ+বিতরণ+১',
+                'https://placehold.co/400x250/E0F2F7/000000?text=ত্রাণ+বিতরণ+২'
+            ],
+            'skill-training': [
+                'https://placehold.co/400x250/E0F2F7/000000?text=প্রশিক্ষণ+১',
+                'https://placehold.co/400x250/E0F2F7/000000?text=প্রশিক্ষণ+২'
+            ],
+            'rural-development': [
+                'https://placehold.co/400x250/E0F2F7/000000?text=গ্রাম+উন্নয়ন+১',
+                'https://placehold.co/400x250/E0F2F7/000000?text=গ্রাম+উন্নয়ন+২'
+            ]
+        };
+
+        document.querySelectorAll('.activity-card').forEach(card => {
+            const imageElement = card.querySelector('.activity-image');
+            const prevBtn = card.querySelector('.prev-image-btn');
+            const nextBtn = card.querySelector('.next-image-btn');
+            const activityId = card.dataset.activityId; 
+
+            if (!activityId || !activityImagesData[activityId] || activityImagesData[activityId].length <= 1) {
+                // Hide buttons if no multiple images are available or only one image
+                prevBtn.classList.add('hidden');
+                nextBtn.classList.add('hidden');
+                return; 
+            }
+
+            let currentImageIndex = 0;
+            const images = activityImagesData[activityId];
+
+            // Set initial image
+            imageElement.src = images[currentImageIndex];
+
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent card click if any
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                imageElement.src = images[currentImageIndex];
+            });
+
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent card click if any
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                imageElement.src = images[currentImageIndex];
+            });
+        });
+    </script>
+</body>
+</html>
