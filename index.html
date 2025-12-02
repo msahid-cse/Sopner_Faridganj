@@ -1285,7 +1285,17 @@
                 <div class="mt-8 bg-card p-6 rounded-xl border border-custom shadow-lg">
                     <p class="text-center text-secondary">
                         <span class="font-bold text-primary">ফর্ম জমার শেষ তারিখ:</span> 10 নভেম্বর 2025 |
-                        <span class="font-bold text-primary">পরীক্ষা তারিখ:</span> 19 ডিসেম্বর 2025 |
+                        <span class="font-bold text-primary">পরীক্ষা তারিখ:</span>
+                        <button onclick="addToCalendar()"
+                            class="text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 font-semibold inline-flex items-center gap-1 transition-colors cursor-pointer border-none bg-transparent"
+                            title="ক্যালেন্ডারে যোগ করুন">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            19 ডিসেম্বর 2025
+                        </button> |
                         <span class="font-bold text-primary">পরীক্ষা কেন্দ্র:</span>
                         <a href="https://maps.app.goo.gl/hzJ5J2tQ5kZ4n7XNA" target="_blank"
                             class="text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 font-semibold inline-flex items-center gap-1 transition-colors">
@@ -2244,6 +2254,75 @@
         function toggleMoreAdvisors() {
             // This function is no longer needed but kept for compatibility
             console.log('Mobile carousel is now active');
+        }
+
+        // Add to Calendar Function
+        function addToCalendar() {
+            // Event details
+            const eventTitle = 'স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫';
+            const eventDescription = 'স্বপ্নের ফরিদগঞ্জের ১ম প্রতিষ্ঠা বার্ষিকী উপলক্ষে বৃত্তি পরীক্ষা। বিষয়: বাংলা, ইংরেজি, গণিত, সাধারণ জ্ঞান';
+            const eventLocation = 'ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ, ফরিদগঞ্জ, চাঁদপুর';
+            const eventLocationUrl = 'https://maps.app.goo.gl/hzJ5J2tQ5kZ4n7XNA';
+
+            // Date: December 19, 2025, 9:00 AM - 1:00 PM (Bangladesh Time)
+            const startDate = new Date('2025-12-19T09:00:00+06:00');
+            const endDate = new Date('2025-12-19T13:00:00+06:00');
+
+            // Format dates for ICS file (YYYYMMDDTHHMMSS format in UTC)
+            const formatICSDate = (date) => {
+                const year = date.getUTCFullYear();
+                const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+                const day = String(date.getUTCDate()).padStart(2, '0');
+                const hours = String(date.getUTCHours()).padStart(2, '0');
+                const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+                const seconds = String(date.getUTCSeconds()).padStart(2, '0');
+                return `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
+            };
+
+            const startDateFormatted = formatICSDate(startDate);
+            const endDateFormatted = formatICSDate(endDate);
+            const currentDate = formatICSDate(new Date());
+
+            // Create ICS file content
+            const icsContent = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//Sopner Faridganj//Scholarship Exam//EN',
+                'CALSCALE:GREGORIAN',
+                'METHOD:PUBLISH',
+                'BEGIN:VEVENT',
+                `DTSTART:${startDateFormatted}`,
+                `DTEND:${endDateFormatted}`,
+                `DTSTAMP:${currentDate}`,
+                `UID:scholarship-exam-2025@sopnerfaridganj.org`,
+                `SUMMARY:${eventTitle}`,
+                `DESCRIPTION:${eventDescription}`,
+                `LOCATION:${eventLocation}`,
+                `URL:${eventLocationUrl}`,
+                'STATUS:CONFIRMED',
+                'SEQUENCE:0',
+                'BEGIN:VALARM',
+                'TRIGGER:-PT24H',
+                'ACTION:DISPLAY',
+                'DESCRIPTION:আগামীকাল বৃত্তি পরীক্ষা - প্রস্তুতি নিন!',
+                'END:VALARM',
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\r\n');
+
+            // Create blob and download
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'বৃত্তি_পরীক্ষা_২০২৫.ics';
+
+            // Trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Show confirmation message
+            alert('✅ পরীক্ষার তারিখ আপনার ক্যালেন্ডারে যোগ করা হয়েছে!\n\n📝 স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫\n📅 তারিখ: ১৯ ডিসেম্বর ২০২৫\n⏰ সময়: সকাল ৯টা\n📍 স্থান: ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ');
         }
     </script>
 </body>
