@@ -526,6 +526,33 @@
                 padding: 15px;
             }
         }
+
+        /* Advisor Card Fixed Heights */
+        .advisor-card-container {
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .advisor-card-container img {
+            flex-shrink: 0;
+        }
+
+        .advisor-card-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Ensure institution text wraps properly */
+        .advisor-institution {
+            min-height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 
@@ -773,33 +800,212 @@
                 <!-- Advisors (Fixed) -->
                 <div class="mb-12">
                     <h4 class="text-xl font-bold mb-6 text-center text-primary">উপদেষ্টা মন্ডলী</h4>
-                    <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                        <div
-                            class="text-center p-8 bg-secondary rounded-xl hover:shadow-lg transition-all border border-custom border-emerald-300 dark:border-emerald-600">
-                            <img src="mobarak-sir.jpg" alt="mobarak karim khan"
-                                class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-3 border-amber-400">
-                            <div class="text-sm text-secondary mb-1">প্রধান উপদেষ্টা</div>
-                            <div class="font-bold text-xl text-primary mb-2">মোবারক করিম খান</div>
 
-                            <div class="text-sm text-emerald-600">ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ</div>
+                    <!-- Desktop: Carousel with arrows -->
+                    <div class="hidden md:block relative">
+                        <div class="max-w-5xl mx-auto relative">
+                            <!-- Left Arrow -->
+                            <button onclick="scrollAdvisors('left')"
+                                class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 z-10 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full p-3 shadow-lg transition-all">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                            </button>
+
+                            <!-- Advisors Container -->
+                            <div id="advisorsContainer" class="overflow-hidden">
+                                <div id="advisorsTrack" class="flex transition-transform duration-500 ease-in-out">
+                                    <div class="flex-shrink-0 w-1/3 px-3">
+                                        <div
+                                            class="advisor-card-container text-center p-8 bg-secondary rounded-xl hover:shadow-lg transition-all border border-custom border-emerald-300 dark:border-emerald-600">
+                                            <img src="mobarak-sir.jpg" alt="mobarak karim khan"
+                                                class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-3 border-amber-400">
+                                            <div class="advisor-card-content">
+                                                <div class="text-sm text-secondary mb-1">প্রধান উপদেষ্টা</div>
+                                                <div class="font-bold text-xl text-primary mb-2">মোবারক করিম খান</div>
+                                                <div class="advisor-institution text-sm text-emerald-600">ফরিদগঞ্জ
+                                                    সরকারি ডিগ্রি কলেজ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-shrink-0 w-1/3 px-3">
+                                        <div
+                                            class="advisor-card-container text-center p-8 bg-secondary rounded-xl hover:shadow-lg transition-all border border-custom border-emerald-300 dark:border-emerald-600">
+                                            <img src="nasir-sir.jpg" alt="nasir uddin mithu"
+                                                class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-3 border-amber-400">
+                                            <div class="advisor-card-content">
+                                                <div class="text-sm text-secondary mb-1">উপদেষ্টা</div>
+                                                <div class="font-bold text-xl text-primary mb-2">নাসির উদ্দিন মিঠু</div>
+                                                <div class="advisor-institution text-sm text-emerald-600">ফরিদগঞ্জ
+                                                    সরকারি ডিগ্রি কলেজ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-shrink-0 w-1/3 px-3">
+                                        <div
+                                            class="advisor-card-container text-center p-8 bg-secondary rounded-xl hover:shadow-lg transition-all border border-custom border-emerald-300 dark:border-emerald-600">
+                                            <img src="mahabub sir.jpg" alt="mahabub khan"
+                                                class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-3 border-amber-400">
+                                            <div class="advisor-card-content">
+                                                <div class="text-sm text-secondary mb-1">উপদেষ্টা</div>
+                                                <div class="font-bold text-xl text-primary mb-2">মাহাবুব খান</div>
+                                                <div class="advisor-institution text-sm text-emerald-600">লাউতলী ডাঃ
+                                                    রশীদ আহমেদ উবি ও কলেজ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-shrink-0 w-1/3 px-3">
+                                        <div
+                                            class="advisor-card-container text-center p-8 bg-secondary rounded-xl hover:shadow-lg transition-all border border-custom border-emerald-300 dark:border-emerald-600">
+                                            <img src="belayet.jpeg" alt="belayet hosen"
+                                                class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-3 border-amber-400">
+                                            <div class="advisor-card-content">
+                                                <div class="text-sm text-secondary mb-1">উপদেষ্টা</div>
+                                                <div class="font-bold text-xl text-primary mb-2">বেলায়েত হোসেন</div>
+                                                <div class="advisor-institution text-sm text-emerald-600">ফরিদগঞ্জ
+                                                    সরকারি ডিগ্রি কলেজ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-shrink-0 w-1/3 px-3">
+                                        <div
+                                            class="advisor-card-container text-center p-8 bg-secondary rounded-xl hover:shadow-lg transition-all border border-custom border-emerald-300 dark:border-emerald-600">
+                                            <img src="nijum.jpeg" alt="nijum saha"
+                                                class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-3 border-amber-400">
+                                            <div class="advisor-card-content">
+                                                <div class="text-sm text-secondary mb-1">উপদেষ্টা</div>
+                                                <div class="font-bold text-xl text-primary mb-2">নিজুম সাহা</div>
+                                                <div class="advisor-institution text-sm text-emerald-600">ফরিদগঞ্জ
+                                                    সরকারি ডিগ্রি কলেজ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Arrow -->
+                            <button onclick="scrollAdvisors('right')"
+                                class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 z-10 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full p-3 shadow-lg transition-all">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </button>
                         </div>
-                        <div
-                            class="text-center p-8 bg-secondary rounded-xl hover:shadow-lg transition-all border border-custom border-emerald-300 dark:border-emerald-600">
-                            <img src="nasir-sir.jpg" alt="nasir uddin mithu"
-                                class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-3 border-amber-400">
-                            <div class="text-sm text-secondary mb-1">উপদেষ্টা</div>
-                            <div class="font-bold text-xl text-primary mb-2">নাসির উদ্দিন মিঠু</div>
 
-                            <div class="text-sm text-emerald-600">ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ</div>
+                        <!-- Dots Indicator -->
+                        <div class="flex justify-center gap-2 mt-6">
+                            <div id="dot0" class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                            <div id="dot1" class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+                            <div id="dot2" class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600"></div>
                         </div>
-                        <div
-                            class="text-center p-8 bg-secondary rounded-xl hover:shadow-lg transition-all border border-custom border-emerald-300 dark:border-emerald-600">
-                            <img src="mahabub sir.jpg" alt="mahabub khan"
-                                class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-3 border-amber-400">
-                            <div class="text-sm text-secondary mb-1">উপদেষ্টা</div>
-                            <div class="font-bold text-xl text-primary mb-2">মাহাবুব খান</div>
+                    </div>
 
-                            <div class="text-sm text-emerald-600">লাউতলী ডাঃ রশীদ আহমেদ উচ্চ বিদ্যালয় ও কলেজ</div>
+                    <!-- Mobile: Carousel with auto-play -->
+                    <div class="md:hidden">
+                        <div class="max-w-sm mx-auto relative">
+                            <!-- Mobile Advisors Container -->
+                            <div id="mobileAdvisorsContainer" class="overflow-hidden">
+                                <div id="mobileAdvisorsTrack"
+                                    class="flex transition-transform duration-500 ease-in-out">
+                                    <!-- Advisor 1 -->
+                                    <div class="flex-shrink-0 w-full px-4">
+                                        <div
+                                            class="advisor-card-container text-center p-8 bg-secondary rounded-xl shadow-lg border border-custom border-emerald-300 dark:border-emerald-600">
+                                            <img src="mobarak-sir.jpg" alt="mobarak karim khan"
+                                                class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-3 border-amber-400">
+                                            <div class="advisor-card-content">
+                                                <div class="text-sm text-secondary mb-1">প্রধান উপদেষ্টা</div>
+                                                <div class="font-bold text-xl text-primary mb-2">মোবারক করিম খান</div>
+                                                <div class="advisor-institution text-sm text-emerald-600">ফরিদগঞ্জ
+                                                    সরকারি ডিগ্রি কলেজ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Advisor 2 -->
+                                    <div class="flex-shrink-0 w-full px-4">
+                                        <div
+                                            class="advisor-card-container text-center p-8 bg-secondary rounded-xl shadow-lg border border-custom border-emerald-300 dark:border-emerald-600">
+                                            <img src="nasir-sir.jpg" alt="nasir uddin mithu"
+                                                class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-3 border-amber-400">
+                                            <div class="advisor-card-content">
+                                                <div class="text-sm text-secondary mb-1">উপদেষ্টা</div>
+                                                <div class="font-bold text-xl text-primary mb-2">নাসির উদ্দিন মিঠু</div>
+                                                <div class="advisor-institution text-sm text-emerald-600">ফরিদগঞ্জ
+                                                    সরকারি ডিগ্রি কলেজ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Advisor 3 -->
+                                    <div class="flex-shrink-0 w-full px-4">
+                                        <div
+                                            class="advisor-card-container text-center p-8 bg-secondary rounded-xl shadow-lg border border-custom border-emerald-300 dark:border-emerald-600">
+                                            <img src="mahabub sir.jpg" alt="mahabub khan"
+                                                class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-3 border-amber-400">
+                                            <div class="advisor-card-content">
+                                                <div class="text-sm text-secondary mb-1">উপদেষ্টা</div>
+                                                <div class="font-bold text-xl text-primary mb-2">মাহাবুব খান</div>
+                                                <div class="advisor-institution text-sm text-emerald-600">লাউতলী ডাঃ
+                                                    রশীদ আহমেদ উচ্চ বিদ্যালয় ও কলেজ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Advisor 4 -->
+                                    <div class="flex-shrink-0 w-full px-4">
+                                        <div
+                                            class="advisor-card-container text-center p-8 bg-secondary rounded-xl shadow-lg border border-custom border-emerald-300 dark:border-emerald-600">
+                                            <img src="belayet.jpeg" alt="belayet hosen"
+                                                class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-3 border-amber-400">
+                                            <div class="advisor-card-content">
+                                                <div class="text-sm text-secondary mb-1">উপদেষ্টা</div>
+                                                <div class="font-bold text-xl text-primary mb-2">বেলায়েত হোসেন</div>
+                                                <div class="advisor-institution text-sm text-emerald-600">ফরিদগঞ্জ
+                                                    সরকারি ডিগ্রি কলেজ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Advisor 5 -->
+                                    <div class="flex-shrink-0 w-full px-4">
+                                        <div
+                                            class="advisor-card-container text-center p-8 bg-secondary rounded-xl shadow-lg border border-custom border-emerald-300 dark:border-emerald-600">
+                                            <img src="nijum.jpg" alt="nijum saha"
+                                                class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-3 border-amber-400">
+                                            <div class="advisor-card-content">
+                                                <div class="text-sm text-secondary mb-1">উপদেষ্টা</div>
+                                                <div class="font-bold text-xl text-primary mb-2">নিজুম সাহা</div>
+                                                <div class="advisor-institution text-sm text-emerald-600">ফরিদগঞ্জ
+                                                    সরকারি ডিগ্রি কলেজ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Navigation Arrows -->
+                            <button onclick="scrollMobileAdvisors('left')"
+                                class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-10 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full p-2 shadow-lg transition-all">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                            </button>
+                            <button onclick="scrollMobileAdvisors('right')"
+                                class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-10 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full p-2 shadow-lg transition-all">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Dots Indicator -->
+                        <div class="flex justify-center gap-2 mt-6">
+                            <div id="mobileDot0" class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                            <div id="mobileDot1" class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+                            <div id="mobileDot2" class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+                            <div id="mobileDot3" class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+                            <div id="mobileDot4" class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600"></div>
                         </div>
                     </div>
                 </div>
@@ -1832,6 +2038,203 @@
         document.querySelectorAll('.card-hover, .stat-card').forEach(el => {
             observer.observe(el);
         });
+
+        // Advisor Carousel Functions
+        let currentAdvisorIndex = 0;
+        const totalAdvisors = 5;
+        const advisorsPerView = 3;
+        const maxIndex = totalAdvisors - advisorsPerView; // 2 (positions: 0, 1, 2)
+        let advisorAutoPlayInterval = null;
+
+        function scrollAdvisors(direction) {
+            const track = document.getElementById('advisorsTrack');
+
+            if (direction === 'left') {
+                currentAdvisorIndex = Math.max(0, currentAdvisorIndex - 1);
+            } else if (direction === 'right') {
+                currentAdvisorIndex = Math.min(maxIndex, currentAdvisorIndex + 1);
+            } else if (direction === 'auto') {
+                // Auto-play: loop back to start when reaching the end
+                currentAdvisorIndex = (currentAdvisorIndex + 1) % (maxIndex + 1);
+            }
+
+            // Calculate the transform percentage
+            const translatePercentage = -(currentAdvisorIndex * (100 / advisorsPerView));
+            track.style.transform = `translateX(${translatePercentage}%)`;
+
+            // Update dots
+            updateAdvisorDots();
+        }
+
+        function updateAdvisorDots() {
+            // Reset all dots
+            for (let i = 0; i <= maxIndex; i++) {
+                const dot = document.getElementById(`dot${i}`);
+                if (dot) {
+                    dot.className = 'w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600';
+                }
+            }
+
+            // Highlight current dot
+            const currentDot = document.getElementById(`dot${currentAdvisorIndex}`);
+            if (currentDot) {
+                currentDot.className = 'w-3 h-3 rounded-full bg-emerald-500';
+            }
+        }
+
+        // Start auto-play
+        function startAdvisorAutoPlay() {
+            // Clear any existing interval
+            if (advisorAutoPlayInterval) {
+                clearInterval(advisorAutoPlayInterval);
+            }
+
+            // Start new interval - change every 3 seconds
+            advisorAutoPlayInterval = setInterval(() => {
+                scrollAdvisors('auto');
+            }, 2000);
+        }
+
+        // Stop auto-play
+        function stopAdvisorAutoPlay() {
+            if (advisorAutoPlayInterval) {
+                clearInterval(advisorAutoPlayInterval);
+                advisorAutoPlayInterval = null;
+            }
+        }
+
+        // Initialize auto-play when page loads
+        window.addEventListener('load', function () {
+            const advisorsContainer = document.getElementById('advisorsContainer');
+            if (advisorsContainer) {
+                // Start auto-play
+                startAdvisorAutoPlay();
+
+                // Pause on hover
+                advisorsContainer.addEventListener('mouseenter', stopAdvisorAutoPlay);
+
+                // Resume on mouse leave
+                advisorsContainer.addEventListener('mouseleave', startAdvisorAutoPlay);
+
+                // Also add event listeners to arrow buttons to restart auto-play after manual navigation
+                const leftArrow = document.querySelector('button[onclick*="scrollAdvisors(\'left\')"]');
+                const rightArrow = document.querySelector('button[onclick*="scrollAdvisors(\'right\')"]');
+
+                if (leftArrow) {
+                    leftArrow.addEventListener('click', () => {
+                        stopAdvisorAutoPlay();
+                        setTimeout(startAdvisorAutoPlay, 5000); // Resume after 5 seconds
+                    });
+                }
+
+                if (rightArrow) {
+                    rightArrow.addEventListener('click', () => {
+                        stopAdvisorAutoPlay();
+                        setTimeout(startAdvisorAutoPlay, 5000); // Resume after 5 seconds
+                    });
+                }
+            }
+
+            // Initialize mobile carousel auto-play
+            const mobileAdvisorsContainer = document.getElementById('mobileAdvisorsContainer');
+            if (mobileAdvisorsContainer) {
+                startMobileAdvisorAutoPlay();
+
+                // Pause on touch/hover
+                mobileAdvisorsContainer.addEventListener('touchstart', stopMobileAdvisorAutoPlay);
+                mobileAdvisorsContainer.addEventListener('mouseenter', stopMobileAdvisorAutoPlay);
+
+                // Resume on touch end/mouse leave
+                mobileAdvisorsContainer.addEventListener('touchend', () => {
+                    setTimeout(startMobileAdvisorAutoPlay, 3000);
+                });
+                mobileAdvisorsContainer.addEventListener('mouseleave', startMobileAdvisorAutoPlay);
+
+                // Handle manual navigation
+                const mobileLeftArrow = document.querySelector('button[onclick*="scrollMobileAdvisors(\'left\')"]');
+                const mobileRightArrow = document.querySelector('button[onclick*="scrollMobileAdvisors(\'right\')"]');
+
+                if (mobileLeftArrow) {
+                    mobileLeftArrow.addEventListener('click', () => {
+                        stopMobileAdvisorAutoPlay();
+                        setTimeout(startMobileAdvisorAutoPlay, 4000);
+                    });
+                }
+
+                if (mobileRightArrow) {
+                    mobileRightArrow.addEventListener('click', () => {
+                        stopMobileAdvisorAutoPlay();
+                        setTimeout(startMobileAdvisorAutoPlay, 4000);
+                    });
+                }
+            }
+        });
+
+        // Mobile Advisor Carousel Functions
+        let currentMobileAdvisorIndex = 0;
+        const totalMobileAdvisors = 5;
+        let mobileAdvisorAutoPlayInterval = null;
+
+        function scrollMobileAdvisors(direction) {
+            const track = document.getElementById('mobileAdvisorsTrack');
+
+            if (direction === 'left') {
+                currentMobileAdvisorIndex = (currentMobileAdvisorIndex - 1 + totalMobileAdvisors) % totalMobileAdvisors;
+            } else if (direction === 'right') {
+                currentMobileAdvisorIndex = (currentMobileAdvisorIndex + 1) % totalMobileAdvisors;
+            } else if (direction === 'auto') {
+                currentMobileAdvisorIndex = (currentMobileAdvisorIndex + 1) % totalMobileAdvisors;
+            }
+
+            // Calculate the transform percentage
+            const translatePercentage = -(currentMobileAdvisorIndex * 100);
+            track.style.transform = `translateX(${translatePercentage}%)`;
+
+            // Update dots
+            updateMobileAdvisorDots();
+        }
+
+        function updateMobileAdvisorDots() {
+            // Reset all dots
+            for (let i = 0; i < totalMobileAdvisors; i++) {
+                const dot = document.getElementById(`mobileDot${i}`);
+                if (dot) {
+                    dot.className = 'w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600';
+                }
+            }
+
+            // Highlight current dot
+            const currentDot = document.getElementById(`mobileDot${currentMobileAdvisorIndex}`);
+            if (currentDot) {
+                currentDot.className = 'w-3 h-3 rounded-full bg-emerald-500';
+            }
+        }
+
+        // Start mobile auto-play
+        function startMobileAdvisorAutoPlay() {
+            if (mobileAdvisorAutoPlayInterval) {
+                clearInterval(mobileAdvisorAutoPlayInterval);
+            }
+
+            // Change every 2 seconds
+            mobileAdvisorAutoPlayInterval = setInterval(() => {
+                scrollMobileAdvisors('auto');
+            }, 2000);
+        }
+
+        // Stop mobile auto-play
+        function stopMobileAdvisorAutoPlay() {
+            if (mobileAdvisorAutoPlayInterval) {
+                clearInterval(mobileAdvisorAutoPlayInterval);
+                mobileAdvisorAutoPlayInterval = null;
+            }
+        }
+
+        // Mobile "Show More Advisors" Toggle (deprecated but kept for compatibility)
+        function toggleMoreAdvisors() {
+            // This function is no longer needed but kept for compatibility
+            console.log('Mobile carousel is now active');
+        }
     </script>
 </body>
 
