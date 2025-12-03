@@ -141,9 +141,9 @@ const galleryData = {
         name: 'শিক্ষা সহায়তা',
         description: 'আমাদের শিক্ষা সহায়তা কর্মসূচি গরীব এবং মেধাবী শিক্ষার্থীদের তাদের স্বপ্ন পূরণে সাহায্য করে।',
         images: [
-            'sikkha-help-1.jpg',
-            'sikkha-help-2.jpg',
-            'sikkha-help-3.jpg',
+            'https://i.imghippo.com/files/kHx7730Ro.jpg',
+            'https://i.imghippo.com/files/tun7417is.jpg',
+            'https://i.imghippo.com/files/dkmy5149JQ.jpg',
             'https://i.imghippo.com/files/kP2578TAs.jpg'
         ]
     },
