@@ -581,6 +581,12 @@ header nav .container img {
     width: 36px;
     height: 36px;
 }
+
+.advisor-institution {
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media (min-width: 769px) {
@@ -593,4 +599,15 @@ header nav .container img {
     .see-more-btn {
         display: none;
     }
+}
+
+.advisor-position {
+    min-height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+    font-weight: 500;
+    color: #07cddb;
+    /* margin-bottom: 0.25rem; */
 }
