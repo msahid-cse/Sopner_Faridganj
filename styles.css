@@ -611,3 +611,85 @@ header nav .container img {
     color: #07cddb;
     /* margin-bottom: 0.25rem; */
 }
+
+/* Committee Card Fixed Heights */
+#committee2025Container .flex-shrink-0>div,
+#mobileCommittee2025Container .flex-shrink-0>div {
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem !important;
+    /* Match সভাপতি card p-8 padding */
+}
+
+/* Ensure committee member images don't shrink */
+#committee2025Container img,
+#mobileCommittee2025Container img {
+    flex-shrink: 0;
+}
+
+/* Reduce spacing between position and name - MINIMAL */
+#committee2025Container .font-bold,
+#mobileCommittee2025Container .font-bold {
+    margin-bottom: 0 !important;
+    /* No spacing between position and name */
+}
+
+/* Ensure extra text (like additional roles) has consistent spacing */
+#committee2025Container .text-xs,
+#mobileCommittee2025Container .text-xs {
+    min-height: 1.25rem;
+}
+
+
+/* Committee Card Fixed Heights */
+#committee2025Container .flex-shrink-0>div,
+#mobileCommittee2025Container .flex-shrink-0>div {
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem !important;
+    /* Match সভাপতি card p-8 padding */
+}
+
+/* Ensure committee member images don't shrink */
+#committee2025Container img,
+#mobileCommittee2025Container img {
+    flex-shrink: 0;
+}
+
+/* Reduce spacing between position and name */
+#committee2025Container .font-bold,
+#mobileCommittee2025Container .font-bold {
+    margin-bottom: 0.25rem !important;
+    /* Reduced spacing */
+}
+
+/* Ensure extra text (like additional roles) has consistent spacing */
+#committee2025Container .text-xs,
+#mobileCommittee2025Container .text-xs {
+    min-height: 1.25rem;
+}
+
+/* Committee Card Fixed Heights */
+#committee2025Container .flex-shrink-0>div,
+#mobileCommittee2025Container .flex-shrink-0>div {
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Ensure committee member images don't shrink */
+#committee2025Container img,
+#mobileCommittee2025Container img {
+    flex-shrink: 0;
+}
+
+/* Ensure extra text (like additional roles) has consistent spacing */
+#committee2025Container .text-xs,
+#mobileCommittee2025Container .text-xs {
+    min-height: 1.25rem;
+}

@@ -565,6 +565,161 @@ function toggleMoreAdvisors() {
     console.log('Mobile carousel is now active');
 }
 
+// Committee 2025 Carousel Functions (Desktop)
+let currentCommittee2025Index = 0;
+const totalCommittee2025Members = 7;
+const committee2025PerView = 3;
+const maxCommittee2025Index = totalCommittee2025Members - committee2025PerView; // 4 (positions: 0, 1, 2, 3, 4)
+let committee2025AutoPlayInterval = null;
+
+function scrollCommittee2025(direction) {
+    const track = document.getElementById('committee2025Track');
+
+    if (direction === 'left') {
+        currentCommittee2025Index = Math.max(0, currentCommittee2025Index - 1);
+    } else if (direction === 'right') {
+        currentCommittee2025Index = Math.min(maxCommittee2025Index, currentCommittee2025Index + 1);
+    } else if (direction === 'auto') {
+        // Auto-play: loop back to start when reaching the end
+        currentCommittee2025Index = (currentCommittee2025Index + 1) % (maxCommittee2025Index + 1);
+    }
+
+    // Calculate the transform percentage
+    const translatePercentage = -(currentCommittee2025Index * (100 / committee2025PerView));
+    track.style.transform = `translateX(${translatePercentage}%)`;
+
+    // Update dots
+    updateCommittee2025Dots();
+}
+
+function updateCommittee2025Dots() {
+    // Reset all dots
+    for (let i = 0; i <= maxCommittee2025Index; i++) {
+        const dot = document.getElementById(`committee2025Dot${i}`);
+        if (dot) {
+            dot.className = 'w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600';
+        }
+    }
+
+    // Highlight current dot
+    const currentDot = document.getElementById(`committee2025Dot${currentCommittee2025Index}`);
+    if (currentDot) {
+        currentDot.className = 'w-3 h-3 rounded-full bg-emerald-500';
+    }
+}
+
+// Start committee 2025 auto-play
+function startCommittee2025AutoPlay() {
+    if (committee2025AutoPlayInterval) {
+        clearInterval(committee2025AutoPlayInterval);
+    }
+
+    // Change every 2 seconds
+    committee2025AutoPlayInterval = setInterval(() => {
+        scrollCommittee2025('auto');
+    }, 2000);
+}
+
+// Stop committee 2025 auto-play
+function stopCommittee2025AutoPlay() {
+    if (committee2025AutoPlayInterval) {
+        clearInterval(committee2025AutoPlayInterval);
+        committee2025AutoPlayInterval = null;
+    }
+}
+
+// Mobile Committee 2025 Carousel Functions
+let currentMobileCommittee2025Index = 0;
+const totalMobileCommittee2025Members = 7;
+let mobileCommittee2025AutoPlayInterval = null;
+
+function scrollMobileCommittee2025(direction) {
+    const track = document.getElementById('mobileCommittee2025Track');
+
+    if (direction === 'left') {
+        currentMobileCommittee2025Index = (currentMobileCommittee2025Index - 1 + totalMobileCommittee2025Members) % totalMobileCommittee2025Members;
+    } else if (direction === 'right') {
+        currentMobileCommittee2025Index = (currentMobileCommittee2025Index + 1) % totalMobileCommittee2025Members;
+    } else if (direction === 'auto') {
+        currentMobileCommittee2025Index = (currentMobileCommittee2025Index + 1) % totalMobileCommittee2025Members;
+    }
+
+    // Calculate the transform percentage
+    const translatePercentage = -(currentMobileCommittee2025Index * 100);
+    track.style.transform = `translateX(${translatePercentage}%)`;
+
+    // Update dots
+    updateMobileCommittee2025Dots();
+}
+
+function updateMobileCommittee2025Dots() {
+    // Reset all dots
+    for (let i = 0; i < totalMobileCommittee2025Members; i++) {
+        const dot = document.getElementById(`mobileCommittee2025Dot${i}`);
+        if (dot) {
+            dot.className = 'w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600';
+        }
+    }
+
+    // Highlight current dot
+    const currentDot = document.getElementById(`mobileCommittee2025Dot${currentMobileCommittee2025Index}`);
+    if (currentDot) {
+        currentDot.className = 'w-3 h-3 rounded-full bg-emerald-500';
+    }
+}
+
+// Start mobile committee 2025 auto-play
+function startMobileCommittee2025AutoPlay() {
+    if (mobileCommittee2025AutoPlayInterval) {
+        clearInterval(mobileCommittee2025AutoPlayInterval);
+    }
+
+    // Change every 2 seconds
+    mobileCommittee2025AutoPlayInterval = setInterval(() => {
+        scrollMobileCommittee2025('auto');
+    }, 2000);
+}
+
+// Stop mobile committee 2025 auto-play
+function stopMobileCommittee2025AutoPlay() {
+    if (mobileCommittee2025AutoPlayInterval) {
+        clearInterval(mobileCommittee2025AutoPlayInterval);
+        mobileCommittee2025AutoPlayInterval = null;
+    }
+}
+
+// Initialize committee 2025 carousel when page loads
+window.addEventListener('load', function () {
+    const committee2025Container = document.getElementById('committee2025Container');
+    if (committee2025Container) {
+        // Start auto-play
+        startCommittee2025AutoPlay();
+
+        // Pause on hover
+        committee2025Container.addEventListener('mouseenter', stopCommittee2025AutoPlay);
+
+        // Resume on mouse leave
+        committee2025Container.addEventListener('mouseleave', startCommittee2025AutoPlay);
+    }
+
+    // Initialize mobile committee 2025 carousel auto-play
+    const mobileCommittee2025Container = document.getElementById('mobileCommittee2025Container');
+    if (mobileCommittee2025Container) {
+        startMobileCommittee2025AutoPlay();
+
+        // Pause on touch/hover
+        mobileCommittee2025Container.addEventListener('touchstart', stopMobileCommittee2025AutoPlay);
+        mobileCommittee2025Container.addEventListener('mouseenter', stopMobileCommittee2025AutoPlay);
+
+        // Resume on touch end/mouse leave
+        mobileCommittee2025Container.addEventListener('touchend', () => {
+            setTimeout(startMobileCommittee2025AutoPlay, 3000);
+        });
+        mobileCommittee2025Container.addEventListener('mouseleave', startMobileCommittee2025AutoPlay);
+    }
+});
+
+
 // Add to Calendar Function
 function addToCalendar() {
     // Event details
