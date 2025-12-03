@@ -693,13 +693,14 @@ header nav .container img {
 #mobileCommittee2025Container .text-xs {
     min-height: 1.25rem;
 }
+
 /* Founding Members Infinite Scroll Animation */
 .founding-scroll-container {
     padding: 20px 0;
 }
 
 .founding-scroll-track {
-    animation: founding-scroll 30s linear infinite;
+    animation: founding-scroll 15s linear infinite;
 }
 
 .founding-scroll-track:hover {
@@ -710,6 +711,7 @@ header nav .container img {
     0% {
         transform: translateX(0);
     }
+
     100% {
         transform: translateX(-50%);
     }
