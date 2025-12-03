@@ -643,6 +643,15 @@
                 right: -10px;
             }
         }
+
+        /* Sponsor Section Background */
+        .sponsor-section-bg {
+            background: linear-gradient(to right, rgb(250, 245, 255), rgb(252, 231, 243), rgb(239, 246, 255));
+        }
+
+        .dark-theme .sponsor-section-bg {
+            background: linear-gradient(to right, rgb(30, 41, 59), rgb(6, 78, 59), rgb(30, 41, 59));
+        }
     </style>
 </head>
 
@@ -1480,14 +1489,14 @@
 
                 <!-- Sponsor Section -->
                 <div
-                    class="mt-8 bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-900/20 dark:to-blue-900/20 p-8 rounded-2xl border-2 border-emerald-300 dark:border-emerald-600 shadow-lg">
+                    class="mt-8 p-8 rounded-2xl border-2 shadow-lg sponsor-section-bg border-purple-300 dark:border-emerald-500">
                     <div class="text-center">
                         <h3 class="text-2xl font-bold text-primary mb-6">পৃষ্ঠপোষক</h3>
                         <div class="flex flex-col items-center gap-6">
                             <a href="https://awayscholarsbd.com/" target="_blank" rel="noopener noreferrer"
                                 class="group transition-all duration-300 hover:scale-105">
                                 <div
-                                    class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-all border-2 border-transparent hover:border-emerald-500">
+                                    class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-xl transition-all border-2 border-transparent hover:border-emerald-500">
                                     <img src="https://i.imghippo.com/files/FY9350wmA.png" alt="Away Scholars BD"
                                         class="h-20 md:h-24 w-auto mx-auto object-contain">
                                 </div>
