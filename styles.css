@@ -576,3 +576,21 @@ body {
         display: none;
     }
 }
+
+header nav .container img {
+    width: 36px;
+    height: 36px;
+}
+}
+
+@media (min-width: 769px) {
+    .hidden-content {
+        max-height: none;
+        overflow: visible;
+        opacity: 1;
+    }
+
+    .see-more-btn {
+        display: none;
+    }
+}
