@@ -1,0 +1,640 @@
+// Sopner Faridganj - Main JavaScript File
+
+// Hero Background Carousel
+let currentHeroIndex = 0;
+const heroBackgrounds = ['heroBg1', 'heroBg2', 'heroBg3', 'heroBg4', 'heroBg5'];
+
+function rotateHeroBackground() {
+    // Remove active class from current
+    document.getElementById(heroBackgrounds[currentHeroIndex]).classList.remove('active');
+
+    // Move to next background
+    currentHeroIndex = (currentHeroIndex + 1) % heroBackgrounds.length;
+
+    // Add active class to new background
+    document.getElementById(heroBackgrounds[currentHeroIndex]).classList.add('active');
+}
+
+// Start with first image
+document.getElementById(heroBackgrounds[0]).classList.add('active');
+
+// Rotate every 5 seconds
+setInterval(rotateHeroBackground, 5000);
+
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const themeToggleMobile = document.getElementById('themeToggleMobile');
+const themeIcon = document.getElementById('themeIcon');
+const themeIconMobile = document.getElementById('themeIconMobile');
+const body = document.body;
+
+// Check for saved theme preference or default to 'light'
+const currentTheme = localStorage.getItem('theme') || 'light';
+body.classList.add(currentTheme + '-theme');
+updateThemeIcon(currentTheme);
+
+function toggleTheme() {
+    if (body.classList.contains('light-theme')) {
+        body.classList.remove('light-theme');
+        body.classList.add('dark-theme');
+        localStorage.setItem('theme', 'dark');
+        updateThemeIcon('dark');
+    } else {
+        body.classList.remove('dark-theme');
+        body.classList.add('light-theme');
+        localStorage.setItem('theme', 'light');
+        updateThemeIcon('light');
+    }
+}
+
+function updateThemeIcon(theme) {
+    const icon = theme === 'dark' ? '☀️' : '🌙';
+    themeIcon.textContent = icon;
+    themeIconMobile.textContent = icon;
+}
+
+themeToggle.addEventListener('click', toggleTheme);
+themeToggleMobile.addEventListener('click', toggleTheme);
+
+// Mobile Menu Toggle
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+const hamburgerIcon = document.getElementById('hamburgerIcon');
+
+mobileMenuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('active');
+    hamburgerIcon.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+});
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        hamburgerIcon.textContent = '☰';
+    });
+});
+
+// Smooth Scrolling for Navigation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Active Link Highlighting
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+function highlightActiveLink() {
+    let current = '';
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+    });
+}
+
+window.addEventListener('scroll', highlightActiveLink);
+
+// Year Gallery Switching
+function showYear(year) {
+    // Hide all galleries
+    document.getElementById('gallery2025').classList.add('hidden');
+    document.getElementById('gallery2024').classList.add('hidden');
+
+    // Show selected year
+    document.getElementById('gallery' + year).classList.remove('hidden');
+
+    // Update button styles
+    document.getElementById('year2025Btn').classList.remove('bg-emerald-500', 'text-white');
+    document.getElementById('year2025Btn').classList.add('bg-secondary', 'text-primary', 'border', 'border-custom');
+    document.getElementById('year2024Btn').classList.remove('bg-emerald-500', 'text-white');
+    document.getElementById('year2024Btn').classList.add('bg-secondary', 'text-primary', 'border', 'border-custom');
+
+    document.getElementById('year' + year + 'Btn').classList.remove('bg-secondary', 'text-primary', 'border', 'border-custom');
+    document.getElementById('year' + year + 'Btn').classList.add('bg-emerald-500', 'text-white');
+}
+
+let currentImageIndex = 0;
+
+// Gallery data with descriptions
+const galleryData = {
+    // 2025 Gallery
+    'education': {
+        name: 'শিক্ষা সহায়তা',
+        description: 'আমাদের শিক্ষা সহায়তা কর্মসূচি গরীব এবং মেধাবী শিক্ষার্থীদের তাদের স্বপ্ন পূরণে সাহায্য করে।',
+        images: [
+            'sikkha-help-1.jpg',
+            'sikkha-help-2.jpg',
+            'sikkha-help-3.jpg',
+            'https://i.imghippo.com/files/kP2578TAs.jpg'
+        ]
+    },
+    'award-2025': {
+        name: 'অর্জন',
+        description: 'শ্রেষ্ট সামাজিক সংগঠন সম্মাননা অর্জন আমাদের জন্য একটি গর্বের বিষয়।',
+        images: [
+            'https://i.imghippo.com/files/UeGl2960F.jpg',
+            'https://i.imghippo.com/files/gaz2073ls.jpg',
+            'https://i.imghippo.com/files/iuGN8811yU.jpg'
+        ]
+    },
+    'bitti_2025': {
+        name: 'বৃত্তি পরিক্ষা কর্মসূচি',
+        description: 'বৃত্তি ফর্ম বিতরণ ও সংগ্রহ কার্যক্রমের কিছু মুহূর্ত।',
+        images: [
+            'https://i.imghippo.com/files/hBo1030M.jpg',
+            'https://i.imghippo.com/files/tPMi8672ws.jpg',
+            'https://i.imghippo.com/files/Hzj3044hUM.jpg',
+            'https://i.imghippo.com/files/cQle4691RFc.jpg',
+            'https://i.imghippo.com/files/Dgy8081Xeo.jpg',
+            'https://i.imghippo.com/files/pRJV1935Vpw.jpg'
+        ]
+    },
+    'seminar-lawtoli': {
+        name: 'সেমিনার',
+        description: 'লাউতলী ডাঃ রশীদ আহমেদ উচ্চ বিদ্যালয়ে সেমিনার কার্যক্রমের কিছু ছবি।',
+        images: [
+            'https://i.imghippo.com/files/uyVA9986MN.jpg',
+            'https://i.imghippo.com/files/UDcU1485coo.jpg',
+            'https://i.imghippo.com/files/sgw2017gpI.jpg'
+        ]
+    },
+    // 2024 Gallery
+    'education2024': {
+        name: 'শিক্ষা সহায়তা',
+        description: '২০২৪ সালের শিক্ষা সহায়তা কর্মসূচির কিছু মুহূর্ত।',
+        images: [
+            'sikkha-help-1.jpg',
+            'sikkha-help-2.jpg',
+            'sikkha-help-3.jpg',
+            'sikkha-help-4.jpg'
+        ]
+    },
+    'award-20252024': {
+        name: 'অর্জন',
+        description: '২০২৪ সালের সম্মাননা ও পুরস্কার প্রাপ্তির কিছু ছবি।',
+        images: [
+            'award-1.jpg',
+            'award-2.jpg',
+            'award-3.jpg'
+        ]
+    }
+};
+
+let currentGalleryImages = [];
+let currentGalleryIndex = 0;
+
+function openGalleryModal(galleryId) {
+    const data = galleryData[galleryId];
+    if (!data) return;
+
+    currentGalleryImages = data.images;
+    currentGalleryIndex = 0;
+
+    const modalHTML = `
+        <div id="galleryModal" class="gallery-modal active">
+            <div class="gallery-modal-content">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-3xl font-bold text-white mb-2">${data.name}</h2>
+                        <p class="text-gray-300">${data.description}</p>
+                    </div>
+                    <button onclick="closeGalleryModal()" class="text-white text-4xl hover:text-gray-300 w-12 h-12 flex items-center justify-center">&times;</button>
+                </div>
+                <div class="grid md:grid-cols-3 gap-4">
+                    ${data.images.map((img, idx) => `
+                        <div class="cursor-pointer" onclick="openFullImage(${idx})">
+                            <img src="${img}" alt="${data.name} ${idx + 1}" class="w-full h-64 object-cover rounded-lg hover:opacity-80 transition-opacity">
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+}
+
+function closeGalleryModal() {
+    const modal = document.getElementById('galleryModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+function openFullImage(index) {
+    currentGalleryIndex = index;
+    showFullImage();
+}
+
+function showFullImage() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxContent = document.getElementById('lightboxContent');
+
+    lightboxContent.innerHTML = `
+        <div class="relative inline-block max-w-full max-h-screen">
+            <img src="${currentGalleryImages[currentGalleryIndex]}" alt="Gallery Image" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl">
+            ${currentGalleryImages.length > 1 ? `
+                <button onclick="navigateFullImage(-1); event.stopPropagation();" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white text-3xl w-14 h-14 rounded-full flex items-center justify-center transition-all" style="backdrop-filter: blur(8px);">
+                    ❮
+                </button>
+                <button onclick="navigateFullImage(1); event.stopPropagation();" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white text-3xl w-14 h-14 rounded-full flex items-center justify-center transition-all" style="backdrop-filter: blur(8px);">
+                    ❯
+                </button>
+            ` : ''}
+        </div>
+    `;
+
+    lightbox.classList.add('active');
+}
+
+function navigateFullImage(direction) {
+    currentGalleryIndex = (currentGalleryIndex + direction + currentGalleryImages.length) % currentGalleryImages.length;
+    showFullImage();
+}
+
+// Toggle Content Function for See More
+function toggleContent(contentId, button) {
+    const content = document.getElementById(contentId);
+    const btnText = button.querySelector('.btn-text');
+
+    content.classList.toggle('show');
+    button.classList.toggle('active');
+
+    if (content.classList.contains('show')) {
+        btnText.textContent = 'কম দেখুন';
+    } else {
+        btnText.textContent = 'আরও পড়ুন';
+    }
+}
+
+// Toggle About Content
+function toggleAboutContent() {
+    const content = document.getElementById('moreAboutContent');
+    const btn = document.getElementById('seeMoreBtn');
+    const text = document.getElementById('seeMoreText');
+    const icon = document.getElementById('seeMoreIcon');
+
+    if (content.style.maxHeight === '0px' || content.style.maxHeight === '') {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        text.textContent = 'কম দেখুন';
+        icon.textContent = '▲';
+    } else {
+        content.style.maxHeight = '0px';
+        text.textContent = 'আরও পড়ুন';
+        icon.textContent = '▼';
+    }
+}
+
+// Leadership Year Switching
+function showLeadershipYear(year) {
+    // Hide all sections first
+    document.getElementById('leadership2025').classList.add('hidden');
+    document.getElementById('leadership2024').classList.add('hidden');
+
+    // Show selected year
+    document.getElementById('leadership' + year).classList.remove('hidden');
+
+    // Reset all button styles
+    document.getElementById('leaderYear2025').className = 'px-8 py-2 bg-white text-primary hover:bg-gray-100 transition-colors border border-custom rounded-lg font-semibold shadow-lg';
+    document.getElementById('leaderYear2024').className = 'px-8 py-2 bg-white text-primary hover:bg-gray-100 transition-colors border border-custom rounded-lg font-semibold shadow-lg';
+
+    // Set active button style
+    document.getElementById('leaderYear' + year).className = 'px-8 py-2 bg-emerald-500 text-white hover:bg-emerald-600 transition-colors rounded-lg font-semibold shadow-lg';
+}
+
+// Splash Screen Functions
+function closeSplash() {
+    const splashScreen = document.getElementById('splashScreen');
+    splashScreen.classList.add('fade-out');
+
+    // Remove from DOM after animation completes
+    setTimeout(() => {
+        splashScreen.style.display = 'none';
+    }, 500);
+}
+
+// Auto-close splash screen after 3 seconds
+window.addEventListener('load', function () {
+    setTimeout(() => {
+        closeSplash();
+    }, 3000);
+});
+
+// Make 2025 active by default when page loads
+window.addEventListener('load', function () {
+    showLeadershipYear('2025');
+});
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    currentGalleryImages = [];
+}
+
+// Fade in animation on scroll
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in-up');
+        }
+    });
+}, observerOptions);
+
+// Observe all cards
+document.querySelectorAll('.card-hover, .stat-card').forEach(el => {
+    observer.observe(el);
+});
+
+// Advisor Carousel Functions
+let currentAdvisorIndex = 0;
+const totalAdvisors = 8;
+const advisorsPerView = 3;
+const maxIndex = totalAdvisors - advisorsPerView; // 5 (positions: 0, 1, 2, 3, 4, 5)
+let advisorAutoPlayInterval = null;
+
+function scrollAdvisors(direction) {
+    const track = document.getElementById('advisorsTrack');
+
+    if (direction === 'left') {
+        currentAdvisorIndex = Math.max(0, currentAdvisorIndex - 1);
+    } else if (direction === 'right') {
+        currentAdvisorIndex = Math.min(maxIndex, currentAdvisorIndex + 1);
+    } else if (direction === 'auto') {
+        // Auto-play: loop back to start when reaching the end
+        currentAdvisorIndex = (currentAdvisorIndex + 1) % (maxIndex + 1);
+    }
+
+    // Calculate the transform percentage
+    const translatePercentage = -(currentAdvisorIndex * (100 / advisorsPerView));
+    track.style.transform = `translateX(${translatePercentage}%)`;
+
+    // Update dots
+    updateAdvisorDots();
+}
+
+function updateAdvisorDots() {
+    // Reset all dots
+    for (let i = 0; i <= maxIndex; i++) {
+        const dot = document.getElementById(`dot${i}`);
+        if (dot) {
+            dot.className = 'w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600';
+        }
+    }
+
+    // Highlight current dot
+    const currentDot = document.getElementById(`dot${currentAdvisorIndex}`);
+    if (currentDot) {
+        currentDot.className = 'w-3 h-3 rounded-full bg-emerald-500';
+    }
+}
+
+// Start auto-play
+function startAdvisorAutoPlay() {
+    // Clear any existing interval
+    if (advisorAutoPlayInterval) {
+        clearInterval(advisorAutoPlayInterval);
+    }
+
+    // Start new interval - change every 2 seconds
+    advisorAutoPlayInterval = setInterval(() => {
+        scrollAdvisors('auto');
+    }, 2000);
+}
+
+// Stop auto-play
+function stopAdvisorAutoPlay() {
+    if (advisorAutoPlayInterval) {
+        clearInterval(advisorAutoPlayInterval);
+        advisorAutoPlayInterval = null;
+    }
+}
+
+// Initialize auto-play when page loads
+window.addEventListener('load', function () {
+    const advisorsContainer = document.getElementById('advisorsContainer');
+    if (advisorsContainer) {
+        // Start auto-play
+        startAdvisorAutoPlay();
+
+        // Pause on hover
+        advisorsContainer.addEventListener('mouseenter', stopAdvisorAutoPlay);
+
+        // Resume on mouse leave
+        advisorsContainer.addEventListener('mouseleave', startAdvisorAutoPlay);
+
+        // Also add event listeners to arrow buttons to restart auto-play after manual navigation
+        const leftArrow = document.querySelector('button[onclick*="scrollAdvisors(\'left\')"]');
+        const rightArrow = document.querySelector('button[onclick*="scrollAdvisors(\'right\')"]');
+
+        if (leftArrow) {
+            leftArrow.addEventListener('click', () => {
+                stopAdvisorAutoPlay();
+                setTimeout(startAdvisorAutoPlay, 5000); // Resume after 5 seconds
+            });
+        }
+
+        if (rightArrow) {
+            rightArrow.addEventListener('click', () => {
+                stopAdvisorAutoPlay();
+                setTimeout(startAdvisorAutoPlay, 5000); // Resume after 5 seconds
+            });
+        }
+    }
+
+    // Initialize mobile carousel auto-play
+    const mobileAdvisorsContainer = document.getElementById('mobileAdvisorsContainer');
+    if (mobileAdvisorsContainer) {
+        startMobileAdvisorAutoPlay();
+
+        // Pause on touch/hover
+        mobileAdvisorsContainer.addEventListener('touchstart', stopMobileAdvisorAutoPlay);
+        mobileAdvisorsContainer.addEventListener('mouseenter', stopMobileAdvisorAutoPlay);
+
+        // Resume on touch end/mouse leave
+        mobileAdvisorsContainer.addEventListener('touchend', () => {
+            setTimeout(startMobileAdvisorAutoPlay, 3000);
+        });
+        mobileAdvisorsContainer.addEventListener('mouseleave', startMobileAdvisorAutoPlay);
+
+        // Handle manual navigation
+        const mobileLeftArrow = document.querySelector('button[onclick*="scrollMobileAdvisors(\'left\')"]');
+        const mobileRightArrow = document.querySelector('button[onclick*="scrollMobileAdvisors(\'right\')"]');
+
+        if (mobileLeftArrow) {
+            mobileLeftArrow.addEventListener('click', () => {
+                stopMobileAdvisorAutoPlay();
+                setTimeout(startMobileAdvisorAutoPlay, 4000);
+            });
+        }
+
+        if (mobileRightArrow) {
+            mobileRightArrow.addEventListener('click', () => {
+                stopMobileAdvisorAutoPlay();
+                setTimeout(startMobileAdvisorAutoPlay, 4000);
+            });
+        }
+    }
+});
+
+// Mobile Advisor Carousel Functions
+let currentMobileAdvisorIndex = 0;
+const totalMobileAdvisors = 8;
+let mobileAdvisorAutoPlayInterval = null;
+
+function scrollMobileAdvisors(direction) {
+    const track = document.getElementById('mobileAdvisorsTrack');
+
+    if (direction === 'left') {
+        currentMobileAdvisorIndex = (currentMobileAdvisorIndex - 1 + totalMobileAdvisors) % totalMobileAdvisors;
+    } else if (direction === 'right') {
+        currentMobileAdvisorIndex = (currentMobileAdvisorIndex + 1) % totalMobileAdvisors;
+    } else if (direction === 'auto') {
+        currentMobileAdvisorIndex = (currentMobileAdvisorIndex + 1) % totalMobileAdvisors;
+    }
+
+    // Calculate the transform percentage
+    const translatePercentage = -(currentMobileAdvisorIndex * 100);
+    track.style.transform = `translateX(${translatePercentage}%)`;
+
+    // Update dots
+    updateMobileAdvisorDots();
+}
+
+function updateMobileAdvisorDots() {
+    // Reset all dots
+    for (let i = 0; i < totalMobileAdvisors; i++) {
+        const dot = document.getElementById(`mobileDot${i}`);
+        if (dot) {
+            dot.className = 'w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600';
+        }
+    }
+
+    // Highlight current dot
+    const currentDot = document.getElementById(`mobileDot${currentMobileAdvisorIndex}`);
+    if (currentDot) {
+        currentDot.className = 'w-3 h-3 rounded-full bg-emerald-500';
+    }
+}
+
+// Start mobile auto-play
+function startMobileAdvisorAutoPlay() {
+    if (mobileAdvisorAutoPlayInterval) {
+        clearInterval(mobileAdvisorAutoPlayInterval);
+    }
+
+    // Change every 2 seconds
+    mobileAdvisorAutoPlayInterval = setInterval(() => {
+        scrollMobileAdvisors('auto');
+    }, 2000);
+}
+
+// Stop mobile auto-play
+function stopMobileAdvisorAutoPlay() {
+    if (mobileAdvisorAutoPlayInterval) {
+        clearInterval(mobileAdvisorAutoPlayInterval);
+        mobileAdvisorAutoPlayInterval = null;
+    }
+}
+
+// Mobile "Show More Advisors" Toggle (deprecated but kept for compatibility)
+function toggleMoreAdvisors() {
+    // This function is no longer needed but kept for compatibility
+    console.log('Mobile carousel is now active');
+}
+
+// Add to Calendar Function
+function addToCalendar() {
+    // Event details
+    const eventTitle = 'স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫';
+    const eventDescription = 'স্বপ্নের ফরিদগঞ্জের ১ম প্রতিষ্ঠা বার্ষিকী উপলক্ষে বৃত্তি পরীক্ষা। বিষয়: বাংলা, ইংরেজি, গণিত, সাধারণ জ্ঞান';
+    const eventLocation = 'ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ, ফরিদগঞ্জ, চাঁদপুর';
+    const eventLocationUrl = 'https://maps.app.goo.gl/hzJ5J2tQ5kZ4n7XNA';
+
+    // Date: December 19, 2025, 9:00 AM - 1:00 PM (Bangladesh Time)
+    const startDate = new Date('2025-12-19T09:00:00+06:00');
+    const endDate = new Date('2025-12-19T13:00:00+06:00');
+
+    // Format dates for ICS file (YYYYMMDDTHHMMSS format in UTC)
+    const formatICSDate = (date) => {
+        const year = date.getUTCFullYear();
+        const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+        const day = String(date.getUTCDate()).padStart(2, '0');
+        const hours = String(date.getUTCHours()).padStart(2, '0');
+        const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+        const seconds = String(date.getUTCSeconds()).padStart(2, '0');
+        return `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
+    };
+
+    const startDateFormatted = formatICSDate(startDate);
+    const endDateFormatted = formatICSDate(endDate);
+    const currentDate = formatICSDate(new Date());
+
+    // Create ICS file content
+    const icsContent = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Sopner Faridganj//Scholarship Exam//EN',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
+        'BEGIN:VEVENT',
+        `DTSTART:${startDateFormatted}`,
+        `DTEND:${endDateFormatted}`,
+        `DTSTAMP:${currentDate}`,
+        `UID:sopnerfaridganj@gmail.com`,
+        `SUMMARY:${eventTitle}`,
+        `DESCRIPTION:${eventDescription}`,
+        `LOCATION:${eventLocation}`,
+        `URL:${eventLocationUrl}`,
+        'STATUS:CONFIRMED',
+        'SEQUENCE:0',
+        'BEGIN:VALARM',
+        'TRIGGER:-PT24H',
+        'ACTION:DISPLAY',
+        'DESCRIPTION:আগামীকাল বৃত্তি পরীক্ষা - প্রস্তুতি নিন!',
+        'END:VALARM',
+        'BEGIN:VALARM',
+        'TRIGGER:-PT3H',
+        'ACTION:DISPLAY',
+        'DESCRIPTION:৩ ঘণ্টা পর বৃত্তি পরীক্ষা শুরু - সময়মতো পৌঁছান!',
+        'END:VALARM',
+        'END:VEVENT',
+        'END:VCALENDAR'
+    ].join('\r\n');
+
+    // Create blob and download
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = 'বৃত্তি_পরীক্ষা_২০২৫.ics';
+
+    // Trigger download
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // Show confirmation message
+    alert('✅ পরীক্ষার তারিখ আপনার ক্যালেন্ডারে যোগ করা হয়েছে!\n\n📝 স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫\n📅 তারিখ: ১৯ ডিসেম্বর ২০২৫\n⏰ সময়: সকাল ৯টা\n📍 স্থান: ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ');
+}
