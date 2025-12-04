@@ -1,0 +1,42 @@
+/* Founding Members - Manual Scroll Support */
+.founding-scroll-container {
+    cursor: grab;
+    user-select: none;
+}
+
+.founding-scroll-container:active {
+    cursor: grabbing;
+}
+
+.founding-scroll-track.dragging {
+    animation-play-state: paused;
+    cursor: grabbing;
+}
+
+/* Mobile: Enable horizontal scrolling */
+@media (max-width: 768px) {
+    .founding-scroll-container {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+    }
+
+    .founding-scroll-container::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .founding-scroll-container::-webkit-scrollbar-track {
+        background: var(--bg-secondary);
+        border-radius: 3px;
+    }
+
+    .founding-scroll-container::-webkit-scrollbar-thumb {
+        background: #10b981;
+        border-radius: 3px;
+    }
+
+    .founding-scroll-container::-webkit-scrollbar-thumb:hover {
+        background: #059669;
+    }
+}
