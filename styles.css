@@ -601,15 +601,20 @@ header nav .container img {
     }
 }
 
+
+
+/* Advisor Position/Profession Styling */
 .advisor-position {
-    min-height: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     font-style: italic;
     font-weight: 500;
-    color: #07cddb;
-    /* margin-bottom: 0.25rem; */
+    color: #ffb01d;
+    margin-bottom: 0;
+    /* margin-top: 0.25rem; */
+    font-size: 0.875rem;
+    line-height: 1.2;
 }
 
 /* Committee Card Fixed Heights */
