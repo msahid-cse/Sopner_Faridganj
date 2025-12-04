@@ -700,7 +700,7 @@ header nav .container img {
 }
 
 .founding-scroll-track {
-    animation: founding-scroll 15s linear infinite;
+    animation: founding-scroll 7s linear infinite;
 }
 
 .founding-scroll-track:hover {

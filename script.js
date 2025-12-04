@@ -336,7 +336,7 @@ function closeSplash() {
 window.addEventListener('load', function () {
     setTimeout(() => {
         closeSplash();
-    }, 3000);
+    }, 1500);
 });
 
 // Make 2025 active by default when page loads
@@ -370,9 +370,9 @@ document.querySelectorAll('.card-hover, .stat-card').forEach(el => {
 
 // Advisor Carousel Functions
 let currentAdvisorIndex = 0;
-const totalAdvisors = 8;
+const totalAdvisors = 9;
 const advisorsPerView = 3;
-const maxIndex = totalAdvisors - advisorsPerView; // 5 (positions: 0, 1, 2, 3, 4, 5)
+const maxIndex = totalAdvisors - advisorsPerView; // 6 (positions: 0, 1, 2, 3, 4, 5, 6)
 let advisorAutoPlayInterval = null;
 
 function scrollAdvisors(direction) {
@@ -501,7 +501,7 @@ window.addEventListener('load', function () {
 
 // Mobile Advisor Carousel Functions
 let currentMobileAdvisorIndex = 0;
-const totalMobileAdvisors = 8;
+const totalMobileAdvisors = 9;
 let mobileAdvisorAutoPlayInterval = null;
 
 function scrollMobileAdvisors(direction) {
