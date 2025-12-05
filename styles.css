@@ -36,6 +36,34 @@
     --bg-card: #ffffff;
     --text-primary: #1f2937;
     --text-secondary: #6b7280;
+    transition: opacity 0.3s ease-out;
+}
+
+.hidden-content.show {
+    display: block;
+    opacity: 1;
+}
+
+.see-more-btn .btn-icon {
+    transition: transform 0.3s ease;
+}
+
+.see-more-btn.active .btn-icon {
+    transform: rotate(180deg);
+}
+
+:root {
+    --primary-color: #10b981;
+    --secondary-color: #3b82f6;
+    --accent-color: #f59e0b;
+}
+
+.light-theme {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f3f4f6;
+    --bg-card: #ffffff;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
     --border-color: #e5e7eb;
     --hero-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --header-bg: #ffffff;
