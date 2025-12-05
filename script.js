@@ -568,8 +568,8 @@ function toggleMoreAdvisors() {
 // Committee 2025 Carousel Functions (Desktop)
 let currentCommittee2025Index = 0;
 const totalCommittee2025Members = 12;
-const committee2025PerView = 3;
-const maxCommittee2025Index = totalCommittee2025Members - committee2025PerView; // 9 (positions: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+const committee2025PerView = 4;
+const maxCommittee2025Index = totalCommittee2025Members - committee2025PerView; // 8 (positions: 0, 1, 2, 3, 4, 5, 6, 7, 8)
 let committee2025AutoPlayInterval = null;
 
 function scrollCommittee2025(direction) {
