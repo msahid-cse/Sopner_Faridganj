@@ -314,7 +314,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 - **Phone**: 01642164347
 - **Location**: Faridganj, Chandpur, Bangladesh
 - **Facebook**: [Sopner Faridganj](https://www.facebook.com/tarunnerfaridgonj)
-- **Website**: [https://shwapner-faridganj.netlify.app/](https://shwapner-faridganj.netlify.app/)
+- **Website**: [https://sopner-faridganj.netlify.app/](https://sopner-faridganj.netlify.app/)
 
 ---
 
