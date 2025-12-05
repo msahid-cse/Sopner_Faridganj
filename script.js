@@ -370,9 +370,9 @@ document.querySelectorAll('.card-hover, .stat-card').forEach(el => {
 
 // Advisor Carousel Functions
 let currentAdvisorIndex = 0;
-const totalAdvisors = 9;
+const totalAdvisors = 10;
 const advisorsPerView = 3;
-const maxIndex = totalAdvisors - advisorsPerView; // 6 (positions: 0, 1, 2, 3, 4, 5, 6)
+const maxIndex = totalAdvisors - advisorsPerView; // 7 (positions: 0, 1, 2, 3, 4, 5, 6, 7)
 let advisorAutoPlayInterval = null;
 
 function scrollAdvisors(direction) {
@@ -501,7 +501,7 @@ window.addEventListener('load', function () {
 
 // Mobile Advisor Carousel Functions
 let currentMobileAdvisorIndex = 0;
-const totalMobileAdvisors = 9;
+const totalMobileAdvisors = 10;
 let mobileAdvisorAutoPlayInterval = null;
 
 function scrollMobileAdvisors(direction) {
