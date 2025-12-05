@@ -90,9 +90,6 @@ Sopner_Faridganj/
 ├── robots.txt                 # SEO robots file
 ├── README.md                  # Project documentation
 │
-├── .gemini/                   # AI assistant artifacts
-│   └── *.md                   # Documentation files
-│
 └── assets/                    # Images and media (external CDN)
 ```
 
@@ -359,13 +356,16 @@ If you find any bugs, please [open an issue](https://github.com/msahid-cse/Sopne
 ## 📸 Screenshots
 
 ### Desktop View
-![Desktop View](https://via.placeholder.com/800x400?text=Desktop+View)
+![Desktop View](https://i.imghippo.com/files/HgSL2592WO.png))
 
 ### Mobile View
-![Mobile View](https://via.placeholder.com/400x800?text=Mobile+View)
+![Mobile View](https://i.imghippo.com/files/lCIJ4741vg.jpeg))
+
+### Mobile View
+![Mobile View](https://i.imghippo.com/files/ZLH6241oDA.jpeg))
 
 ### Dark Mode
-![Dark Mode](https://via.placeholder.com/800x400?text=Dark+Mode)
+![Dark Mode](https://i.imghippo.com/files/ryA1501OOs.png))
 
 ---
 
