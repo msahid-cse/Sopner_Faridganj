@@ -1201,7 +1201,7 @@
                                         </div>
                                         <div class="flex-shrink-0 w-full px-4">
                                             <div
-                                                class="text-center p-6 bg-secondary rounded-xl shadow-lg border border-custom border-rose-300dark:border-rose-600">
+                                                class="text-center p-6 bg-secondary rounded-xl shadow-lg border border-custom border-rose-300 dark:border-rose-600">
                                                 <img src="https://i.imghippo.com/files/MaFI3982lM.jpg"
                                                     alt="আতাউল ইসলাম সাকিব"
                                                     class="w-28 h-28 rounded-full mx-auto mb-4 object-cover border-4 border-rose-500">
@@ -1638,142 +1638,143 @@
     <section id="gallery" class="py-20 bg-secondary">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="section-title text-primary">গ্যালারি</h2>
+                <h2 class="section-title text-primary">আমাদের কার্যক্রম</h2>
                 <p class="text-secondary mt-4 max-w-2xl mx-auto">
-                    আমাদের কার্যক্রমের বছরওয়ারি সংগ্রহ
+                    সামাজিক উন্নয়নে আমাদের বিভিন্ন কর্মসূচি ও অর্জনের সংগ্রহ
                 </p>
             </div>
 
             <!-- Year Selector -->
             <div class="flex justify-center mb-8 gap-4">
                 <button onclick="showYear('2025')" id="year2025Btn"
-                    class="px-6 py-3 bg-emerald-500 text-white rounded-lg font-semibold">২০২৫</button>
+                    class="px-8 py-3 bg-emerald-500 text-white rounded-lg font-semibold shadow-lg hover:bg-emerald-600 transition-all transform hover:scale-105">২০২৫</button>
                 <button onclick="showYear('2024')" id="year2024Btn"
-                    class="px-6 py-3 bg-secondary text-primary border border-custom rounded-lg font-semibold">২০২৪</button>
+                    class="px-8 py-3 bg-secondary text-primary border-2 border-emerald-500 rounded-lg font-semibold shadow-lg hover:bg-emerald-50 dark:hover:bg-gray-700 transition-all transform hover:scale-105">২০২৪</button>
             </div>
 
             <!-- 2025 Gallery -->
             <div id="gallery2025" class="max-w-6xl mx-auto">
-                <div class="grid md:grid-cols-4 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Education Program -->
-                    <div class="group cursor-pointer relative" onclick="openGalleryModal('education') ">
+                    <div class="group cursor-pointer" onclick="openGalleryModal('education')">
                         <div
-                            class="bg-inherit dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-transform hover:-translate-y-1 border border-custom border-emerald-300 dark:border-emerald-600">
-                            <!-- Stacked Images Effect -->
-                            <div class="relative">
-                                <!-- Background Stacked Images -->
+                            class="bg-card rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-2 border-emerald-300 dark:border-emerald-600">
+                            <div class="relative overflow-hidden">
+                                <img src="https://i.imghippo.com/files/kP2578TAs.jpg" alt="শিক্ষা সহায়তা"
+                                    class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110">
                                 <div
-                                    class="absolute -right-2 -bottom-2 w-full h-48 bg-gray-200 dark:bg-gray-700 rounded-xl">
+                                    class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 </div>
                                 <div
-                                    class="absolute -right-1 -bottom-1 w-full h-48 bg-gray-100 dark:bg-gray-600 rounded-xl">
+                                    class="absolute top-4 right-4 bg-emerald-500 text-white px-3 py-1.5 rounded-full text-sm font-bold shadow-lg">
+                                    <span>4 ছবি</span>
                                 </div>
-                                <!-- Main Image Container -->
-                                <div class="relative overflow-hidden rounded-t-xl">
-                                    <img src="https://i.imghippo.com/files/kP2578TAs.jpg" alt="শিক্ষা সহায়তা"
-                                        class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
-                                    <div
-                                        class="absolute bottom-2 right-2 bg-green-400 dark:bg-gray-800 px-2 py-1 rounded-lg text-sm font-medium text-primary">
-                                        <span>5+ ছবি</span>
-                                    </div>
+                                <div
+                                    class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <p class="text-white text-sm font-medium">ক্লিক করে সম্পূর্ণ গ্যালারি দেখুন →</p>
                                 </div>
                             </div>
-                            <div class="p-4">
-                                <h3 class="text-lg font-bold text-primary text-center">শিক্ষা সহায়তা</h3>
-                                <p class="text-sm text-secondary text-center mt-1">শিক্ষার্থীদের সহায়তা কর্মসূচি</p>
+                            <div
+                                class="p-6 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-gray-800 dark:to-gray-700">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="text-2xl">📚</span>
+                                    <h3 class="text-xl font-bold text-primary">শিক্ষা সহায়তা</h3>
+                                </div>
+                                <p class="text-sm text-secondary leading-relaxed">গরীব ও মেধাবী শিক্ষার্থীদের শিক্ষা
+                                    উপকরণ ও আর্থিক সহায়তা</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- award-2025care Program -->
-                    <div class="group cursor-pointer relative" onclick="openGalleryModal('award-2025')">
+                    <!-- Award 2025 -->
+                    <div class="group cursor-pointer" onclick="openGalleryModal('award-2025')">
                         <div
-                            class="bg-inherit dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-transform hover:-translate-y-1 border border-custom border-emerald-300 dark:border-emerald-600">
-                            <!-- Stacked Images Effect -->
-                            <div class="relative">
-                                <!-- Background Stacked Images -->
+                            class="bg-card rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-2 border-amber-300 dark:border-amber-600">
+                            <div class="relative overflow-hidden">
+                                <img src="https://i.imghippo.com/files/gaz2073ls.jpg" alt="অর্জন"
+                                    class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110">
                                 <div
-                                    class="absolute -right-2 -bottom-2 w-full h-48 bg-gray-200 dark:bg-gray-700 rounded-xl">
+                                    class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 </div>
                                 <div
-                                    class="absolute -right-1 -bottom-1 w-full h-48 bg-gray-100 dark:bg-gray-600 rounded-xl">
+                                    class="absolute top-4 right-4 bg-amber-500 text-white px-3 py-1.5 rounded-full text-sm font-bold shadow-lg">
+                                    <span>3 ছবি</span>
                                 </div>
-                                <!-- Main Image Container -->
-                                <div class="relative overflow-hidden rounded-t-xl">
-                                    <img src="https://i.imghippo.com/files/gaz2073ls.jpg" alt="Award 2025"
-                                        class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
-                                    <div
-                                        class="absolute bottom-2 right-2 bg-emerald-400 dark:bg-gray-800 px-2 py-1 rounded-lg text-sm font-medium text-primary">
-                                        <span>3+ ছবি</span>
-                                    </div>
+                                <div
+                                    class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <p class="text-white text-sm font-medium">ক্লিক করে সম্পূর্ণ গ্যালারি দেখুন →</p>
                                 </div>
                             </div>
-                            <div class="p-4">
-                                <h3 class="text-lg font-bold text-primary text-center">অর্জন</h3>
-                                <p class="text-sm text-secondary text-center mt-1">শ্রেষ্ট সামাজিক সংগঠন সম্মাননা</p>
+                            <div
+                                class="p-6 bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-gray-800 dark:to-gray-700">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="text-2xl">🏆</span>
+                                    <h3 class="text-xl font-bold text-primary">অর্জন</h3>
+                                </div>
+                                <p class="text-sm text-secondary leading-relaxed">শ্রেষ্ট সামাজিক সংগঠন হিসেবে সম্মাননা
+                                    প্রাপ্তি</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- bitti 2025 -->
-                    <div class="group cursor-pointer relative" onclick="openGalleryModal('bitti_2025')">
+                    <!-- Scholarship Exam Program -->
+                    <div class="group cursor-pointer" onclick="openGalleryModal('bitti_2025')">
                         <div
-                            class="bg-inherit dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-transform hover:-translate-y-1 border border-custom border-emerald-300 dark:border-emerald-600">
-                            <!-- Stacked Images Effect -->
-                            <div class="relative">
-                                <!-- Background Stacked Images -->
+                            class="bg-card rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-2 border-blue-300 dark:border-blue-600">
+                            <div class="relative overflow-hidden">
+                                <img src="https://i.imghippo.com/files/pRJV1935Vpw.jpg" alt="বৃত্তি পরীক্ষা"
+                                    class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110">
                                 <div
-                                    class="absolute -right-2 -bottom-2 w-full h-48 bg-gray-200 dark:bg-gray-700 rounded-xl">
+                                    class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 </div>
                                 <div
-                                    class="absolute -right-1 -bottom-1 w-full h-48 bg-gray-100 dark:bg-gray-600 rounded-xl">
+                                    class="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1.5 rounded-full text-sm font-bold shadow-lg">
+                                    <span>6 ছবি</span>
                                 </div>
-                                <!-- Main Image Container -->
-                                <div class="relative overflow-hidden rounded-t-xl">
-                                    <img src="https://i.imghippo.com/files/pRJV1935Vpw.jpg"
-                                        alt="বৃত্তি পরিক্ষা কর্মসূচি"
-                                        class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
-                                    <div
-                                        class="absolute bottom-2 right-2 bg-emerald-400 dark:bg-gray-800 px-2 py-1 rounded-lg text-sm font-medium text-primary">
-                                        <span>6+ ছবি</span>
-                                    </div>
+                                <div
+                                    class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <p class="text-white text-sm font-medium">ক্লিক করে সম্পূর্ণ গ্যালারি দেখুন →</p>
                                 </div>
                             </div>
-                            <div class="p-4">
-                                <h3 class="text-lg font-bold text-primary text-center">বৃত্তি পরিক্ষা কর্মসূচি</h3>
-                                <p class="text-sm text-secondary text-center mt-1">বৃত্তি ফর্ম বিতরণ ও সংগ্রহ
-                                </p>
+                            <div
+                                class="p-6 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-gray-800 dark:to-gray-700">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="text-2xl">📝</span>
+                                    <h3 class="text-xl font-bold text-primary">বৃত্তি পরীক্ষা কর্মসূচি</h3>
+                                </div>
+                                <p class="text-sm text-secondary leading-relaxed">বৃত্তি ফর্ম বিতরণ, সংগ্রহ ও পরীক্ষা
+                                    আয়োজন</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- seminar-lawtoli Program -->
-                    <div class="group cursor-pointer relative" onclick="openGalleryModal('seminar-lawtoli')">
+                    <!-- Seminar Program -->
+                    <div class="group cursor-pointer" onclick="openGalleryModal('seminar-lawtoli')">
                         <div
-                            class="bg-inherit dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-transform hover:-translate-y-1 border border-custom border-emerald-300 dark:border-emerald-600">
-                            <!-- Stacked Images Effect -->
-                            <div class="relative">
-                                <!-- Background Stacked Images -->
+                            class="bg-card rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-2 border-purple-300 dark:border-purple-600">
+                            <div class="relative overflow-hidden">
+                                <img src="https://i.imghippo.com/files/sgw2017gpI.jpg" alt="সেমিনার"
+                                    class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110">
                                 <div
-                                    class="absolute -right-2 -bottom-2 w-full h-48 bg-gray-200 dark:bg-gray-700 rounded-xl">
+                                    class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 </div>
                                 <div
-                                    class="absolute -right-1 -bottom-1 w-full h-48 bg-gray-100 dark:bg-gray-600 rounded-xl">
+                                    class="absolute top-4 right-4 bg-purple-500 text-white px-3 py-1.5 rounded-full text-sm font-bold shadow-lg">
+                                    <span>3 ছবি</span>
                                 </div>
-                                <!-- Main Image Container -->
-                                <div class="relative overflow-hidden rounded-t-xl">
-                                    <img src="https://i.imghippo.com/files/sgw2017gpI.jpg" alt="সেমিনার"
-                                        class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
-                                    <div
-                                        class="absolute bottom-2 right-2 bg-emerald-400 dark:bg-gray-800 px-2 py-1 rounded-lg text-sm font-medium text-primary">
-                                        <span>6+ ছবি</span>
-                                    </div>
+                                <div
+                                    class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <p class="text-white text-sm font-medium">ক্লিক করে সম্পূর্ণ গ্যালারি দেখুন →</p>
                                 </div>
                             </div>
-                            <div class="p-4">
-                                <h3 class="text-lg font-bold text-primary text-center">সেমিনার</h3>
-                                <p class="text-sm text-secondary text-center mt-1">লাউতলী ডাঃ রশীদ আহমেদ উচ্চ বিদ্যালয়
-                                </p>
+                            <div
+                                class="p-6 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-700">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="text-2xl">🎤</span>
+                                    <h3 class="text-xl font-bold text-primary">সেমিনার</h3>
+                                </div>
+                                <p class="text-sm text-secondary leading-relaxed">লাউতলী ডাঃ রশীদ আহমেদ উচ্চ বিদ্যালয়ে
+                                    শিক্ষামূলক সেমিনার</p>
                             </div>
                         </div>
                     </div>
@@ -1786,60 +1787,63 @@
 
         <!-- 2024 Gallery -->
         <div id="gallery2024" class="max-w-6xl mx-auto hidden">
-            <div class="grid md:grid-cols-4 gap-8">
-                <!-- Education Program -->
-                <div class="group cursor-pointer relative" onclick="openGalleryModal('education2024')">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Education Program 2024 -->
+                <div class="group cursor-pointer" onclick="openGalleryModal('education2024')">
                     <div
-                        class="bg-inherit dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-transform hover:-translate-y-1 border border-custom border-emerald-300 dark:border-emerald-600">
-                        <!-- Stacked Images Effect -->
-                        <div class="relative">
-                            <!-- Background Stacked Images -->
+                        class="bg-card rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-2 border-emerald-300 dark:border-emerald-600">
+                        <div class="relative overflow-hidden">
+                            <img src="https://i.imghippo.com/files/kHx7730Ro.jpg" alt="শিক্ষা সহায়তা ২০২৪"
+                                class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110">
                             <div
-                                class="absolute -right-2 -bottom-2 w-full h-48 bg-gray-200 dark:bg-gray-700 rounded-xl">
+                                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             </div>
                             <div
-                                class="absolute -right-1 -bottom-1 w-full h-48 bg-gray-100 dark:bg-gray-600 rounded-xl">
+                                class="absolute top-4 right-4 bg-emerald-500 text-white px-3 py-1.5 rounded-full text-sm font-bold shadow-lg">
+                                <span>4 ছবি</span>
                             </div>
-                            <!-- Main Image Container -->
-                            <div class="relative overflow-hidden rounded-t-xl">
-                                <img src="https://i.imghippo.com/files/kHx7730Ro.jpg" alt="শিক্ষা সহায়তা ২০২৪"
-                                    class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
-                                <div
-                                    class="absolute bottom-2 right-2 bg-emerald-400 dark:bg-gray-800 px-2 py-1 rounded-lg text-sm font-medium text-primary">
-                                    <span>8+ ছবি</span>
-                                </div>
+                            <div
+                                class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <p class="text-white text-sm font-medium">ক্লিক করে সম্পূর্ণ গ্যালারি দেখুন →</p>
                             </div>
                         </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-bold text-primary text-center">শিক্ষা সহায়তা</h3>
-                            <p class="text-sm text-secondary text-center mt-1">২০২৪ সালের কার্যক্রম</p>
+                        <div
+                            class="p-6 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-gray-800 dark:to-gray-700">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-2xl">📚</span>
+                                <h3 class="text-xl font-bold text-primary">শিক্ষা সহায়তা</h3>
+                            </div>
+                            <p class="text-sm text-secondary leading-relaxed">২০২৪ সালের শিক্ষা সহায়তা কর্মসূচি</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- award-2025care Program -->
-                <div class="group cursor-pointer relative" onclick="openGalleryModal('award-20252024')">
+                <!-- Award 2024 -->
+                <div class="group cursor-pointer" onclick="openGalleryModal('award-20252024')">
                     <div
-                        class="bg-inherit dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-transform hover:-translate-y-1 border border-custom border-emerald-300 dark:border-emerald-600">
-                        <div class="relative">
+                        class="bg-card rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-2 border-amber-300 dark:border-amber-600">
+                        <div class="relative overflow-hidden">
+                            <img src="award-1.jpg" alt="অর্জন ২০২৪"
+                                class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110">
                             <div
-                                class="absolute -right-2 -bottom-2 w-full h-48 bg-gray-200 dark:bg-gray-700 rounded-xl">
+                                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             </div>
                             <div
-                                class="absolute -right-1 -bottom-1 w-full h-48 bg-gray-100 dark:bg-gray-600 rounded-xl">
+                                class="absolute top-4 right-4 bg-amber-500 text-white px-3 py-1.5 rounded-full text-sm font-bold shadow-lg">
+                                <span>3 ছবি</span>
                             </div>
-                            <div class="relative overflow-hidden rounded-t-xl">
-                                <img src="award-1.jpg" alt="স্বাস্থ্যসেবা ২০২৪"
-                                    class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
-                                <div
-                                    class="absolute bottom-2 right-2 bg-emerald-400 dark:bg-gray-800 px-2 py-1 rounded-lg text-sm font-medium text-primary">
-                                    <span>5+ ছবি</span>
-                                </div>
+                            <div
+                                class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <p class="text-white text-sm font-medium">ক্লিক করে সম্পূর্ণ গ্যালারি দেখুন →</p>
                             </div>
                         </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-bold text-primary text-center">অর্জন</h3>
-                            <p class="text-sm text-secondary text-center mt-1">২০২৪ সালের সম্মাননা</p>
+                        <div
+                            class="p-6 bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-gray-800 dark:to-gray-700">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-2xl">🏆</span>
+                                <h3 class="text-xl font-bold text-primary">অর্জন</h3>
+                            </div>
+                            <p class="text-sm text-secondary leading-relaxed">২০২৪ সালের সম্মাননা ও পুরস্কার</p>
                         </div>
                     </div>
                 </div>

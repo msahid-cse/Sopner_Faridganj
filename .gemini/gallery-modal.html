@@ -1,0 +1,43 @@
+<!-- Gallery Modal -->
+<div id="galleryModal" class="fixed inset-0 bg-black/95 z-50 hidden overflow-y-auto">
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-8">
+            <h2 id="galleryModalTitle" class="text-3xl font-bold text-white"></h2>
+            <button onclick="closeGalleryModal()" class="text-white hover:text-emerald-400 transition-colors">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+        </div>
+        <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+    </div>
+</div>
+
+<!-- Image Lightbox Viewer -->
+<div id="imageLightbox" class="fixed inset-0 bg-black/98 z-[60] hidden flex items-center justify-center">
+    <button onclick="closeLightboxViewer()"
+        class="absolute top-4 right-4 text-white hover:text-emerald-400 transition-colors z-10">
+        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+    </button>
+    <button onclick="navigateLightbox(-1)"
+        class="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-emerald-400 transition-all bg-black/50 hover:bg-black/70 rounded-full p-4 z-10">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"></path>
+        </svg>
+    </button>
+    <div class="max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center p-4">
+        <img id="lightboxImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
+    </div>
+    <button onclick="navigateLightbox(1)"
+        class="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-emerald-400 transition-all bg-black/50 hover:bg-black/70 rounded-full p-4 z-10">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+        </svg>
+    </button>
+    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white bg-black/50 px-4 py-2 rounded-full">
+        <span id="imageCounter"></span>
+    </div>
+</div>
