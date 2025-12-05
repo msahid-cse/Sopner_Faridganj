@@ -722,10 +722,249 @@ header nav .container img {
     }
 }
 
+.see-more-btn .btn-icon {
+    transition: transform 0.3s ease;
+}
+
+.see-more-btn.active .btn-icon {
+    transform: rotate(180deg);
+}
+
+.gallery-modal-content {
+    margin: 20px auto;
+    padding: 15px;
+}
+
+.splash-content img {
+    max-width: 95%;
+    max-height: 80vh;
+}
+
+.splash-close-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    top: -10px;
+    right: -10px;
+}
+}
+
+/* Extra small screens: ensure header title fits in one line */
+@media (max-width: 420px) {
+    header nav .container h1 {
+        font-size: 1rem;
+    }
+
+    header nav .container img {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (min-width: 769px) {
+    .hidden-content {
+        max-height: none;
+        overflow: visible;
+        opacity: 1;
+    }
+
+    .see-more-btn {
+        display: none;
+    }
+}
+
+header nav .container img {
+    width: 36px;
+    height: 36px;
+}
+
+.advisor-institution {
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 769px) {
+    .hidden-content {
+        max-height: none;
+        overflow: visible;
+        opacity: 1;
+    }
+
+    .see-more-btn {
+        display: none;
+    }
+}
+
+
+
+/* Advisor Position/Profession Styling */
+.advisor-position {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+    font-weight: 500;
+    color: #ffb01d;
+    margin-bottom: 0;
+    /* margin-top: 0.25rem; */
+    font-size: 0.875rem;
+    line-height: 1.2;
+}
+
+/* Committee Card Fixed Heights */
+#committee2025Container .flex-shrink-0>div,
+#mobileCommittee2025Container .flex-shrink-0>div {
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem !important;
+    /* Match সভাপতি card p-8 padding */
+}
+
+/* Ensure committee member images don't shrink */
+#committee2025Container img,
+#mobileCommittee2025Container img {
+    flex-shrink: 0;
+}
+
+/* Reduce spacing between position and name - MINIMAL */
+#committee2025Container .font-bold,
+#mobileCommittee2025Container .font-bold {
+    margin-bottom: 0 !important;
+    /* No spacing between position and name */
+}
+
+/* Ensure extra text (like additional roles) has consistent spacing */
+#committee2025Container .text-xs,
+#mobileCommittee2025Container .text-xs {
+    min-height: 1.25rem;
+}
+
+
+/* Committee Card Fixed Heights */
+#committee2025Container .flex-shrink-0>div,
+#mobileCommittee2025Container .flex-shrink-0>div {
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem !important;
+    /* Match সভাপতি card p-8 padding */
+}
+
+/* Ensure committee member images don't shrink */
+#committee2025Container img,
+#mobileCommittee2025Container img {
+    flex-shrink: 0;
+}
+
+/* Reduce spacing between position and name */
+#committee2025Container .font-bold,
+#mobileCommittee2025Container .font-bold {
+    margin-bottom: 0.25rem !important;
+    /* Reduced spacing */
+}
+
+/* Ensure extra text (like additional roles) has consistent spacing */
+#committee2025Container .text-xs,
+#mobileCommittee2025Container .text-xs {
+    min-height: 1.25rem;
+}
+
+/* Committee Card Fixed Heights */
+#committee2025Container .flex-shrink-0>div,
+#mobileCommittee2025Container .flex-shrink-0>div {
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Ensure committee member images don't shrink */
+#committee2025Container img,
+#mobileCommittee2025Container img {
+    flex-shrink: 0;
+}
+
+/* Ensure extra text (like additional roles) has consistent spacing */
+#committee2025Container .text-xs,
+#mobileCommittee2025Container .text-xs {
+    min-height: 1.25rem;
+}
+
+/* Founding Members Infinite Scroll Animation */
+.founding-scroll-container {
+    padding: 20px 0;
+}
+
+.founding-scroll-track {
+    animation: founding-scroll 7s linear infinite;
+}
+
+.founding-scroll-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes founding-scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
 .founding-member-card {
     transition: transform 0.3s ease;
 }
 
 .founding-member-card:hover {
     transform: scale(1.05);
+}
+
+/* Founding Members - Manual Scroll Support */
+.founding-scroll-container {
+    cursor: grab;
+    user-select: none;
+}
+
+.founding-scroll-container:active {
+    cursor: grabbing;
+}
+
+.founding-scroll-track.dragging {
+    animation-play-state: paused;
+    cursor: grabbing;
+}
+
+/* Mobile: Enable horizontal scrolling */
+@media (max-width: 768px) {
+    .founding-scroll-container {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+    }
+
+    .founding-scroll-container::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .founding-scroll-container::-webkit-scrollbar-track {
+        background: var(--bg-secondary);
+        border-radius: 3px;
+    }
+
+    .founding-scroll-container::-webkit-scrollbar-thumb {
+        background: #10b981;
+        border-radius: 3px;
+    }
+
+    .founding-scroll-container::-webkit-scrollbar-thumb:hover {
+        background: #059669;
+    }
 }

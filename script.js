@@ -793,3 +793,236 @@ function addToCalendar() {
     // Show confirmation message
     alert('✅ পরীক্ষার তারিখ আপনার ক্যালেন্ডারে যোগ করা হয়েছে!\n\n📝 স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫\n📅 তারিখ: ১৯ ডিসেম্বর ২০২৫\n⏰ সময়: সকাল ৯টা\n📍 স্থান: ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ');
 }
+
+// ============================================
+// FOUNDING MEMBERS MANUAL SCROLL FUNCTIONALITY
+// ============================================
+
+// Founding Members Manual Scroll Functionality
+window.addEventListener('load', function () {
+    const foundingScrollContainer = document.querySelector('.founding-scroll-container');
+    const foundingScrollTrack = document.querySelector('.founding-scroll-track');
+
+    if (!foundingScrollContainer || !foundingScrollTrack) return;
+
+    let isDragging = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    // Mouse events for desktop drag
+    foundingScrollContainer.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        foundingScrollTrack.classList.add('dragging');
+        startX = e.pageX - foundingScrollContainer.offsetLeft;
+        scrollLeft = foundingScrollContainer.scrollLeft;
+    });
+
+    foundingScrollContainer.addEventListener('mouseleave', () => {
+        if (isDragging) {
+            isDragging = false;
+            foundingScrollTrack.classList.remove('dragging');
+        }
+    });
+
+    foundingScrollContainer.addEventListener('mouseup', () => {
+        isDragging = false;
+        foundingScrollTrack.classList.remove('dragging');
+    });
+
+    foundingScrollContainer.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - foundingScrollContainer.offsetLeft;
+        const walk = (x - startX) * 2;
+        foundingScrollContainer.scrollLeft = scrollLeft - walk;
+    });
+
+    // Touch events for mobile swipe
+    let touchStartX = 0;
+    let touchScrollLeft = 0;
+
+    foundingScrollContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].pageX - foundingScrollContainer.offsetLeft;
+        touchScrollLeft = foundingScrollContainer.scrollLeft;
+        foundingScrollTrack.classList.add('dragging');
+    }, { passive: true });
+
+    foundingScrollContainer.addEventListener('touchmove', (e) => {
+        const x = e.touches[0].pageX - foundingScrollContainer.offsetLeft;
+        const walk = (x - touchStartX) * 2;
+        foundingScrollContainer.scrollLeft = touchScrollLeft - walk;
+    }, { passive: true });
+
+    foundingScrollContainer.addEventListener('touchend', () => {
+        foundingScrollTrack.classList.remove('dragging');
+    });
+});
+
+// ============================================
+// GALLERY MODAL SYSTEM
+// ============================================
+
+// Gallery data with all images for each event
+const galleryDataModal = {
+    'education': {
+        title: 'শিক্ষা সহায়তা',
+        images: [
+            'https://i.imghippo.com/files/kP2578TAs.jpg',
+            'https://i.imghippo.com/files/kHx7730Ro.jpg'
+        ]
+    },
+    'award-2025': {
+        title: 'অর্জন ২০২৫',
+        images: [
+            'https://i.imghippo.com/files/gaz2073ls.jpg'
+        ]
+    },
+    'bitti_2025': {
+        title: 'বৃত্তি পরীক্ষা কর্মসূচি',
+        images: [
+            'https://i.imghippo.com/files/pRJV1935Vpw.jpg'
+        ]
+    },
+    'seminar-lawtoli': {
+        title: 'সেমিনার - লাউতলী ডাঃ রশীদ আহমেদ উচ্চ বিদ্যালয়',
+        images: [
+            'https://i.imghippo.com/files/sgw2017gpI.jpg'
+        ]
+    },
+    'education2024': {
+        title: 'শিক্ষা সহায়তা ২০২৪',
+        images: [
+            'https://i.imghippo.com/files/kHx7730Ro.jpg',
+            'https://i.imghippo.com/files/kP2578TAs.jpg'
+        ]
+    },
+    'award-20252024': {
+        title: 'অর্জন ২০২৪',
+        images: [
+            'https://i.imghippo.com/files/gaz2073ls.jpg'
+        ]
+    }
+};
+
+// Current lightbox state
+let currentGalleryImagesModal = [];
+let currentImageIndexModal = 0;
+
+// Open gallery modal and show all images for the event
+function openGalleryModal(eventId) {
+    const modal = document.getElementById('galleryModal');
+    const title = document.getElementById('galleryModalTitle');
+    const grid = document.getElementById('galleryGrid');
+
+    const eventData = galleryDataModal[eventId];
+    if (!eventData) return;
+
+    // Set title
+    title.textContent = eventData.title;
+
+    // Clear previous images
+    grid.innerHTML = '';
+
+    // Store current gallery images
+    currentGalleryImagesModal = eventData.images;
+
+    // Create image grid
+    eventData.images.forEach((imageSrc, index) => {
+        const imageCard = document.createElement('div');
+        imageCard.className = 'group cursor-pointer relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105';
+        imageCard.onclick = (event) => {
+            event.stopPropagation(); // Prevent event bubbling
+            openLightboxViewer(index);
+        };
+
+        imageCard.innerHTML = `
+            <img src="${imageSrc}" alt="${eventData.title}" 
+                class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110">
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                </svg>
+            </div>
+        `;
+
+        grid.appendChild(imageCard);
+    });
+
+    // Show modal
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+// Close gallery modal
+function closeGalleryModal() {
+    const modal = document.getElementById('galleryModal');
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+
+// Open lightbox viewer for a specific image
+function openLightboxViewer(index) {
+    const lightbox = document.getElementById('imageLightbox');
+    const image = document.getElementById('lightboxImage');
+    const counter = document.getElementById('imageCounter');
+
+    currentImageIndexModal = index;
+
+    // Set image
+    image.src = currentGalleryImagesModal[index];
+
+    // Update counter
+    counter.textContent = `${index + 1} / ${currentGalleryImagesModal.length}`;
+
+    // Show lightbox (it will appear above the gallery modal due to higher z-index)
+    lightbox.classList.remove('hidden');
+}
+
+// Close lightbox viewer (gallery modal stays open)
+function closeLightboxViewer() {
+    const lightbox = document.getElementById('imageLightbox');
+    lightbox.classList.add('hidden');
+    // Gallery modal remains open so user can see the grid again
+}
+
+// Navigate through images in lightbox
+function navigateLightbox(direction) {
+    currentImageIndexModal += direction;
+
+    // Loop around
+    if (currentImageIndexModal < 0) {
+        currentImageIndexModal = currentGalleryImagesModal.length - 1;
+    } else if (currentImageIndexModal >= currentGalleryImagesModal.length) {
+        currentImageIndexModal = 0;
+    }
+
+    // Update image
+    const image = document.getElementById('lightboxImage');
+    const counter = document.getElementById('imageCounter');
+
+    image.src = currentGalleryImagesModal[currentImageIndexModal];
+    counter.textContent = `${currentImageIndexModal + 1} / ${currentGalleryImagesModal.length}`;
+}
+
+// Keyboard navigation for lightbox
+document.addEventListener('keydown', function (e) {
+    const lightbox = document.getElementById('imageLightbox');
+
+    // If lightbox is open, handle its keyboard events
+    if (!lightbox.classList.contains('hidden')) {
+        if (e.key === 'ArrowLeft') {
+            navigateLightbox(-1);
+        } else if (e.key === 'ArrowRight') {
+            navigateLightbox(1);
+        } else if (e.key === 'Escape') {
+            closeLightboxViewer(); // Close lightbox, gallery modal stays open
+        }
+        return; // Don't process other keys when lightbox is open
+    }
+
+    // If gallery modal is open (and lightbox is not), handle its keyboard events
+    const galleryModal = document.getElementById('galleryModal');
+    if (!galleryModal.classList.contains('hidden') && e.key === 'Escape') {
+        closeGalleryModal(); // Close gallery modal
+    }
+});
