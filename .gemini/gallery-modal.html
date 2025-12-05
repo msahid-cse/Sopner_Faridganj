@@ -1,5 +1,5 @@
 <!-- Gallery Modal -->
-<div id="galleryModal" class="fixed inset-0 bg-black/95 z-50 hidden overflow-y-auto">
+<div id="galleryModal" class="fixed inset-0 bg-black/95 hidden overflow-y-auto" style="z-index: 1000;">
     <div class="container mx-auto px-4 py-8">
         <div class="flex justify-between items-center mb-8">
             <h2 id="galleryModalTitle" class="text-3xl font-bold text-white"></h2>
@@ -15,7 +15,8 @@
 </div>
 
 <!-- Image Lightbox Viewer -->
-<div id="imageLightbox" class="fixed inset-0 bg-black/98 z-[60] hidden flex items-center justify-center">
+<div id="imageLightbox" class="fixed inset-0 bg-black/98 hidden flex items-center justify-center"
+    style="z-index: 2000;">
     <button onclick="closeLightboxViewer()"
         class="absolute top-4 right-4 text-white hover:text-emerald-400 transition-colors z-10">
         <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
