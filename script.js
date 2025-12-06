@@ -370,9 +370,9 @@ document.querySelectorAll('.card-hover, .stat-card').forEach(el => {
 
 // Advisor Carousel Functions
 let currentAdvisorIndex = 0;
-const totalAdvisors = 13;
+const totalAdvisors = 14;
 const advisorsPerView = 3;
-const maxIndex = totalAdvisors - advisorsPerView; // 7 (positions: 0, 1, 2, 3, 4, 5, 6, 7)
+const maxIndex = totalAdvisors - advisorsPerView; // 11 (positions: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)
 let advisorAutoPlayInterval = null;
 
 function scrollAdvisors(direction) {
@@ -501,7 +501,7 @@ window.addEventListener('load', function () {
 
 // Mobile Advisor Carousel Functions
 let currentMobileAdvisorIndex = 0;
-const totalMobileAdvisors = 13;
+const totalMobileAdvisors = 14;
 let mobileAdvisorAutoPlayInterval = null;
 
 function scrollMobileAdvisors(direction) {
@@ -567,8 +567,8 @@ function toggleMoreAdvisors() {
 
 // Committee 2025 Carousel Functions (Desktop)
 let currentCommittee2025Index = 0;
-const totalCommittee2025Members = 12;
-const committee2025PerView = 4;
+const totalCommittee2025Members = 13;
+const committee2025PerView = 5;
 const maxCommittee2025Index = totalCommittee2025Members - committee2025PerView; // 8 (positions: 0, 1, 2, 3, 4, 5, 6, 7, 8)
 let committee2025AutoPlayInterval = null;
 
@@ -630,7 +630,7 @@ function stopCommittee2025AutoPlay() {
 
 // Mobile Committee 2025 Carousel Functions
 let currentMobileCommittee2025Index = 0;
-const totalMobileCommittee2025Members = 12;
+const totalMobileCommittee2025Members = 13;
 let mobileCommittee2025AutoPlayInterval = null;
 
 function scrollMobileCommittee2025(direction) {
