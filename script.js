@@ -720,109 +720,109 @@ window.addEventListener('load', function () {
 });
 
 
-// Add to Calendar Function
-function addToCalendar() {
-    // Event details
-    const eventTitle = 'স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫';
-    const eventDescription = 'স্বপ্নের ফরিদগঞ্জের ১ম প্রতিষ্ঠা বার্ষিকী উপলক্ষে বৃত্তি পরীক্ষা। বিষয়: বাংলা, ইংরেজি, গণিত, সাধারণ জ্ঞান';
-    const eventLocation = 'ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ, ফরিদগঞ্জ, চাঁদপুর';
-    const eventLocationUrl = 'https://maps.app.goo.gl/hzJ5J2tQ5kZ4n7XNA';
+// // Add to Calendar Function
+// function addToCalendar() {
+//     // Event details
+//     const eventTitle = 'স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫';
+//     const eventDescription = 'স্বপ্নের ফরিদগঞ্জের ১ম প্রতিষ্ঠা বার্ষিকী উপলক্ষে বৃত্তি পরীক্ষা। বিষয়: বাংলা, ইংরেজি, গণিত, সাধারণ জ্ঞান';
+//     const eventLocation = 'ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ, ফরিদগঞ্জ, চাঁদপুর';
+//     const eventLocationUrl = 'https://maps.app.goo.gl/hzJ5J2tQ5kZ4n7XNA';
 
-    // Date: December 19, 2025, 9:00 AM - 1:00 PM (Bangladesh Time)
-    const startDate = new Date('2025-12-19T09:00:00+06:00');
-    const endDate = new Date('2025-12-19T13:00:00+06:00');
+//     // Date: December 19, 2025, 9:00 AM - 1:00 PM (Bangladesh Time)
+//     const startDate = new Date('2025-12-19T09:00:00+06:00');
+//     const endDate = new Date('2025-12-19T13:00:00+06:00');
 
-    // Format dates for ICS file (YYYYMMDDTHHMMSS format in UTC)
-    const formatICSDate = (date) => {
-        const year = date.getUTCFullYear();
-        const month = String(date.getUTCMonth() + 1).padStart(2, '0');
-        const day = String(date.getUTCDate()).padStart(2, '0');
-        const hours = String(date.getUTCHours()).padStart(2, '0');
-        const minutes = String(date.getUTCMinutes()).padStart(2, '0');
-        const seconds = String(date.getUTCSeconds()).padStart(2, '0');
-        return `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
-    };
+//     // Format dates for ICS file (YYYYMMDDTHHMMSS format in UTC)
+//     const formatICSDate = (date) => {
+//         const year = date.getUTCFullYear();
+//         const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+//         const day = String(date.getUTCDate()).padStart(2, '0');
+//         const hours = String(date.getUTCHours()).padStart(2, '0');
+//         const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+//         const seconds = String(date.getUTCSeconds()).padStart(2, '0');
+//         return `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
+//     };
 
-    // Escape special characters for ICS format
-    const escapeICS = (str) => {
-        return str.replace(/\\/g, '\\\\')
-            .replace(/;/g, '\\;')
-            .replace(/,/g, '\\,')
-            .replace(/\n/g, '\\n');
-    };
+//     // Escape special characters for ICS format
+//     const escapeICS = (str) => {
+//         return str.replace(/\\/g, '\\\\')
+//             .replace(/;/g, '\\;')
+//             .replace(/,/g, '\\,')
+//             .replace(/\n/g, '\\n');
+//     };
 
-    const startDateFormatted = formatICSDate(startDate);
-    const endDateFormatted = formatICSDate(endDate);
-    const currentDate = formatICSDate(new Date());
+//     const startDateFormatted = formatICSDate(startDate);
+//     const endDateFormatted = formatICSDate(endDate);
+//     const currentDate = formatICSDate(new Date());
 
-    // Create unique UID with timestamp
-    const uniqueUID = `scholarship-exam-2025-${Date.now()}@sopnerfaridganj.com`;
+//     // Create unique UID with timestamp
+//     const uniqueUID = `scholarship-exam-2025-${Date.now()}@sopnerfaridganj.com`;
 
-    // Create ICS file content with 4 reminders (RFC 5545 compliant)
-    const icsContent = [
-        'BEGIN:VCALENDAR',
-        'VERSION:2.0',
-        'PRODID:-//Sopner Faridganj//Scholarship Exam 2025//EN',
-        'CALSCALE:GREGORIAN',
-        'METHOD:PUBLISH',
-        'BEGIN:VEVENT',
-        `UID:${uniqueUID}`,
-        `DTSTAMP:${currentDate}`,
-        `DTSTART:${startDateFormatted}`,
-        `DTEND:${endDateFormatted}`,
-        `SUMMARY:${escapeICS(eventTitle)}`,
-        `DESCRIPTION:${escapeICS(eventDescription)}`,
-        `LOCATION:${escapeICS(eventLocation)}`,
-        'STATUS:CONFIRMED',
-        'TRANSP:OPAQUE',
-        'SEQUENCE:0',
-        // Reminder 1: 3 days before
-        'BEGIN:VALARM',
-        'TRIGGER:-P3D',
-        'ACTION:DISPLAY',
-        'DESCRIPTION:৩ দিন পর বৃত্তি পরীক্ষা - প্রস্তুতি শুরু করুন!',
-        'END:VALARM',
-        // Reminder 2: 1 day before
-        'BEGIN:VALARM',
-        'TRIGGER:-P1D',
-        'ACTION:DISPLAY',
-        'DESCRIPTION:আগামীকাল বৃত্তি পরীক্ষা - সব প্রস্তুতি সম্পন্ন করুন!',
-        'END:VALARM',
-        // Reminder 3: 3 hours before
-        'BEGIN:VALARM',
-        'TRIGGER:-PT3H',
-        'ACTION:DISPLAY',
-        'DESCRIPTION:৩ ঘণ্টা পর বৃত্তি পরীক্ষা শুরু - সময়মতো পৌঁছান!',
-        'END:VALARM',
-        // Reminder 4: 1 hour before
-        'BEGIN:VALARM',
-        'TRIGGER:-PT1H',
-        'ACTION:DISPLAY',
-        'DESCRIPTION:১ ঘণ্টা পর পরীক্ষা শুরু - এখনই রওনা দিন!',
-        'END:VALARM',
-        'END:VEVENT',
-        'END:VCALENDAR'
-    ].join('\r\n');
+//     // Create ICS file content with 4 reminders (RFC 5545 compliant)
+//     const icsContent = [
+//         'BEGIN:VCALENDAR',
+//         'VERSION:2.0',
+//         'PRODID:-//Sopner Faridganj//Scholarship Exam 2025//EN',
+//         'CALSCALE:GREGORIAN',
+//         'METHOD:PUBLISH',
+//         'BEGIN:VEVENT',
+//         `UID:${uniqueUID}`,
+//         `DTSTAMP:${currentDate}`,
+//         `DTSTART:${startDateFormatted}`,
+//         `DTEND:${endDateFormatted}`,
+//         `SUMMARY:${escapeICS(eventTitle)}`,
+//         `DESCRIPTION:${escapeICS(eventDescription)}`,
+//         `LOCATION:${escapeICS(eventLocation)}`,
+//         'STATUS:CONFIRMED',
+//         'TRANSP:OPAQUE',
+//         'SEQUENCE:0',
+//         // Reminder 1: 3 days before
+//         'BEGIN:VALARM',
+//         'TRIGGER:-P3D',
+//         'ACTION:DISPLAY',
+//         'DESCRIPTION:৩ দিন পর বৃত্তি পরীক্ষা - প্রস্তুতি শুরু করুন!',
+//         'END:VALARM',
+//         // Reminder 2: 1 day before
+//         'BEGIN:VALARM',
+//         'TRIGGER:-P1D',
+//         'ACTION:DISPLAY',
+//         'DESCRIPTION:আগামীকাল বৃত্তি পরীক্ষা - সব প্রস্তুতি সম্পন্ন করুন!',
+//         'END:VALARM',
+//         // Reminder 3: 3 hours before
+//         'BEGIN:VALARM',
+//         'TRIGGER:-PT3H',
+//         'ACTION:DISPLAY',
+//         'DESCRIPTION:৩ ঘণ্টা পর বৃত্তি পরীক্ষা শুরু - সময়মতো পৌঁছান!',
+//         'END:VALARM',
+//         // Reminder 4: 1 hour before
+//         'BEGIN:VALARM',
+//         'TRIGGER:-PT1H',
+//         'ACTION:DISPLAY',
+//         'DESCRIPTION:১ ঘণ্টা পর পরীক্ষা শুরু - এখনই রওনা দিন!',
+//         'END:VALARM',
+//         'END:VEVENT',
+//         'END:VCALENDAR'
+//     ].join('\r\n');
 
-    // Create blob and download
-    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-    const link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
-    link.download = 'বৃত্তি_পরীক্ষা_২০২৫.ics';
+//     // Create blob and download
+//     const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+//     const link = document.createElement('a');
+//     link.href = window.URL.createObjectURL(blob);
+//     link.download = 'বৃত্তি_পরীক্ষা_২০২৫.ics';
 
-    // Trigger download
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+//     // Trigger download
+//     document.body.appendChild(link);
+//     link.click();
+//     document.body.removeChild(link);
 
-    // Clean up the URL object
-    setTimeout(() => {
-        window.URL.revokeObjectURL(link.href);
-    }, 100);
+//     // Clean up the URL object
+//     setTimeout(() => {
+//         window.URL.revokeObjectURL(link.href);
+//     }, 100);
 
-    // Show confirmation message
-    alert('✅ পরীক্ষার তারিখ আপনার ক্যালেন্ডারে যোগ করা হয়েছে!\n\n📝 স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫\n📅 তারিখ: ১৯ ডিসেম্বর ২০২৫\n⏰ সময়: সকাল ৯টা\n📍 স্থান: ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ\n\n🔔 রিমাইন্ডার:\n• ৩ দিন আগে\n• ১ দিন আগে\n• ৩ ঘণ্টা আগে\n• ১ ঘণ্টা আগে');
-}
+//     // Show confirmation message
+//     alert('✅ পরীক্ষার তারিখ আপনার ক্যালেন্ডারে যোগ করা হয়েছে!\n\n📝 স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫\n📅 তারিখ: ১৯ ডিসেম্বর ২০২৫\n⏰ সময়: সকাল ৯টা\n📍 স্থান: ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ\n\n🔔 রিমাইন্ডার:\n• ৩ দিন আগে\n• ১ দিন আগে\n• ৩ ঘণ্টা আগে\n• ১ ঘণ্টা আগে');
+// }
 
 // ============================================
 // FOUNDING MEMBERS MANUAL SCROLL FUNCTIONALITY
