@@ -32,69 +32,114 @@ function addToCalendar() {
 
 // ICS Download Function (with 4 custom reminders)
 function downloadICS() {
-    const formatDate = (d) => {
-        const pad = (n) => String(n).padStart(2, '0');
-        return d.getUTCFullYear() + pad(d.getUTCMonth() + 1) + pad(d.getUTCDate()) +
-            'T' + pad(d.getUTCHours()) + pad(d.getUTCMinutes()) + pad(d.getUTCSeconds()) + 'Z';
+    // Event details
+    const eventTitle = 'স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫';
+    const eventDescription = 'স্বপ্নের ফরিদগঞ্জের ১ম প্রতিষ্ঠা বার্ষিকী উপলক্ষে বৃত্তি পরীক্ষা। বিষয়: বাংলা, ইংরেজি, গণিত, সাধারণ জ্ঞান';
+    const eventLocation = 'ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ, ফরিদগঞ্জ, চাঁদপুর';
+    const eventLocationUrl = 'https://maps.app.goo.gl/hzJ5J2tQ5kZ4n7XNA';
+
+    // Date: December 19, 2025, 9:00 AM - 1:00 PM (Bangladesh Time)
+    const startDate = new Date('2025-12-19T09:00:00+06:00');
+    const endDate = new Date('2025-12-19T13:00:00+06:00');
+
+    // Format date to ICS UTC format
+    const formatICSDate = (date) => {
+        return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
     };
 
-    const start = new Date('2025-12-19T09:00:00+06:00');
-    const end = new Date('2025-12-19T13:00:00+06:00');
-    const now = new Date();
+    // Escape ICS characters
+    const escapeICS = (str) => {
+        return str.replace(/\\/g, '\\\\')
+            .replace(/;/g, '\\;')
+            .replace(/,/g, '\\,')
+            .replace(/\n/g, '\\n');
+    };
 
-    const ics = [
+    const startDateFormatted = formatICSDate(startDate);
+    const endDateFormatted = formatICSDate(endDate);
+    const currentDate = formatICSDate(new Date());
+
+    // UID
+    const uniqueUID = `scholarship-exam-2025-${Date.now()}@sopnerfaridganj.com`;
+
+    // ICS Content
+    const icsContent = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
-        'PRODID:-//Sopner Faridganj//EN',
+        'PRODID:-//Sopner Faridganj//Scholarship Exam 2025//EN',
         'CALSCALE:GREGORIAN',
+
+        // TIMEZONE BLOCK (Required for Google/Apple)
+        'BEGIN:VTIMEZONE',
+        'TZID:Asia/Dhaka',
+        'BEGIN:STANDARD',
+        'DTSTART:19700101T000000',
+        'TZOFFSETFROM:+0600',
+        'TZOFFSETTO:+0600',
+        'TZNAME:BDT',
+        'END:STANDARD',
+        'END:VTIMEZONE',
+
         'BEGIN:VEVENT',
-        'UID:' + now.getTime() + '@sopnerfaridganj.com',
-        'DTSTAMP:' + formatDate(now),
-        'DTSTART:' + formatDate(start),
-        'DTEND:' + formatDate(end),
-        'SUMMARY:Sopner Faridganj Scholarship Exam 2025',
-        'DESCRIPTION:Sopner Faridganj 1st Anniversary Scholarship Exam. Subjects: Bangla English Math General Knowledge',
-        'LOCATION:Faridganj Government Degree College',
+        `UID:${uniqueUID}`,
+        `DTSTAMP:${currentDate}`,
+        `DTSTART:${startDateFormatted}`,
+        `DTEND:${endDateFormatted}`,
+        `SUMMARY:${escapeICS(eventTitle)}`,
+        `DESCRIPTION:${escapeICS(eventDescription)}`,
+        `LOCATION:${escapeICS(eventLocation)}`,
+        `URL:${eventLocationUrl}`,
         'STATUS:CONFIRMED',
-        // Reminder 1: 3 days before
+        'TRANSP:OPAQUE',
+        'SEQUENCE:0',
+
+        // Reminder 1 - 3 days before
         'BEGIN:VALARM',
-        'ACTION:DISPLAY',
         'TRIGGER:-P3D',
-        'DESCRIPTION:Exam in 3 days - Start your preparation!',
-        'END:VALARM',
-        // Reminder 2: 1 day before
-        'BEGIN:VALARM',
         'ACTION:DISPLAY',
+        'DESCRIPTION:Exam Reminder (3 days before)',
+        'END:VALARM',
+
+        // Reminder 2 - 1 day before
+        'BEGIN:VALARM',
         'TRIGGER:-P1D',
-        'DESCRIPTION:Exam tomorrow - Final preparation!',
-        'END:VALARM',
-        // Reminder 3: 3 hours before
-        'BEGIN:VALARM',
         'ACTION:DISPLAY',
+        'DESCRIPTION:Exam Reminder (1 day before)',
+        'END:VALARM',
+
+        // Reminder 3 - 3 hours before
+        'BEGIN:VALARM',
         'TRIGGER:-PT3H',
-        'DESCRIPTION:Exam in 3 hours - Leave on time!',
-        'END:VALARM',
-        // Reminder 4: 1 hour before
-        'BEGIN:VALARM',
         'ACTION:DISPLAY',
-        'TRIGGER:-PT1H',
-        'DESCRIPTION:Exam in 1 hour - Leave now!',
+        'DESCRIPTION:Exam Reminder (3 hours before)',
         'END:VALARM',
+
+        // Reminder 4 - 1 hour before
+        'BEGIN:VALARM',
+        'TRIGGER:-PT1H',
+        'ACTION:DISPLAY',
+        'DESCRIPTION:Exam Reminder (1 hour before)',
+        'END:VALARM',
+
         'END:VEVENT',
         'END:VCALENDAR'
     ].join('\r\n');
 
-    const blob = new Blob([ics], { type: 'text/calendar' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'Scholarship_Exam_2025.ics';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    // Download file
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = 'বৃত্তি_পরীক্ষা_২০২৫.ics';
 
-    alert('✅ ICS ফাইল ডাউনলোড হয়েছে!\n\n📝 স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫\n📅 তারিখ: ১৯ ডিসেম্বর ২০২৫\n⏰ সময়: সকাল ৯টা\n\n🔔 ৪টি রিমাইন্ডার যুক্ত:\n• ৩ দিন আগে\n• ১ দিন আগে\n• ৩ ঘণ্টা আগে\n• ১ ঘণ্টা আগে\n\n💡 আপনার ক্যালেন্ডার অ্যাপে ইমপোর্ট করুন');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    setTimeout(() => {
+        window.URL.revokeObjectURL(link.href);
+    }, 100);
+
+    alert('✅ পরীক্ষার তারিখ সফলভাবে ক্যালেন্ডারে যুক্ত হয়েছে!\n\n📝 স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫\n📅 তারিখ: ১৯ ডিসেম্বর ২০২৫\n⏰ সময়: সকাল ৯টা\n\n🔔 ৪টি রিমাইন্ডার যুক্ত:\n• ৩ দিন আগে\n• ১ দিন আগে\n• ৩ ঘণ্টা আগে\n• ১ ঘণ্টা আগে');
 }
 
 // Splash Screen Close Function
