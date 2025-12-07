@@ -24,9 +24,9 @@ function downloadICS() {
         'DTSTAMP:' + formatDate(now),
         'DTSTART:' + formatDate(start),
         'DTEND:' + formatDate(end),
-        'SUMMARY:Sopner Faridganj Scholarship Exam 2025',
-        'DESCRIPTION:Sopner Faridganj 1st Anniversary Scholarship Exam. Subjects: Bangla English Math General Knowledge',
-        'LOCATION:Faridganj Government Degree College',
+        'SUMMARY:স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫',
+        'DESCRIPTION:স্বপ্নের ফরিদগঞ্জের ১ম প্রতিষ্ঠা বার্ষিকী উপলক্ষে বৃত্তি পরীক্ষা। বিষয়: বাংলা, ইংরেজি, গণিত, সাধারণ জ্ঞান',
+        'LOCATION:ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ, ফরিদগঞ্জ, চাঁদপুর',
         'STATUS:CONFIRMED',
         // Reminder 1: 3 days before
         'BEGIN:VALARM',
