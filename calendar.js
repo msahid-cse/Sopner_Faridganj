@@ -30,7 +30,6 @@ function addToCalendar() {
     const dtstamp = formatICSDate(new Date());
     const uid = `scholarship-exam-${Date.now()}@sopnerfaridganj.com`;
 
-    // Create ICS content (simplified, no special characters)
     const icsLines = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
@@ -47,29 +46,11 @@ function addToCalendar() {
         `LOCATION:${eventLocation}`,
         'STATUS:CONFIRMED',
         'TRANSP:OPAQUE',
-        // Reminder 1: 3 days before
-        'BEGIN:VALARM',
-        'ACTION:DISPLAY',
-        'TRIGGER:-P3D',
-        'DESCRIPTION:Scholarship Exam in 3 days - Start preparation',
-        'END:VALARM',
-        // Reminder 2: 1 day before
+        // Single reminder: 1 day before (for testing)
         'BEGIN:VALARM',
         'ACTION:DISPLAY',
         'TRIGGER:-P1D',
-        'DESCRIPTION:Scholarship Exam tomorrow - Final preparation',
-        'END:VALARM',
-        // Reminder 3: 3 hours before
-        'BEGIN:VALARM',
-        'ACTION:DISPLAY',
-        'TRIGGER:-PT3H',
-        'DESCRIPTION:Exam in 3 hours - Leave on time',
-        'END:VALARM',
-        // Reminder 4: 1 hour before
-        'BEGIN:VALARM',
-        'ACTION:DISPLAY',
-        'TRIGGER:-PT1H',
-        'DESCRIPTION:Exam in 1 hour - Leave now',
+        'DESCRIPTION:Exam tomorrow',
         'END:VALARM',
         'END:VEVENT',
         'END:VCALENDAR'
@@ -93,7 +74,7 @@ function addToCalendar() {
     setTimeout(() => URL.revokeObjectURL(url), 100);
 
     // Show success message in Bengali
-    alert('✅ পরীক্ষার তারিখ আপনার ক্যালেন্ডারে যোগ করা হয়েছে!\n\n📝 স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫\n📅 তারিখ: ১৯ ডিসেম্বর ২০২৫\n⏰ সময়: সকাল ৯টা\n📍 স্থান: ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ\n\n🔔 রিমাইন্ডার:\n• ৩ দিন আগে\n• ১ দিন আগে\n• ৩ ঘণ্টা আগে\n• ১ ঘণ্টা আগে');
+    alert('✅ পরীক্ষার তারিখ আপনার ক্যালেন্ডারে যোগ করা হয়েছে!\n\n📝 স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫\n📅 তারিখ: ১৯ ডিসেম্বর ২০২৫\n⏰ সময়: সকাল ৯টা\n📍 স্থান: ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ\n\n🔔 রিমাইন্ডার: ১ দিন আগে (Testing)');
 }
 
 // Splash Screen Close Function
