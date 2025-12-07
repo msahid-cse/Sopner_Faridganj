@@ -4,77 +4,53 @@
 // ============================================
 
 function addToCalendar() {
-    // Event details (using English for maximum compatibility)
-    const eventTitle = 'Sopner Faridganj Scholarship Exam 2025';
-    const eventDescription = 'Sopner Faridganj 1st Anniversary Scholarship Examination. Subjects: Bangla, English, Math, General Knowledge';
-    const eventLocation = 'Faridganj Government Degree College, Faridganj, Chandpur';
+    // Minimal ICS file - no reminders, simplest format
+    const now = new Date();
+    const timestamp = now.getTime();
 
-    // Date: December 19, 2025, 9:00 AM - 1:00 PM (Bangladesh Time = UTC+6)
-    const startDate = new Date('2025-12-19T09:00:00+06:00');
-    const endDate = new Date('2025-12-19T13:00:00+06:00');
-
-    // Format date to ICS format (YYYYMMDDTHHMMSSZ in UTC)
-    const formatICSDate = (date) => {
+    // Format: YYYYMMDDTHHMMSSZ
+    const formatDate = (d) => {
         const pad = (n) => String(n).padStart(2, '0');
-        const y = date.getUTCFullYear();
-        const m = pad(date.getUTCMonth() + 1);
-        const d = pad(date.getUTCDate());
-        const h = pad(date.getUTCHours());
-        const min = pad(date.getUTCMinutes());
-        const s = pad(date.getUTCSeconds());
-        return `${y}${m}${d}T${h}${min}${s}Z`;
+        return d.getUTCFullYear() +
+            pad(d.getUTCMonth() + 1) +
+            pad(d.getUTCDate()) + 'T' +
+            pad(d.getUTCHours()) +
+            pad(d.getUTCMinutes()) +
+            pad(d.getUTCSeconds()) + 'Z';
     };
 
-    const dtstart = formatICSDate(startDate);
-    const dtend = formatICSDate(endDate);
-    const dtstamp = formatICSDate(new Date());
-    const uid = `scholarship-exam-${Date.now()}@sopnerfaridganj.com`;
+    const start = new Date('2025-12-19T09:00:00+06:00');
+    const end = new Date('2025-12-19T13:00:00+06:00');
 
-    const icsLines = [
+    // Absolute minimal ICS
+    const ics = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
-        'PRODID:-//Sopner Faridganj//EN',
-        'CALSCALE:GREGORIAN',
-        'METHOD:PUBLISH',
+        'PRODID:-//SopnerFaridganj//EN',
         'BEGIN:VEVENT',
-        `UID:${uid}`,
-        `DTSTAMP:${dtstamp}`,
-        `DTSTART:${dtstart}`,
-        `DTEND:${dtend}`,
-        `SUMMARY:${eventTitle}`,
-        `DESCRIPTION:${eventDescription}`,
-        `LOCATION:${eventLocation}`,
-        'STATUS:CONFIRMED',
-        'TRANSP:OPAQUE',
-        // Single reminder: 1 day before (for testing)
-        'BEGIN:VALARM',
-        'ACTION:DISPLAY',
-        'TRIGGER:-P1D',
-        'DESCRIPTION:Exam tomorrow',
-        'END:VALARM',
+        'UID:' + timestamp + '@sopnerfaridganj.com',
+        'DTSTAMP:' + formatDate(now),
+        'DTSTART:' + formatDate(start),
+        'DTEND:' + formatDate(end),
+        'SUMMARY:Scholarship Exam 2025',
+        'DESCRIPTION:Sopner Faridganj Scholarship Exam',
+        'LOCATION:Faridganj Degree College',
         'END:VEVENT',
         'END:VCALENDAR'
-    ];
+    ].join('\r\n');
 
-    // Join with proper line endings
-    const icsContent = icsLines.join('\r\n');
-
-    // Create and download the file
-    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    // Download
+    const blob = new Blob([ics], { type: 'text/calendar' });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'Scholarship_Exam_2025.ics';
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'exam.ics';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    // Clean up
-    setTimeout(() => URL.revokeObjectURL(url), 100);
-
-    // Show success message in Bengali
-    alert('✅ পরীক্ষার তারিখ আপনার ক্যালেন্ডারে যোগ করা হয়েছে!\n\n📝 স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫\n📅 তারিখ: ১৯ ডিসেম্বর ২০২৫\n⏰ সময়: সকাল ৯টা\n📍 স্থান: ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ\n\n🔔 রিমাইন্ডার: ১ দিন আগে (Testing)');
+    alert('✅ ICS ফাইল ডাউনলোড হয়েছে!\n\n📝 স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫\n📅 তারিখ: ১৯ ডিসেম্বর ২০২৫\n⏰ সময়: সকাল ৯টা\n\n⚠️ Testing: No reminders');
 }
 
 // Splash Screen Close Function
