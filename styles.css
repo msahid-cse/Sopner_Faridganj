@@ -70,6 +70,7 @@
     --header-text: #1f2937;
     --header-text-hover: #10b981;
     --header-logo-text: #1f2937;
+    --ics-card-bg: linear-gradient(to bottom right, #faf5ff, #e0e7ff);
 }
 
 .dark-theme {
@@ -84,6 +85,7 @@
     --header-text: #ffffff;
     --header-text-hover: #d1fae5;
     --header-logo-text: #ffffff;
+    --ics-card-bg: linear-gradient(to bottom right, #1e293b, #0f172a);
 }
 
 body {
@@ -541,6 +543,12 @@ body {
     background: linear-gradient(to right, rgb(30, 41, 59), rgb(6, 78, 59), rgb(30, 41, 59));
 }
 
+/* ICS Calendar Card Background */
+.ics-card-bg {
+    background: var(--ics-card-bg);
+    transition: background 0.3s ease;
+}
+
 /* Media Queries */
 @media (max-width: 768px) {
     .hidden-content {
@@ -775,7 +783,7 @@ header nav .container img {
     top: -10px;
     right: -10px;
 }
-}
+
 
 /* Extra small screens: ensure header title fits in one line */
 @media (max-width: 420px) {
