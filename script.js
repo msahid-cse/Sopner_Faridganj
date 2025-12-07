@@ -743,51 +743,62 @@ function addToCalendar() {
         return `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
     };
 
+    // Escape special characters for ICS format
+    const escapeICS = (str) => {
+        return str.replace(/\\/g, '\\\\')
+            .replace(/;/g, '\\;')
+            .replace(/,/g, '\\,')
+            .replace(/\n/g, '\\n');
+    };
+
     const startDateFormatted = formatICSDate(startDate);
     const endDateFormatted = formatICSDate(endDate);
     const currentDate = formatICSDate(new Date());
 
-    // Create ICS file content with 4 reminders
+    // Create unique UID with timestamp
+    const uniqueUID = `scholarship-exam-2025-${Date.now()}@sopnerfaridganj.com`;
+
+    // Create ICS file content with 4 reminders (RFC 5545 compliant)
     const icsContent = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
-        'PRODID:-//Sopner Faridganj//Scholarship Exam//EN',
+        'PRODID:-//Sopner Faridganj//Scholarship Exam 2025//EN',
         'CALSCALE:GREGORIAN',
         'METHOD:PUBLISH',
         'BEGIN:VEVENT',
+        `UID:${uniqueUID}`,
+        `DTSTAMP:${currentDate}`,
         `DTSTART:${startDateFormatted}`,
         `DTEND:${endDateFormatted}`,
-        `DTSTAMP:${currentDate}`,
-        `UID:sopnerfaridganj-scholarship-2025@gmail.com`,
-        `SUMMARY:${eventTitle}`,
-        `DESCRIPTION:${eventDescription}`,
-        `LOCATION:${eventLocation}`,
-        `URL:${eventLocationUrl}`,
+        `SUMMARY:${escapeICS(eventTitle)}`,
+        `DESCRIPTION:${escapeICS(eventDescription)}`,
+        `LOCATION:${escapeICS(eventLocation)}`,
         'STATUS:CONFIRMED',
+        'TRANSP:OPAQUE',
         'SEQUENCE:0',
         // Reminder 1: 3 days before
         'BEGIN:VALARM',
         'TRIGGER:-P3D',
         'ACTION:DISPLAY',
-        'DESCRIPTION:🔔 ৩ দিন পর বৃত্তি পরীক্ষা - প্রস্তুতি শুরু করুন!',
+        'DESCRIPTION:৩ দিন পর বৃত্তি পরীক্ষা - প্রস্তুতি শুরু করুন!',
         'END:VALARM',
         // Reminder 2: 1 day before
         'BEGIN:VALARM',
         'TRIGGER:-P1D',
         'ACTION:DISPLAY',
-        'DESCRIPTION:⏰ আগামীকাল বৃত্তি পরীক্ষা - সব প্রস্তুতি সম্পন্ন করুন!',
+        'DESCRIPTION:আগামীকাল বৃত্তি পরীক্ষা - সব প্রস্তুতি সম্পন্ন করুন!',
         'END:VALARM',
         // Reminder 3: 3 hours before
         'BEGIN:VALARM',
         'TRIGGER:-PT3H',
         'ACTION:DISPLAY',
-        'DESCRIPTION:⚡ ৩ ঘণ্টা পর বৃত্তি পরীক্ষা শুরু - সময়মতো পৌঁছান!',
+        'DESCRIPTION:৩ ঘণ্টা পর বৃত্তি পরীক্ষা শুরু - সময়মতো পৌঁছান!',
         'END:VALARM',
         // Reminder 4: 1 hour before
         'BEGIN:VALARM',
         'TRIGGER:-PT1H',
         'ACTION:DISPLAY',
-        'DESCRIPTION:🚀 ১ ঘণ্টা পর পরীক্ষা শুরু - এখনই রওনা দিন!',
+        'DESCRIPTION:১ ঘণ্টা পর পরীক্ষা শুরু - এখনই রওনা দিন!',
         'END:VALARM',
         'END:VEVENT',
         'END:VCALENDAR'
@@ -803,6 +814,11 @@ function addToCalendar() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
+    // Clean up the URL object
+    setTimeout(() => {
+        window.URL.revokeObjectURL(link.href);
+    }, 100);
 
     // Show confirmation message
     alert('✅ পরীক্ষার তারিখ আপনার ক্যালেন্ডারে যোগ করা হয়েছে!\n\n📝 স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫\n📅 তারিখ: ১৯ ডিসেম্বর ২০২৫\n⏰ সময়: সকাল ৯টা\n📍 স্থান: ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ\n\n🔔 রিমাইন্ডার:\n• ৩ দিন আগে\n• ১ দিন আগে\n• ৩ ঘণ্টা আগে\n• ১ ঘণ্টা আগে');
