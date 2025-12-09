@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ব্লাড ব্যাংক - স্বপ্নের ফরিদগঞ্জ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #e63946;
+            --secondary-color: #1d3557;
+            --light-bg: #f1faee;
+            --text-color: #333;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --light-bg: #0f172a;
+            --text-color: #f1f5f9;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --header-bg: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode header {
+            background-color: var(--header-bg);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dark-mode .logo {
+            color: #60a5fa;
+        }
+
+        .logo i {
+            color: var(--primary-color);
+            animation: heartbeat 2s infinite;
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            10%,
+            30% {
+                transform: scale(1.15);
+            }
+
+            20%,
+            40% {
+                transform: scale(1.05);
+            }
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid #ddd;
+            color: var(--text-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .dark-mode .theme-toggle {
+            border-color: #475569;
+        }
+
+        .dark-mode .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .home-btn {
+            background: var(--secondary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .home-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(230, 57, 70, 0.9), rgba(29, 53, 87, 0.9)),
+                url('https://images.unsplash.com/photo-1615461066841-6116e61058f4?w=1200');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Search Container */
+        .search-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 1000px;
+            margin: -3rem auto 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode .search-box {
+            background: var(--card-bg);
+        }
+
+        .search-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .dark-mode .form-group label {
+            color: #94a3b8;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: 'Hind Siliguri', sans-serif;
+            background: white;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode select,
+        .dark-mode input {
+            background: #0f172a;
+            border-color: #475569;
+            color: #f1f5f9;
+        }
+
+        select:focus,
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
+        }
+
+        .search-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            background-color: #d62828;
+            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
+        }
+
+        /* Results */
+        .results-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .dark-mode .results-header {
+            color: #94a3b8;
+        }
+
+        .donors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .donor-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            border-top: 4px solid var(--primary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dark-mode .donor-card {
+            background: var(--card-bg);
+        }
+
+        .donor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .blood-group-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(230, 57, 70, 0.1);
+            color: var(--primary-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .donor-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .dark-mode .donor-name {
+            color: #e2e8f0;
+        }
+
+        .donor-info {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dark-mode .donor-info {
+            color: #94a3b8;
+        }
+
+        .donor-info i {
+            color: var(--primary-color);
+            width: 20px;
+        }
+
+        .donor-phone {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .call-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-top: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .call-btn:hover {
+            background-color: #14213d;
+            transform: translateY(-2px);
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-call {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-call:hover {
+            background-color: #14213d;
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+        }
+
+        .btn-facebook {
+            background-color: #1877F2;
+        }
+
+        .btn-facebook:hover {
+            background-color: #115dc5;
+        }
+
+        /* Registration Section */
+        .join-cta {
+            background: white;
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode .join-cta {
+            background: var(--card-bg);
+        }
+
+        .join-cta h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .dark-mode .join-cta h2 {
+            color: #94a3b8;
+        }
+
+        .join-cta p {
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .dark-mode .join-cta p {
+            color: #94a3b8;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .form-container iframe {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .search-box {
+                padding: 1.5rem;
+                margin: -2rem 1rem 2rem;
+            }
+
+            .search-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                padding: 0;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .home-btn {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+
+            .donors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .join-cta {
+                padding: 2rem 1rem;
+                margin: 2rem 1rem;
+            }
+
+            header {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .logo {
+                font-size: 1rem;
+            }
+
+            .nav-actions {
+                gap: 8px;
+            }
+
+            .theme-toggle {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Organizations Section */
+        .org-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 1rem;
+        }
+
+        .org-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .org-header h2 {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .dark-mode .org-header h2 {
+            color: #e2e8f0;
+        }
+
+        .org-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .org-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .org-card {
+            background: var(--card-bg);
+        }
+
+        .org-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .org-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dark-mode .org-name {
+            color: #e2e8f0;
+        }
+
+        .org-info {
+            margin-bottom: 0.8rem;
+            font-size: 15px;
+            color: #555;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .dark-mode .org-info {
+            color: #cbd5e1;
+        }
+
+        .org-info i {
+            color: var(--primary-color);
+            margin-top: 4px;
+        }
+
+        .org-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 8px 16px;
+            background: rgba(230, 57, 70, 0.1);
+            color: var(--primary-color);
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .org-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-heartbeat"></i>
+                স্বপ্নের ফরিদগঞ্জ
+            </a>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" title="থিম পরিবর্তন করুন">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="index.html" class="home-btn">
+                    <i class="fas fa-arrow-left"></i> মূল পাতা
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>রক্ত দিন, জীবন বাঁচান</h1>
+        <p>জরুরী প্রয়োজনে রক্তদাতা খুঁজে পেতে নিচে সার্চ করুন। আপনার এক ব্যাগ রক্ত বাঁচাতে পারে একটি জীবন।</p>
+    </section>
+
+    <!-- Search Section -->
+    <div class="search-box">
+        <div class="search-grid">
+            <div class="form-group">
+                <label>রক্তের গ্রুপ</label>
+                <select id="bloodGroup">
+                    <option value="">সকল গ্রুপ</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>জেলা</label>
+                <select id="zila" onchange="updateUpazilas()">
+                    <option value="">সকল জেলা</option>
+                    <option value="Dhaka">ঢাকা</option>
+                    <option value="Chittagong">চট্টগ্রাম</option>
+                    <option value="Rajshahi">রাজশাহী</option>
+                    <option value="Khulna">খুলনা</option>
+                    <option value="Barisal">বরিশাল</option>
+                    <option value="Sylhet">সিলেট</option>
+                    <option value="Rangpur">রংপুর</option>
+                    <option value="Mymensingh">ময়মনসিংহ</option>
+                    <option value="Comilla">কুমিল্লা</option>
+                    <option value="Chandpur">চাঁদপুর</option>
+                    <option value="Feni">ফেনী</option>
+                    <option value="Noakhali">নোয়াখালী</option>
+                    <option value="Lakshmipur">লক্ষ্মীপুর</option>
+                    <option value="Brahmanbaria">ব্রাহ্মণবাড়িয়া</option>
+                    <option value="Cox's Bazar">কক্সবাজার</option>
+                    <option value="Rangamati">রাঙ্গামাটি</option>
+                    <option value="Bandarban">বান্দরবান</option>
+                    <option value="Khagrachari">খাগড়াছড়ি</option>
+                    <option value="Gazipur">গাজীপুর</option>
+                    <option value="Narayanganj">নারায়ণগঞ্জ</option>
+                    <option value="Tangail">টাঙ্গাইল</option>
+                    <option value="Kishoreganj">কিশোরগঞ্জ</option>
+                    <option value="Manikganj">মানিকগঞ্জ</option>
+                    <option value="Munshiganj">মুন্সিগঞ্জ</option>
+                    <option value="Narsingdi">নরসিংদী</option>
+                    <option value="Faridpur">ফরিদপুর</option>
+                    <option value="Gopalganj">গোপালগঞ্জ</option>
+                    <option value="Madaripur">মাদারীপুর</option>
+                    <option value="Rajbari">রাজবাড়ী</option>
+                    <option value="Shariatpur">শরীয়তপুর</option>
+                    <option value="Bogra">বগুড়া</option>
+                    <option value="Joypurhat">জয়পুরহাট</option>
+                    <option value="Naogaon">নওগাঁ</option>
+                    <option value="Natore">নাটোর</option>
+                    <option value="Chapainawabganj">চাঁপাইনবাবগঞ্জ</option>
+                    <option value="Pabna">পাবনা</option>
+                    <option value="Sirajganj">সিরাজগঞ্জ</option>
+                    <option value="Dinajpur">দিনাজপুর</option>
+                    <option value="Gaibandha">গাইবান্ধা</option>
+                    <option value="Kurigram">কুড়িগ্রাম</option>
+                    <option value="Lalmonirhat">লালমনিরহাট</option>
+                    <option value="Nilphamari">নীলফামারী</option>
+                    <option value="Panchagarh">পঞ্চগড়</option>
+                    <option value="Thakurgaon">ঠাকুরগাঁও</option>
+                    <option value="Bagerhat">বাগেরহাট</option>
+                    <option value="Chuadanga">চুয়াডাঙ্গা</option>
+                    <option value="Jessore">যশোর</option>
+                    <option value="Jhenaidah">ঝিনাইদহ</option>
+                    <option value="Kushtia">কুষ্টিয়া</option>
+                    <option value="Magura">মাগুরা</option>
+                    <option value="Meherpur">মেহেরপুর</option>
+                    <option value="Narail">নড়াইল</option>
+                    <option value="Satkhira">সাতক্ষীরা</option>
+                    <option value="Barguna">বরগুনা</option>
+                    <option value="Bhola">ভোলা</option>
+                    <option value="Jhalokati">ঝালকাঠি</option>
+                    <option value="Patuakhali">পটুয়াখালী</option>
+                    <option value="Pirojpur">পিরোজপুর</option>
+                    <option value="Habiganj">হবিগঞ্জ</option>
+                    <option value="Moulvibazar">মৌলভীবাজার</option>
+                    <option value="Sunamganj">সুনামগঞ্জ</option>
+                    <option value="Jamalpur">জামালপুর</option>
+                    <option value="Netrokona">নেত্রকোনা</option>
+                    <option value="Sherpur">শেরপুর</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>উপজেলা</label>
+                <select id="upazila">
+                    <option value="">প্রথমে জেলা নির্বাচন করুন</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="search-btn" onclick="filterDonors()">
+            <i class="fas fa-search"></i> খুঁজুন
+        </button>
+    </div>
+
+    <!-- Results Section -->
+    <div class="results-container">
+        <div class="results-header">
+            <h2 id="resultCount">উপলব্ধ রক্তদাতা</h2>
+        </div>
+        <div class="donors-grid" id="donorsGrid">
+            <!-- Donor cards will be inserted here by JS -->
+        </div>
+    </div>
+
+    <!-- Organizations Section -->
+    <section class="org-section">
+        <div class="org-header">
+            <h2>গুরুত্বপূর্ণ রক্তদান ও সংস্থা সমূহ</h2>
+            <p style="max-width: 600px; margin: 0 auto; opacity: 0.8;">জরুরী প্রয়োজনে রক্ত পেতে বাংলাদেশের নির্ভরযোগ্য
+                কিছু সংস্থার তথ্য নিচে দেওয়া হলো।</p>
+        </div>
+        <div class="org-grid">
+            <!-- Red Crescent -->
+            <div class="org-card">
+                <div class="org-name"><i class="fas fa-plus-square"></i> রেড ক্রিসেন্ট ব্লাড ব্যাংক</div>
+                <div class="org-info"><i class="fas fa-map-marker-alt"></i> ৭/৫, আওরঙ্গজেব রোড, মোহাম্মদপুর, ঢাকা</div>
+                <div class="org-info"><i class="fas fa-phone-alt"></i> +৮৮-০২-৯১১৬৫৬৩, ৮১২১৪৯৭</div>
+                <div class="org-info"><i class="fas fa-globe"></i> <a href="https://bdrcs.org/donate-blood"
+                        target="_blank" style="text-decoration: none; color: inherit;">bdrcs.org</a></div>
+                <a href="tel:+88029116563" class="org-btn"><i class="fas fa-phone"></i> কল করুন</a>
+            </div>
+
+            <!-- BADHAN -->
+            <div class="org-card">
+                <div class="org-name"><i class="fas fa-hands-helping"></i> বাঁধন (BADHAN)</div>
+                <div class="org-info"><i class="fas fa-map-marker-alt"></i> টিএসসি (নিচ তলা), ঢাকা বিশ্ববিদ্যালয়</div>
+                <div class="org-info"><i class="fas fa-phone-alt"></i> ০১৭-১১০২৫৮৭৬, ০১৫-৩৪৯৮২৬৭৪</div>
+                <div class="org-info"><i class="fas fa-globe"></i> <a href="http://www.badhan.org" target="_blank"
+                        style="text-decoration: none; color: inherit;">badhan.org</a></div>
+                <a href="tel:01534982674" class="org-btn"><i class="fas fa-phone"></i> কল করুন</a>
+            </div>
+
+            <!-- Quantum -->
+            <div class="org-card">
+                <div class="org-name"><i class="fas fa-atom"></i> কোয়ান্টাম ব্লাড ল্যাব</div>
+                <div class="org-info"><i class="fas fa-map-marker-alt"></i> ৩১ শান্তিনগর, ঢাকা-১২১৭</div>
+                <div class="org-info"><i class="fas fa-phone-alt"></i> +৮৮-০২-৯৩৫১৯৬৯, ০১৭-১৪০১০৮৬৯</div>
+                <div class="org-info"><i class="fas fa-globe"></i> <a href="http://quantummethod.org/blood-donation"
+                        target="_blank" style="text-decoration: none; color: inherit;">quantummethod.org</a></div>
+                <a href="tel:01714010869" class="org-btn"><i class="fas fa-phone"></i> কল করুন</a>
+            </div>
+
+            <!-- Sandhani -->
+            <div class="org-card">
+                <div class="org-name"><i class="fas fa-heart"></i> সন্ধানী (কেন্দ্রীয় পরিষদ)</div>
+                <div class="org-info"><i class="fas fa-map-marker-alt"></i> বিএসএমএমইউ (সাবেক পিজি হাসপাতাল), শাহবাগ
+                </div>
+                <div class="org-info"><i class="fas fa-phone-alt"></i> ০২-৯৬৬৮৬৯০, ০২-৮৬২১৬৫৮</div>
+                <div class="org-info"><i class="fas fa-globe"></i> <a href="http://www.sandhani.org" target="_blank"
+                        style="text-decoration: none; color: inherit;">sandhani.org</a></div>
+                <a href="tel:029668690" class="org-btn"><i class="fas fa-phone"></i> কল করুন</a>
+            </div>
+
+            <!-- Police Blood Bank -->
+            <div class="org-card">
+                <div class="org-name"><i class="fas fa-user-shield"></i> পুলিশ ব্লাড ব্যাংক</div>
+                <div class="org-info"><i class="fas fa-map-marker-alt"></i> সেন্ট্রাল পুলিশ হাসপাতাল, রাজারবাগ, ঢাকা
+                </div>
+                <div class="org-info"><i class="fas fa-phone-alt"></i> ০১৭-১৩৩৯৮৩৮৬, ৯৩৬২৫৭৩</div>
+                <div class="org-info"><i class="fas fa-globe"></i> <a href="http://www.policebloodbank.gov.bd"
+                        target="_blank" style="text-decoration: none; color: inherit;">policebloodbank.gov.bd</a></div>
+                <a href="tel:01713398386" class="org-btn"><i class="fas fa-phone"></i> কল করুন</a>
+            </div>
+
+            <!-- Thalassemia -->
+            <div class="org-card">
+                <div class="org-name"><i class="fas fa-dna"></i> থ্যালাসেমিয়া ফাউন্ডেশন</div>
+                <div class="org-info"><i class="fas fa-map-marker-alt"></i> ৩০ চামেলীবাগ, শান্তিনগর, ঢাকা</div>
+                <div class="org-info"><i class="fas fa-phone-alt"></i> ০২-৮৩৩২৪৮১, ০১৭৫৫-৫৮৭৪৭৯</div>
+                <div class="org-info"><i class="fas fa-globe"></i> <a href="http://www.thals.org" target="_blank"
+                        style="text-decoration: none; color: inherit;">thals.org</a></div>
+                <a href="tel:01755587479" class="org-btn"><i class="fas fa-phone"></i> কল করুন</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Become a Donor CTA -->
+    <section class="join-cta">
+        <h2>আপনি কি রক্তদাতা হতে চান?</h2>
+        <p>আমাদের সাথে যুক্ত হোন এবং মানবতার সেবায় এগিয়ে আসুন। আপনার তথ্য আমাদের ডাটাবেসে যুক্ত করতে নিচের ফর্মটি পূরণ
+            করুন।</p>
+
+        <div class="form-container">
+            <iframe
+                src="https://docs.google.com/forms/d/e/1FAIpQLSeAjDH_CzH3v5FtC9wMO6iocVUEaDUK_pJzOqI4tFwe7NRVoQ/viewform?embedded=true"
+                width="640" height="850" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+        </div>
+
+        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+            (বি:দ্র: আপনার তথ্য ম্যানুয়ালি যাচাই করার পর ওয়েবসাইটে যুক্ত করা হবে)
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© ২০২৪ স্বপ্নের ফরিদগঞ্জ। সর্বস্বত্ব সংরক্ষিত।</p>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        const body = document.body;
+
+        // Check saved theme
+        const savedTheme = localStorage.getItem('bloodBankTheme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('bloodBankTheme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('bloodBankTheme', 'light');
+            }
+        });
+
+        // Upazila Data
+        const upazilaData = {
+            "Chandpur": ["চাঁদপুর সদর", "ফরিদগঞ্জ", "হাইমচর", "কচুয়া", "মতলব উত্তর", "মতলব দক্ষিণ", "শাহরাস্তি", "হাজীগঞ্জ"],
+            "Dhaka": ["ধামরাই", "দোহার", "কেরানীগঞ্জ", "নবাবগঞ্জ", "সাভার"],
+            "Comilla": ["কুমিল্লা সদর", "বরুড়া", "ব্রাহ্মণপাড়া", "বুড়িচং", "চান্দিনা", "চৌদ্দগ্রাম", "দাউদকান্দি", "দেবিদ্বার", "হোমনা", "লাকসাম", "মুরাদনগর", "নাঙ্গলকোট", "মেঘনা", "তিতাস", "মনোহরগঞ্জ", "সদর দক্ষিণ"],
+            "Chittagong": ["চট্টগ্রাম সদর", "আনোয়ারা", "বাঁশখালী", "বোয়ালখালী", "চন্দনাইশ", "ফটিকছড়ি", "হাটহাজারী", "লোহাগাড়া", "মীরসরাই", "পটিয়া", "রাঙ্গুনিয়া", "রাউজান", "সন্দ্বীপ", "সাতকানিয়া", "সীতাকুণ্ড", "কর্ণফুলী"],
+            "Feni": ["ফেনী সদর", "ছাগলনাইয়া", "দাগনভূঞা", "পরশুরাম", "সোনাগাজী", "ফুলগাজী"],
+            "Noakhali": ["নোয়াখালী সদর", "বেগমগঞ্জ", "চাটখিল", "কোম্পানীগঞ্জ", "হাতিয়া", "সেনবাগ", "সোনাইমুড়ী", "সুবর্ণচর", "কবিরহাট"],
+            "Lakshmipur": ["লক্ষ্মীপুর সদর", "কমলনগর", "রায়পুর", "রামগঞ্জ", "রামগতি"],
+            "Brahmanbaria": ["ব্রাহ্মণবাড়িয়া সদর", "আখাউড়া", "কসবা", "নাসিরনগর", "নবীনগর", "সরাইল", "আশুগঞ্জ", "বাঞ্ছারামপুর", "বিজয়নগর"],
+            "Gazipur": ["গাজীপুর সদর", "কালিয়াকৈর", "কালীগঞ্জ", "কাপাসিয়া", "শ্রীপুর"],
+            "Narayanganj": ["নারায়ণগঞ্জ সদর", "আড়াইহাজার", "বন্দর", "রূপগঞ্জ", "সোনারগাঁও"],
+            "Tangail": ["টাঙ্গাইল সদর", "বাসাইল", "ভুয়াপুর", "দেলদুয়ার", "ঘাটাইল", "গোপালপুর", "কালিহাতী", "মধুপুর", "মির্জাপুর", "নাগরপুর", "সখিপুর", "ধনবাড়ী"],
+            "Kishoreganj": ["কিশোরগঞ্জ সদর", "অষ্টগ্রাম", "বাজিতপুর", "ভৈরব", "হোসেনপুর", "ইটনা", "করিমগঞ্জ", "কটিয়াদী", "কুলিয়ারচর", "মিঠামইন", "নিকলী", "পাকুন্দিয়া", "তাড়াইল"],
+            "Manikganj": ["মানিকগঞ্জ সদর", "দৌলতপুর", "ঘিওর", "হরিরামপুর", "সাটুরিয়া", "শিবালয়", "সিংগাইর"],
+            "Munshiganj": ["মুন্সিগঞ্জ সদর", "গজারিয়া", "লৌহজং", "সিরাজদিখান", "শ্রীনগর", "টংগীবাড়ী"],
+            "Narsingdi": ["নরসিংদী সদর", "বেলাবো", "মনোহরদী", "পলাশ", "রায়পুরা", "শিবপুর"],
+            "Rajshahi": ["রাজশাহী সদর", "বাঘা", "বাগমারা", "চারঘাট", "দুর্গাপুর", "গোদাগাড়ী", "মোহনপুর", "পবা", "পুঠিয়া", "তানোর"],
+            "Bogra": ["বগুড়া সদর", "আদমদিঘী", "দুপচাঁচিয়া", "গাবতলী", "কাহালু", "নন্দীগ্রাম", "সারিয়াকান্দি", "শাজাহানপুর", "শেরপুর", "শিবগঞ্জ", "সোনাতলা", "ধুনট"],
+            "Khulna": ["খুলনা সদর", "বটিয়াঘাটা", "দাকোপ", "ডুমুরিয়া", "দিঘলিয়া", "কয়রা", "পাইকগাছা", "ফুলতলা", "রূপসা", "তেরখাদা"],
+            "Barisal": ["বরিশাল সদর", "আগৈলঝাড়া", "বাবুগঞ্জ", "বাকেরগঞ্জ", "বানারীপাড়া", "গৌরনদী", "হিজলা", "মেহেন্দিগঞ্জ", "মুলাদী", "উজিরপুর"],
+            "Sylhet": ["সিলেট সদর", "বালাগঞ্জ", "বিয়ানীবাজার", "বিশ্বনাথ", "কোম্পানীগঞ্জ", "ফেঞ্চুগঞ্জ", "গোলাপগঞ্জ", "গোয়াইনঘাট", "জৈন্তাপুর", "কানাইঘাট", "জকিগঞ্জ", "দক্ষিণ সুরমা"],
+            "Rangpur": ["রংপুর সদর", "বদরগঞ্জ", "গংগাচড়া", "কাউনিয়া", "মিঠাপুকুর", "পীরগঞ্জ", "পীরগাছা", "তারাগঞ্জ"],
+            "Mymensingh": ["ময়মনসিংহ সদর", "ভালুকা", "ফুলবাড়ীয়া", "গফরগাঁও", "গৌরীপুর", "হালুয়াঘাট", "ঈশ্বরগঞ্জ", "মুক্তাগাছা", "নান্দাইল", "ফুলপুর", "ত্রিশাল", "ধোবাউড়া", "তারাকান্দা"],
+            "Faridpur": ["ফরিদপুর সদর", "আলফাডাঙ্গা", "ভাঙ্গা", "বোয়ালমারী", "চরভদ্রাসন", "মধুখালী", "নগরকান্দা", "সদরপুর", "সালথা"],
+            "Gopalganj": ["গোপালগঞ্জ সদর", "কাশিয়ানী", "কোটালীপাড়া", "মুকসুদপুর", "টুংগীপাড়া"],
+            "Madaripur": ["মাদারীপুর সদর", "কালকিনি", "রাজৈর", "শিবচর"],
+            "Rajbari": ["রাজবাড়ী সদর", "বালিয়াকান্দি", "গোয়ালন্দ", "কালুখালী", "পাংশা"],
+            "Shariatpur": ["শরীয়তপুর সদর", "ডামুড্যা", "গোসাইরহাট", "নড়িয়া", "জাজিরা", "ভেদরগঞ্জ"],
+            "Joypurhat": ["জয়পুরহাট সদর", "আক্কেলপুর", "কালাই", "খেতলাল", "পাঁচবিবি"],
+            "Naogaon": ["নওগাঁ সদর", "আত্রাই", "বদলগাছী", "মান্দা", "ধামইরহাট", "মহাদেবপুর", "নিয়ামতপুর", "পত্নীতলা", "পোরশা", "রাণীনগর", "সাপাহার"],
+            "Natore": ["নাটোর সদর", "বাগাতিপাড়া", "বড়াইগ্রাম", "গুরুদাসপুর", "লালপুর", "নলডাঙ্গা", "সিংড়া"],
+            "Chapainawabganj": ["চাঁপাইনবাবগঞ্জ সদর", "ভোলাহাট", "গোমস্তাপুর", "নাচোল", "শিবগঞ্জ"],
+            "Pabna": ["পাবনা সদর", "আটঘরিয়া", "ভাঙ্গুড়া", "চাটমোহর", "ফরিদপুর", "ঈশ্বরদী", "সাঁথিয়া", "সুজানগর", "বেড়া"],
+            "Sirajganj": ["সিরাজগঞ্জ সদর", "বেলকুচি", "চৌহালী", "কামারখন্দ", "কাজিপুর", "রায়গঞ্জ", "শাহজাদপুর", "তাড়াশ", "উল্লাপাড়া"],
+            "Dinajpur": ["দিনাজপুর সদর", "বীরগঞ্জ", "বিরামপুর", "বোচাগঞ্জ", "চিরিরবন্দর", "ফুলবাড়ী", "ঘোড়াঘাট", "হাকিমপুর", "কাহারোল", "খানসামা", "নবাবগঞ্জ", "পার্বতীপুর", "বিরল"],
+            "Gaibandha": ["গাইবান্ধা সদর", "ফুলছড়ি", "গোবিন্দগঞ্জ", "পলাশবাড়ী", "সাদুল্লাপুর", "সাঘাটা", "সুন্দরগঞ্জ"],
+            "Kurigram": ["কুড়িগ্রাম সদর", "ভুরুঙ্গামারী", "চর রাজিবপুর", "চিলমারী", "ফুলবাড়ী", "নাগেশ্বরী", "রাজারহাট", "রৌমারী", "উলিপুর"],
+            "Lalmonirhat": ["লালমনিরহাট সদর", "আদিতমারী", "কালীগঞ্জ", "হাতীবান্ধা", "পাটগ্রাম"],
+            "Nilphamari": ["নীলফামারী সদর", "ডোমার", "ডিমলা", "জলঢাকা", "কিশোরগঞ্জ", "সৈয়দপুর"],
+            "Panchagarh": ["পঞ্চগড় সদর", "আটোয়ারী", "বোদা", "দেবীগঞ্জ", "তেঁতুলিয়া"],
+            "Thakurgaon": ["ঠাকুরগাঁও সদর", "বালিয়াডাঙ্গী", "হরিপুর", "পীরগঞ্জ", "রাণীশংকৈল"],
+            "Bagerhat": ["বাগেরহাট সদর", "চিতলমারী", "ফকিরহাট", "কচুয়া", "মোল্লাহাট", "মোংলা", "মোড়েলগঞ্জ", "রামপাল", "শরণখোলা"],
+            "Chuadanga": ["চুয়াডাঙ্গা সদর", "আলমডাঙ্গা", "দামুড়হুদা", "জীবননগর"],
+            "Jessore": ["যশোর সদর", "অভয়নগর", "বাঘারপাড়া", "চৌগাছা", "ঝিকরগাছা", "কেশবপুর", "মণিরামপুর", "শার্শা"],
+            "Jhenaidah": ["ঝিনাইদহ সদর", "হরিণাকুন্ডু", "কালীগঞ্জ", "কোটচাঁদপুর", "মহেশপুর", "শৈলকুপা"],
+            "Kushtia": ["কুষ্টিয়া সদর", "ভেড়ামারা", "দৌলতপুর", "খোকসা", "কুমারখালী", "মিরপুর"],
+            "Magura": ["মাগুরা সদর", "মহম্মদপুর", "শালিখা", "শ্রীপুর"],
+            "Meherpur": ["মেহেরপুর সদর", "গাংনী", "মুজিবনগর"],
+            "Narail": ["নড়াইল সদর", "কালিয়া", "লোহাগড়া"],
+            "Satkhira": ["সাতক্ষীরা সদর", "আশাশুনি", "দেবহাটা", "কলারোয়া", "কালীগঞ্জ", "শ্যামনগর", "তালা"],
+            "Barguna": ["বরগুনা সদর", "আমতলী", "বামনা", "বেতাগী", "পাথরঘাটা", "তালতলী"],
+            "Bhola": ["ভোলা সদর", "বোরহানউদ্দিন", "চরফ্যাশন", "দৌলতখান", "লালমোহন", "মনপুরা", "তজুমদ্দিন"],
+            "Jhalokati": ["ঝালকাঠি সদর", "কাঠালিয়া", "নলছিটি", "রাজাপুর"],
+            "Patuakhali": ["পটুয়াখালী সদর", "বাউফল", "দশমিনা", "গলাচিপা", "কলাপাড়া", "মির্জাগঞ্জ", "দুমকি", "রাঙ্গাবালী"],
+            "Pirojpur": ["পিরোজপুর সদর", "ভান্ডারিয়া", "কাউখালী", "মঠবাড়ীয়া", "নাজিরপুর", "নেছারাবাদ", "ইন্দুরকানী"],
+            "Habiganj": ["হবিগঞ্জ সদর", "বাহুবল", "বানিয়াচং", "চুনারুঘাট", "লাখাই", "মাধবপুর", "নবীগঞ্জ", "শায়েস্তাগঞ্জ"],
+            "Moulvibazar": ["মৌলভীবাজার সদর", "বড়লেখা", "জুড়ী", "কমলগঞ্জ", "কুলাউড়া", "রাজনগর", "শ্রীমঙ্গল"],
+            "Sunamganj": ["সুনামগঞ্জ সদর", "বিশ্বম্ভরপুর", "ছাতক", "দিরাই", "ধর্মপাশা", "দোয়ারাবাজার", "জগন্নাথপুর", "জামালগঞ্জ", "শাল্লা", "তাহিরপুর", "দক্ষিণ সুনামগঞ্জ"],
+            "Jamalpur": ["জামালপুর সদর", "বকশীগঞ্জ", "দেওয়ানগঞ্জ", "ইসলামপুর", "মাদারগঞ্জ", "মেলান্দহ", "সরিষাবাড়ী"],
+            "Netrokona": ["নেত্রকোনা সদর", "আটপাড়া", "বারহাট্টা", "দুর্গাপুর", "খালিয়াজুরী", "কলমাকান্দা", "কেন্দুয়া", "মদন", "মোহনগঞ্জ", "পূর্বধলা"],
+            "Sherpur": ["শেরপুর সদর", "ঝিনাইগাতী", "নালিতাবাড়ী", "নকলা", "শ্রীবরদী"],
+            "Cox's Bazar": ["কক্সবাজার সদর", "চকরিয়া", "কুতুবদিয়া", "মহেশখালী", "পেকুয়া", "রামু", "টেকনাফ", "উখিয়া"],
+            "Rangamati": ["রাঙ্গামাটি সদর", "বাঘাইছড়ি", "বরকল", "বিলাইছড়ি", "কাপ্তাই", "কাউখালী", "জুরাছড়ি", "লংগদু", "নানিয়ারচর", "রাজস্থলী"],
+            "Bandarban": ["বান্দরবান সদর", "আলীকদম", "লামা", "নাইক্ষ্যংছড়ি", "রোয়াংছড়ি", "রুমা", "থানচি"],
+            "Khagrachari": ["খাগড়াছড়ি সদর", "দিঘীনালা", "লক্ষ্মীছড়ি", "মহালছড়ি", "মানিকছড়ি", "মাটিরাঙ্গা", "পানছড়ি", "রামগড়", "গুইমারা"]
+        };
+
+        function updateUpazilas() {
+            const zilaSelect = document.getElementById('zila');
+            const upazilaSelect = document.getElementById('upazila');
+            const selectedZila = zilaSelect.value;
+
+            upazilaSelect.innerHTML = '<option value="">সকল উপজেলা</option>';
+
+            if (selectedZila && upazilaData[selectedZila]) {
+                upazilaData[selectedZila].forEach(upazila => {
+                    const option = document.createElement('option');
+                    option.value = upazila;
+                    option.textContent = upazila;
+                    upazilaSelect.appendChild(option);
+                });
+            }
+        }
+
+        // Sample Donor Data
+        // Real Donor Data
+        const donors = [
+            {
+                id: 101,
+                name: "Md. Sahid",
+                group: "B+",
+                zila: "Chandpur",
+                upazila: "ফরিদগঞ্জ",
+                phone: "01407531529",
+                lastDonation: "নতুন দাতা",
+                contactMethods: "Whatsapp, Imo, Call, Message",
+                facebookUrl: "https://www.facebook.com/msahid.cse"
+            }
+        ];
+
+        const grid = document.getElementById('donorsGrid');
+        const countLabel = document.getElementById('resultCount');
+
+        function renderDonors(data) {
+            grid.innerHTML = '';
+
+            if (data.length === 0) {
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: #666; padding: 2rem;">
+                    <i class="fas fa-search" style="font-size: 3rem; color: #ddd; margin-bottom: 1rem;"></i>
+                    <p>দুঃখিত, এই মুহূর্তে এই ক্যাটাগরিতে কোনো রক্তদাতা পাওয়া যায়নি।</p>
+                </div>`;
+                countLabel.innerText = "কোনো ফলাফল পাওয়া যায়নি";
+                return;
+            }
+
+            countLabel.innerText = `উপলব্ধ রক্তদাতা (${data.length} জন)`;
+
+            data.forEach(donor => {
+                const card = document.createElement('div');
+                card.className = 'donor-card';
+
+                // Prepare Social Buttons
+                let socialButtons = '';
+
+                // Call Button (Always present)
+                socialButtons += `
+                    <a href="tel:${donor.phone}" class="action-btn btn-call" title="কল করুন">
+                        <i class="fas fa-phone-alt"></i>
+                    </a>
+                `;
+
+                // WhatsApp Button
+                if (donor.contactMethods && donor.contactMethods.toLowerCase().includes('whatsapp')) {
+                    // Start with '88' for BD if not present
+                    let waNumber = donor.phone.startsWith('88') ? donor.phone : '88' + donor.phone;
+                    socialButtons += `
+                        <a href="https://wa.me/${waNumber}" target="_blank" class="action-btn btn-whatsapp" title="হোয়াটসঅ্যাপে মেসেজ করুন">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    `;
+                }
+
+                // Facebook Button
+                if (donor.facebookUrl) {
+                    socialButtons += `
+                        <a href="${donor.facebookUrl}" target="_blank" class="action-btn btn-facebook" title="ফেসবুক প্রোফাইল">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    `;
+                }
+
+                card.innerHTML = `
+                    <div class="blood-group-badge">${donor.group}</div>
+                    <h3 class="donor-name">${donor.name}</h3>
+                    <div class="donor-info">
+                        <i class="fas fa-map-marker-alt"></i> ${donor.upazila}, ${donor.zila}
+                    </div>
+                    <div class="donor-info">
+                        <i class="fas fa-phone"></i> <span class="donor-phone">${donor.phone}</span>
+                    </div>
+                    <div class="donor-info">
+                        <i class="fas fa-history"></i> শেষ দান: ${donor.lastDonation}
+                    </div>
+                    <div class="action-buttons">
+                        ${socialButtons}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterDonors() {
+            const selectedGroup = document.getElementById('bloodGroup').value;
+            const selectedZila = document.getElementById('zila').value;
+            const selectedUpazila = document.getElementById('upazila').value;
+
+            const filteredData = donors.filter(donor => {
+                const groupMatch = selectedGroup === '' || donor.group === selectedGroup;
+                const zilaMatch = selectedZila === '' || donor.zila === selectedZila;
+                const upazilaMatch = selectedUpazila === '' || donor.upazila === selectedUpazila;
+                return groupMatch && zilaMatch && upazilaMatch;
+            });
+
+            renderDonors(filteredData);
+        }
+
+        // Initial Load
+        renderDonors(donors);
+    </script>
+</body>
+
+</html>
