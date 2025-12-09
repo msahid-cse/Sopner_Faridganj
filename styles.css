@@ -543,6 +543,16 @@ body {
     background: linear-gradient(to right, rgb(30, 41, 59), rgb(6, 78, 59), rgb(30, 41, 59));
 }
 
+/* Sponsor Logo Container */
+.sponsor-logo-container {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    transition: all 0.3s ease;
+}
+
+.dark-theme .sponsor-logo-container {
+    background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+}
+
 /* ICS Calendar Card Background */
 .ics-card-bg {
     background: var(--ics-card-bg);
