@@ -1021,43 +1021,124 @@
                 </div>
             </div>
 
-            <!-- Educational Institutions (Authentic) -->
+            <!-- Educational Institutions -->
             <div class="section" id="education">
-                <h2 class="section-title"><i class="fas fa-graduation-cap"></i> সেরা শিক্ষা প্রতিষ্ঠানসমূহ</h2>
+                <h2 class="section-title"><i class="fas fa-graduation-cap"></i> মাধ্যমিক বিদ্যালয়সমূহ</h2>
 
-                <div style="display: grid; gap: 2rem;">
-                    <div>
-                        <h3
-                            style="color: var(--primary-color); margin-bottom: 1rem; border-left: 4px solid var(--accent-color); padding-left: 10px;">
-                            কলেজ ও মাদ্রাসা</h3>
-                        <div class="list-section">
-                            <ul>
-                                <li><i class="fas fa-university"></i> ফরিদগঞ্জ বঙ্গবন্ধু সরকারি ডিগ্রি কলেজ</li>
-                                <li><i class="fas fa-university"></i> গৃদকালিন্দিয়া হাজেরা হাসমত ডিগ্রি কলেজ</li>
-                                <li><i class="fas fa-university"></i> লাউতলী ডাঃ রশীদ আহমেদ উচ্চ বিদ্যালয় ও কলেজ</li>
-                                <li><i class="fas fa-university"></i> গাল্লাক আদর্শ ডিগ্রি কলেজ</li>
-                                <li><i class="fas fa-quran"></i> ফরিদগঞ্জ মজিদিয়া কামিল মাদ্রাসা</li>
-                                <li><i class="fas fa-quran"></i> কামতা ডি.এস. ফাজিল মাদ্রাসা</li>
-                            </ul>
-                        </div>
+                <!-- Search Bar -->
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="position: relative;">
+                        <input type="text" id="schoolSearch" placeholder="প্রতিষ্ঠান বা প্রধানের নাম খুঁজুন..."
+                            style="width: 100%; padding: 0.9rem 1rem 0.9rem 3rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: white; color: var(--text-color);"
+                            onfocus="this.style.borderColor='var(--primary-color)'; this.style.boxShadow='0 0 0 3px rgba(16, 185, 129, 0.1)'"
+                            onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none'">
+                        <i class="fas fa-search"
+                            style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #9ca3af; font-size: 1.1rem;"></i>
+                    </div>
+                    <div id="schoolCounter"
+                        style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b7280; font-weight: 500;">
+                        মোট <span id="schoolVisibleCount">50</span>টি প্রতিষ্ঠান দেখানো হচ্ছে
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="schoolTable"
+                        style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
+                        <thead>
+                            <tr style="background: linear-gradient(135deg, var(--primary-color), #059669);">
+                                <th
+                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                    ক্রমিক</th>
+                                <th
+                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                    শিক্ষা প্রতিষ্ঠানের নাম</th>
+                                <th
+                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                    প্রতিষ্ঠান প্রধানের নাম</th>
+                                <th
+                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                    মোবাইল নং</th>
+                            </tr>
+                        </thead>
+                        <tbody id="schoolTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Primary Schools Section -->
+            <div class="section" id="primary-education">
+                <h2 class="section-title"><i class="fas fa-school"></i> প্রাথমিক বিদ্যালয়সমূহ</h2>
+
+                <!-- Search and Filters -->
+                <div style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                    <!-- Search Box -->
+                    <div style="position: relative;">
+                        <input type="text" id="primarySearch" placeholder="বিদ্যালয় বা প্রধান শিক্ষকের নাম খুঁজুন..."
+                            style="width: 100%; padding: 0.9rem 1rem 0.9rem 3rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: white; color: var(--text-color);"
+                            onfocus="this.style.borderColor='var(--primary-color)'; this.style.boxShadow='0 0 0 3px rgba(16, 185, 129, 0.1)'"
+                            onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none'">
+                        <i class="fas fa-search"
+                            style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #9ca3af; font-size: 1.1rem;"></i>
                     </div>
 
-                    <div>
-                        <h3
-                            style="color: var(--primary-color); margin-bottom: 1rem; border-left: 4px solid var(--accent-color); padding-left: 10px;">
-                            উল্লেখযোগ্য উচ্চ বিদ্যালয়</h3>
-                        <div class="list-section">
-                            <ul>
-                                <li><i class="fas fa-school"></i> ফরিদগঞ্জ এ.আর. পাইলট সরকারি উচ্চ বিদ্যালয়</li>
-                                <li><i class="fas fa-school"></i> ফরিদগঞ্জ পাইলট বালিকা উচ্চ বিদ্যালয়</li>
-                                <li><i class="fas fa-school"></i> রূপসা আহম্মদিয়া উচ্চ বিদ্যালয়</li>
-                                <li><i class="fas fa-school"></i> গৃদকালিন্দিয়া উচ্চ বিদ্যালয়</li>
-                                <li><i class="fas fa-school"></i> শোল্লা উচ্চ বিদ্যালয়</li>
-                                <li><i class="fas fa-school"></i> বালিথুবা আব্দুল হামিদ উচ্চ বিদ্যালয়</li>
-                                <li><i class="fas fa-school"></i> চান্দ্রা ইমাম আলী উচ্চ বিদ্যালয়</li>
-                            </ul>
+                    <!-- Filter Dropdowns -->
+                    <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
+                        <div style="flex: 1; min-width: 200px;">
+                            <label
+                                style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-color); font-size: 0.9rem;">
+                                <i class="fas fa-layer-group"></i> ক্লাষ্টার অনুযায়ী
+                            </label>
+                            <select id="clusterFilter"
+                                style="width: 100%; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 0.95rem; background: white; color: var(--text-color); cursor: pointer; transition: all 0.3s ease;">
+                                <option value="">সকল ক্লাষ্টার</option>
+                            </select>
                         </div>
+                        <div style="flex: 1; min-width: 200px;">
+                            <label
+                                style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-color); font-size: 0.9rem;">
+                                <i class="fas fa-map-marker-alt"></i> ঠিকানা অনুযায়ী
+                            </label>
+                            <select id="addressFilter"
+                                style="width: 100%; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 0.95rem; background: white; color: var(--text-color); cursor: pointer; transition: all 0.3s ease;">
+                                <option value="">সকল ঠিকানা</option>
+                            </select>
+                        </div>
+                        <button id="resetPrimaryFilter"
+                            style="padding: 0.75rem 1.5rem; border: 2px solid #ef4444; background: white; color: #ef4444; border-radius: 8px; cursor: pointer; font-size: 0.95rem; font-weight: 600; transition: all 0.3s ease; margin-top: auto;">
+                            <i class="fas fa-redo"></i> রিসেট
+                        </button>
                     </div>
+
+                    <!-- Results Counter -->
+                    <div id="primaryCounter" style="font-size: 0.9rem; color: #6b7280; font-weight: 500;">
+                        মোট <span id="primaryVisibleCount">190</span>টি বিদ্যালয় দেখানো হচ্ছে
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="primaryTable"
+                        style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
+                        <thead>
+                            <tr style="background: linear-gradient(135deg, var(--primary-color), #059669);">
+                                <th
+                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                    ক্রমিক</th>
+                                <th
+                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                    বিদ্যালয়ের নাম</th>
+                                <th
+                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                    ঠিকানা ও ক্লাস্টার</th>
+                                <th
+                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                    প্রধান শিক্ষক</th>
+                                <th
+                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                    মোবাইল নং</th>
+                            </tr>
+                        </thead>
+                        <tbody id="primaryTableBody"></tbody>
+                    </table>
                 </div>
             </div>
 
@@ -2239,8 +2320,194 @@
             .dark-mode #resetFilter {
                 background: var(--card-bg);
             }
+
+            /* School search dark mode support */
+            .dark-mode #schoolSearch {
+                background: var(--card-bg);
+                border-color: var(--border-color);
+                color: var(--text-color);
+            }
+
+            .dark-mode #schoolSearch::placeholder {
+                color: #6b7280;
+            }
         `;
         document.head.appendChild(style);
+
+        // School Data from CSV
+        const schoolData = [
+            { no: 1, name: "ফরিদগঞ্জ এ আর পাইলট সরকারী উচ্চ বিদ্যালয়", principal: "মোঃ রফিকুল আমিন কাজল", mobile: "1712672662" },
+            { no: 2, name: "চান্দ্রা ইমাম আলী উচ্চ বিদ্যালয় ও কলেজ", principal: "শাহ মোঃ মকবুল আহমদ", mobile: "1817638378" },
+            { no: 3, name: "কালির বাজার মিজানুর রহমান উচ্চ বিদ্যালয়", principal: "মোঃ মিজানুর রহমান", mobile: "1712626434" },
+            { no: 4, name: "বালিথুবা আব্দুল হামিদ উচ্চ বিদ্যালয়", principal: "হুমায়ূন কবির", mobile: "1815705873" },
+            { no: 5, name: "মূল পাড়া উচ্চ বিদ্যালয়", principal: "মোঃ আবুল কাশেম", mobile: "1713621770" },
+            { no: 6, name: "বাসারা উচ্চ বিদ্যালয়", principal: "যাদব কৃষ্ণ সাহা", mobile: "1724717144" },
+            { no: 7, name: "বড় গাঁও উচ্চ বিদ্যালয়", principal: "মোঃ রফিকুল ইসলাম", mobile: "1913976533" },
+            { no: 8, name: "গফুর চৌধুরী উচ্চ বিদ্যালয়", principal: "হোসনে আরা খানম", mobile: "1814822809" },
+            { no: 9, name: "উভারামপুর এন ইসলাম আদর্শ উচ্চ বিদ্যালয়", principal: "মোঃ মুক্তার মুন্সি", mobile: "1830175901" },
+            { no: 10, name: "মনতলা হামিদিয়া উচ্চ বিদ্যালয়", principal: "মোঃ হারুনুর রশিদ", mobile: "1713639694" },
+            { no: 11, name: "মুন্সিরহাট জে এন্ড এ আলী উচ্চ বিদ্যালয়", principal: "মোঃ সামছুল আমিন", mobile: "1718179334" },
+            { no: 12, name: "শোলা স্কুল এন্ড কলেজ", principal: "মোঃ আরিফুর রহমান", mobile: "1716599035" },
+            { no: 13, name: "আষ্টা মহামায়া পাঠশালা উচ্চ বিদ্যালয়", principal: "মোঃ লোকমান হোসেন", mobile: "1713627380" },
+            { no: 14, name: "গল্লাক নোয়াব আলী উচ্চ বিদ্যালয়", principal: "মোঃ আঃ হান্নান", mobile: "1724609730" },
+            { no: 15, name: "লাউতলী ডাঃ রশিদ আহমেদ উচ্চ বিদ্যালয় ও কলেজ", principal: "তোফায়েল আহমদ", mobile: "1731857751" },
+            { no: 16, name: "খাজুরিয়া বহুমুখী উচ্চ বিদ্যালয়", principal: "মোঃ শওকত আলী", mobile: "1818992793" },
+            { no: 17, name: "পাইকপাড়া ইউ জি উচ্চ বিদ্যালয়", principal: "মোঃ আঃ মোতালেব", mobile: "1834321160" },
+            { no: 18, name: "শাশিয়ালী উচ্চ বিদ্যালয়", principal: "মোঃ ইকবাল হোসেন", mobile: "173436299" },
+            { no: 19, name: "গাজীপুর মুসলিম উচ্চ বিদ্যালয়", principal: "মোঃ আবদুল লতিফ খান", mobile: "1816309667" },
+            { no: 20, name: "কড়ৈতলী উচ্চ বিদ্যালয়", principal: "সমরেন্দ্র মিত্র", mobile: "1740897516" },
+            { no: 21, name: "চির্কা চাঁদপুর বহুমুখী উচ্চ বিদ্যালয় ও কলেজ", principal: "আবু জাফর মোঃ শামসুদ্দিন পাটয়ারী", mobile: "1718420228" },
+            { no: 22, name: "ধানুয়া জনতা উচ্চ বিদ্যালয়", principal: "মোঃ আনিছুর রহমান", mobile: "1816105710" },
+            { no: 23, name: "প্রত্যাশী আর এ উচ্চ বিদ্যালয়", principal: "জ্যোতি প্রকাশ দাস", mobile: "1924739038" },
+            { no: 24, name: "গোবিন্দপুর উচ্চ বিদ্যালয়", principal: "মোঃ কবির হোসেন", mobile: "1768568584" },
+            { no: 25, name: "রামপুর বাজার মজিদিয়া উচ্চ বিদ্যালয়", principal: "মোঃ ফারুক হোসেন", mobile: "1820159878" },
+            { no: 26, name: "হাঁসা বালিকা উচ্চ বিদ্যালয়", principal: "মোঃ মিজানুর রহমান", mobile: "1829801834" },
+            { no: 27, name: "আলোনিয়া উচ্চ বিদ্যালয়", principal: "মোঃ আবু তাহের", mobile: "1726791200" },
+            { no: 28, name: "সন্তোষপুর উচ্চ বিদ্যালয়", principal: "এস এম মিজানুর রহমান", mobile: "1817590386" },
+            { no: 29, name: "ফিরোজপুর জনকল্যাণ উচ্চ বিদ্যালয়", principal: "মোহাম্মদ শাহাজাহান", mobile: "1715446466" },
+            { no: 30, name: "ফরিদগঞ্জ পাইলট বালিকা উচ্চ বিদ্যালয়", principal: "মোঃ শাহাদাত হোসেন", mobile: "1914190234" },
+            { no: 31, name: "চান্দ্রা আঃ হাকিম চৌধুরী মেমোরিয়াল বালিকা উচ্চ বিদ্যালয়", principal: "মোঃ মোস্তাফিজুর রহমান", mobile: "1726580488" },
+            { no: 32, name: "বিরামপুর এস. জে. এম. উচ্চ বিদ্যালয়", principal: "মোঃ খোরশেদ আলম", mobile: "1714433954" },
+            { no: 33, name: "রূপসা বালিকা উচ্চ বিদ্যালয়", principal: "মোঃ নুর হোসেন", mobile: "1811270250" },
+            { no: 34, name: "বি আর হাজী আঃ আহাদ উচ্চ বিদ্যালয়", principal: "মোঃ আবুল কালাম", mobile: "1727454191" },
+            { no: 35, name: "রূপসা আহম্মদিয়া উচ্চ বিদ্যালয়", principal: "মোঃ বশির আহম্মদ", mobile: "1745322709" },
+            { no: 36, name: "কেরোয়া আদর্শ উচ্চ বালিকা বিদ্যালয়", principal: "দিপক কুমার রাউত", mobile: "1733259287" },
+            { no: 37, name: "আদর্শ একাডেমী ফরিদগঞ্জ", principal: "মোঃ হারুনুর রশিদ", mobile: "1712752990" },
+            { no: 38, name: "সোনালী বালিকা উচ্চ বিদ্যালয়", principal: "মোঃ মিজানুর রহমান", mobile: "1818938885" },
+            { no: 39, name: "কাওনিয়া ওয়াই এম উচ্চ বিদ্যালয়", principal: "মোঃ শরীফ আহমেদ", mobile: "1716861680" },
+            { no: 40, name: "কাওনিয়া শহীদ হাবিব উল্যা উচ্চ বিদ্যালয়", principal: "মোঃ দেলোয়ার হোসেন", mobile: "1712690666" },
+            { no: 41, name: "সাহেবগঞ্জ মাধ্যমিক বিদ্যালয়", principal: "মোঃ আবুল কাশেম", mobile: "1727406529" },
+            { no: 42, name: "গৃদকালিন্দিয়া বালিকা উচ্চ বিদ্যালয়", principal: "আমেনা বেগম", mobile: "1818538156" },
+            { no: 43, name: "গৃদকালিন্দিয়া উচ্চ বিদ্যালয়", principal: "মোঃ জাহাঙ্গীর হোসেন", mobile: "1817114336" },
+            { no: 44, name: "লাউতলী শাহ আলম নিম্ন মাধ্যমিক বালিকা বিদ্যালয়", principal: "মোঃ শামছুল হক খান", mobile: "1762209086" },
+            { no: 45, name: "পাইকপাড়া নিম্ন মাধ্যমিক বালিকা বিদ্যালয়", principal: "মোঃ ফিরোজ আলম", mobile: "1851071644" },
+            { no: 46, name: "পূর্ব বড়ালী শাহজাহান কবির উচ্চ বিদ্যালয়", principal: "নেছার আহম্মেদ", mobile: "1914190457" },
+            { no: 47, name: "হাজী মোহাম্মদ সেলিম উচ্চ বিদ্যালয়", principal: "এ.কে.এম তছলিম উদ্দিন", mobile: "1724923528" },
+            { no: 48, name: "শোল্লা আশেক আলী উচ্চ বিদ্যালয় এন্ড কলেজ", principal: "কবির আহমেদ", mobile: "1735639440" },
+            { no: 49, name: "মডেল একাডেমী দেইচর", principal: "মোঃ মিজানুর রহমান", mobile: "1715923528" },
+            { no: 50, name: "খাড়খাদিয়া জুনিয়র বিদ্যালয়", principal: "ফাতেমা আক্তার", mobile: "1712058988" }
+        ];
+
+        // Populate school table
+        const schoolTableBody = document.getElementById('schoolTableBody');
+        const schoolSearch = document.getElementById('schoolSearch');
+        const schoolVisibleCount = document.getElementById('schoolVisibleCount');
+
+        function renderSchoolTable(data) {
+            schoolTableBody.innerHTML = '';
+            data.forEach((school, index) => {
+                const row = document.createElement('tr');
+                row.style.background = index % 2 === 0 ? 'rgba(16, 185, 129, 0.03)' : 'white';
+                row.style.transition = 'all 0.3s ease';
+                row.innerHTML = `
+                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">${school.no}</td>
+                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">${school.name}</td>
+                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">${school.principal}</td>
+                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">${school.mobile}</td>
+                `;
+                schoolTableBody.appendChild(row);
+            });
+            schoolVisibleCount.textContent = data.length;
+        }
+
+        // Initial render
+        renderSchoolTable(schoolData);
+
+        // Search functionality
+        if (schoolSearch) {
+            schoolSearch.addEventListener('input', function () {
+                const searchTerm = this.value.toLowerCase();
+                const filtered = schoolData.filter(school =>
+                    school.name.toLowerCase().includes(searchTerm) ||
+                    school.principal.toLowerCase().includes(searchTerm)
+                );
+                renderSchoolTable(filtered);
+            });
+        }
+
+        // Primary Schools Data
+        const primaryData = [
+            { no: 1, name: "সেকদী সরকারী প্রাথমিক বিদ্যালয়", address: "বালিথুবা ক্লাষ্টার, ১নং বালিথুবা", principal: "লুৎফুন নাহার বেগম", mobile: "1717193148" },
+            { no: 2, name: "পালতালুক সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ১নং বালিথুবা", principal: "তৃপ্তি চক্রবর্তী", mobile: "1717535894" },
+            { no: 3, name: "সকদিরামপুর সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ১নং বালিথুবা", principal: "শরীফ হোসাইন", mobile: "1719099036" },
+            { no: 4, name: "খাড়খাদিয়া সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ১নং বালিথুবা", principal: "মন্টু চন্দ্র দেবনাথ", mobile: "1818929856" },
+            { no: 5, name: "মদনেরগাওঁ সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ১নং বালিথুবা", principal: "মোসাম্মৎ রোকেয়া খানম", mobile: "1813033581" },
+            { no: 6, name: "লোহাগড় সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ১নং বালিথুবা", principal: "মোসাম্মৎ সায়েকা সুলতানা", mobile: "1719210310" },
+            { no: 7, name: "উঃ সকদিরামপুর সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ১নং বালিথুবা", principal: "মোহাম্মদ জাকির হোসেন", mobile: "1818850273" },
+            { no: 8, name: "চান্দ্রা বাজার সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ১নং বালিথুবা", principal: "মোঃ ফখরউদ্দিন তালুকদার", mobile: "1925139654" },
+            { no: 9, name: "দেবীপুর সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ২নং বালিথুবা", principal: "দিল্রুবা খানম", mobile: "1717881332" },
+            { no: 10, name: "মানিকরাজ সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ২নং বালিথুবা", principal: "মনির হোসেন", mobile: "1716119018" }
+        ];
+
+        // Parse CSV data to extract unique clusters and addresses
+        const clusters = [...new Set(primaryData.map(s => s.address.split(',')[0].trim()))].sort();
+        const addresses = [...new Set(primaryData.map(s => s.address.split(',')[1]?.trim() || ''))].filter(a => a).sort();
+
+        // Populate filter dropdowns
+        const clusterFilter = document.getElementById('clusterFilter');
+        const addressFilter = document.getElementById('addressFilter');
+
+        clusters.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c;
+            opt.textContent = c;
+            clusterFilter.appendChild(opt);
+        });
+
+        addresses.forEach(a => {
+            const opt = document.createElement('option');
+            opt.value = a;
+            opt.textContent = a;
+            addressFilter.appendChild(opt);
+        });
+
+        // Render primary table
+        function renderPrimaryTable(data) {
+            const tbody = document.getElementById('primaryTableBody');
+            tbody.innerHTML = '';
+            data.forEach((school, i) => {
+                const row = document.createElement('tr');
+                row.style.background = i % 2 === 0 ? 'rgba(16, 185, 129, 0.03)' : 'white';
+                row.innerHTML = `
+                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">${school.no}</td>
+                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">${school.name}</td>
+                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">${school.address}</td>
+                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">${school.principal}</td>
+                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">${school.mobile}</td>
+                `;
+                tbody.appendChild(row);
+            });
+            document.getElementById('primaryVisibleCount').textContent = data.length;
+        }
+
+        renderPrimaryTable(primaryData);
+
+        // Filter function
+        function filterPrimary() {
+            const search = document.getElementById('primarySearch').value.toLowerCase();
+            const cluster = clusterFilter.value;
+            const address = addressFilter.value;
+
+            const filtered = primaryData.filter(s => {
+                const matchSearch = !search || s.name.toLowerCase().includes(search) || s.principal.toLowerCase().includes(search);
+                const matchCluster = !cluster || s.address.includes(cluster);
+                const matchAddress = !address || s.address.includes(address);
+                return matchSearch && matchCluster && matchAddress;
+            });
+
+            renderPrimaryTable(filtered);
+        }
+
+        document.getElementById('primarySearch').addEventListener('input', filterPrimary);
+        clusterFilter.addEventListener('change', filterPrimary);
+        addressFilter.addEventListener('change', filterPrimary);
+
+        document.getElementById('resetPrimaryFilter').addEventListener('click', function () {
+            document.getElementById('primarySearch').value = '';
+            clusterFilter.value = '';
+            addressFilter.value = '';
+            renderPrimaryTable(primaryData);
+        });
     </script>
 
 </body>
