@@ -1142,6 +1142,164 @@
                 </div>
             </div>
 
+            <!-- Madrasha Section -->
+            <div class="section" id="madrasha-education">
+                <h2 class="section-title"><i class="fas fa-mosque"></i> মাদ্রাসা সমূহ</h2>
+
+                <!-- Search Box -->
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="position: relative;">
+                        <input type="text" id="madrashaSearch" placeholder="মাদ্রাসার নাম বা EIIN খুঁজুন..."
+                            style="width: 100%; padding: 0.9rem 1rem 0.9rem 3rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: white; color: var(--text-color);"
+                            onfocus="this.style.borderColor='var(--primary-color)'; this.style.boxShadow='0 0 0 3px rgba(16, 185, 129, 0.1)'"
+                            onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none'">
+                        <i class="fas fa-search"
+                            style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #9ca3af; font-size: 1.1rem;"></i>
+                    </div>
+                    <!-- Results Counter -->
+                    <div id="madrashaCounter"
+                        style="margin-top: 0.75rem; font-size: 0.9rem; color: #6b7280; font-weight: 500;">
+                        মোট <span id="madrashaVisibleCount">52</span>টি মাদ্রাসা দেখানো হচ্ছে
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="madrashaTable"
+                        style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
+                        <thead>
+                            <tr style="background: linear-gradient(135deg, var(--primary-color), #059669);">
+                                <th
+                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                    ক্রমিক</th>
+                                <th
+                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                    EIIN</th>
+                                <th
+                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                    মাদ্রাসার নাম</th>
+                                <th
+                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                    মোবাইল নং</th>
+                            </tr>
+                        </thead>
+                        <tbody id="madrashaTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Faridganj Thana Section -->
+            <div class="section" id="police-station">
+                <h2 class="section-title"><i class="fas fa-shield-alt"></i> ফরিদগঞ্জ থানা</h2>
+                <p style="margin-bottom: 2rem; color: #666; line-height: 1.8;">
+                    ফরিদগঞ্জ থানা চাঁদপুর জেলার একটি গুরুত্বপূর্ণ আইন-শৃঙ্খলা রক্ষাকারী প্রতিষ্ঠান। এই থানা এলাকার
+                    জনগণের নিরাপত্তা ও শান্তি-শৃঙ্খলা বজায় রাখতে নিরলস কাজ করে যাচ্ছে।
+                </p>
+
+                <!-- Police Officials Cards -->
+                <div style="margin-bottom: 2.5rem;">
+                    <h3
+                        style="font-size: 1.4rem; font-weight: 600; color: var(--text-color); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-user-tie" style="color: var(--primary-color);"></i>
+                        দায়িত্বপ্রাপ্ত কর্মকর্তাবৃন্দ
+                    </h3>
+                    <div id="policeOfficialsContainer"
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                        <!-- Officials will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Police Staff -->
+                <div style="margin-bottom: 2.5rem;">
+                    <h3
+                        style="font-size: 1.4rem; font-weight: 600; color: var(--text-color); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-users" style="color: var(--primary-color);"></i>
+                        কর্মচারীবৃন্দ
+                    </h3>
+                    <div class="table-responsive">
+                        <table
+                            style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
+                            <thead>
+                                <tr style="background: linear-gradient(135deg, var(--primary-color), #059669);">
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                        নাম</th>
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                        পদবী</th>
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                        মোবাইল নং</th>
+                                </tr>
+                            </thead>
+                            <tbody id="policeStaffTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Emergency Contact Info -->
+                <div
+                    style="background: linear-gradient(135deg, #ef4444, #dc2626); padding: 2rem; border-radius: 12px; color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <h3
+                        style="font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-phone-volume"></i>
+                        জরুরি যোগাযোগ
+                    </h3>
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                        <div
+                            style="background: rgba(255,255,255,0.1); padding: 1.2rem; border-radius: 8px; backdrop-filter: blur(10px);">
+                            <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 0.5rem;">জাতীয় জরুরি সেবা</div>
+                            <a href="tel:999"
+                                style="font-size: 2rem; font-weight: 700; color: white; text-decoration: none; display: block;">৯৯৯</a>
+                        </div>
+                        <div
+                            style="background: rgba(255,255,255,0.1); padding: 1.2rem; border-radius: 8px; backdrop-filter: blur(10px);">
+                            <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 0.5rem;">থানা অফিস</div>
+                            <a href="tel:08422640012"
+                                style="font-size: 1.3rem; font-weight: 700; color: white; text-decoration: none; display: block;">০৮৪২২৬৪০১২</a>
+                        </div>
+                        <div
+                            style="background: rgba(255,255,255,0.1); padding: 1.2rem; border-radius: 8px; backdrop-filter: blur(10px);">
+                            <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 0.5rem;">ওসি মোবাইল</div>
+                            <a href="tel:01320116127"
+                                style="font-size: 1.3rem; font-weight: 700; color: white; text-decoration: none; display: block;">০১৩২০-১১৬১২৭</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thana Information -->
+                <div
+                    style="margin-top: 2.5rem; background: var(--card-bg); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <h3
+                        style="font-size: 1.4rem; font-weight: 600; color: var(--text-color); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-info-circle" style="color: var(--primary-color);"></i>
+                        থানা সম্পর্কিত তথ্য
+                    </h3>
+                    <div style="display: grid; gap: 1rem; color: var(--text-color);">
+                        <div style="display: flex; align-items: start; gap: 1rem;">
+                            <i class="fas fa-map-marker-alt"
+                                style="color: var(--primary-color); margin-top: 0.3rem;"></i>
+                            <div>
+                                <strong>ঠিকানা:</strong> ফরিদগঞ্জ, চাঁদপুর
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: start; gap: 1rem;">
+                            <i class="fas fa-envelope" style="color: var(--primary-color); margin-top: 0.3rem;"></i>
+                            <div>
+                                <strong>ইমেইল:</strong> <a href="mailto:oc.faridganjps@gmail.com"
+                                    style="color: var(--primary-color); text-decoration: none;">oc.faridganjps@gmail.com</a>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: start; gap: 1rem;">
+                            <i class="fas fa-clock" style="color: var(--primary-color); margin-top: 0.3rem;"></i>
+                            <div>
+                                <strong>সেবা সময়:</strong> ২৪ ঘণ্টা (সপ্তাহের সকল দিন)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Famous Hats and Bazars (Authentic) -->
             <div class="section" id="markets">
                 <h2 class="section-title"><i class="fas fa-shopping-basket"></i> হাট ও বাজার</h2>
@@ -2331,6 +2489,17 @@
             .dark-mode #schoolSearch::placeholder {
                 color: #6b7280;
             }
+
+            /* Madrasha search dark mode support */
+            .dark-mode #madrashaSearch {
+                background: var(--card-bg);
+                border-color: var(--border-color);
+                color: var(--text-color);
+            }
+
+            .dark-mode #madrashaSearch::placeholder {
+                color: #6b7280;
+            }
         `;
         document.head.appendChild(style);
 
@@ -2338,6 +2507,8 @@
     </script>
     <script src="primary_schools_data.js"></script>
     <script src="schools_data.js"></script>
+    <script src="madrasha_data.js"></script>
+    <script src="faridganj_thana.js"></script>
     <script>
 
         // Populate school table
@@ -2482,6 +2653,126 @@
             addressFilter.value = '';
             renderPrimaryTable(primaryData);
         });
+
+        // Madrasha Data Rendering
+        const madrashaTableBody = document.getElementById('madrashaTableBody');
+        const madrashaSearch = document.getElementById('madrashaSearch');
+        const madrashaVisibleCount = document.getElementById('madrashaVisibleCount');
+
+        function renderMadrashaTable(data) {
+            madrashaTableBody.innerHTML = '';
+            data.forEach((madrasha, index) => {
+                const row = document.createElement('tr');
+                row.style.background = index % 2 === 0 ? 'rgba(16, 185, 129, 0.03)' : 'white';
+                row.innerHTML = `
+                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">${madrasha.no}</td>
+                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">${madrasha.eiin}</td>
+                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">${madrasha.name}</td>
+                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span>${madrasha.mobile}</span>
+                            <a href="tel:${madrasha.mobile}" style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: linear-gradient(135deg, #10b981, #059669); color: white; border-radius: 50%; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2); flex-shrink: 0;" onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 8px rgba(16, 185, 129, 0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 2px 4px rgba(16, 185, 129, 0.2)'">
+                                <i class="fas fa-phone" style="font-size: 0.75rem;"></i>
+                            </a>
+                        </div>
+                    </td>
+                `;
+                madrashaTableBody.appendChild(row);
+            });
+            madrashaVisibleCount.textContent = data.length;
+        }
+
+        // Initial render for madrashas
+        if (typeof madrashaData !== 'undefined') {
+            renderMadrashaTable(madrashaData);
+
+            // Search functionality for madrashas
+            if (madrashaSearch) {
+                madrashaSearch.addEventListener('input', function () {
+                    const searchTerm = this.value.toLowerCase();
+                    const filtered = madrashaData.filter(madrasha =>
+                        madrasha.name.toLowerCase().includes(searchTerm) ||
+                        madrasha.eiin.includes(searchTerm)
+                    );
+                    renderMadrashaTable(filtered);
+                });
+            }
+        }
+
+        // Police Data Rendering
+        if (typeof policeData !== 'undefined') {
+            // Render Police Officials Cards
+            const officialsContainer = document.getElementById('policeOfficialsContainer');
+            if (officialsContainer && policeData.officials) {
+                policeData.officials.forEach(official => {
+                    const card = document.createElement('div');
+                    card.style.cssText = 'background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: all 0.3s ease;';
+                    card.onmouseover = function () { this.style.transform = 'translateY(-4px)'; this.style.boxShadow = '0 8px 16px rgba(0,0,0,0.1)'; };
+                    card.onmouseout = function () { this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px rgba(0,0,0,0.05)'; };
+
+                    card.innerHTML = `
+                        <div style="text-align: center; margin-bottom: 1rem;">
+                            <div style="width: 100px; height: 100px; margin: 0 auto; background: linear-gradient(135deg, var(--primary-color), #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2.5rem; font-weight: 700;">
+                                ${official.name.split(' ')[1]?.charAt(0) || 'P'}
+                            </div>
+                        </div>
+                        <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--text-color); margin-bottom: 0.5rem; text-align: center;">${official.name}</h4>
+                        <p style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem; text-align: center;">${official.designation}</p>
+                        <div style="display: flex; flex-direction: column; gap: 0.75rem; color: var(--text-color);">
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-envelope" style="color: var(--primary-color); width: 20px;"></i>
+                                <a href="mailto:${official.email}" style="color: var(--text-color); text-decoration: none; font-size: 0.85rem; word-break: break-all;">${official.email}</a>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-mobile-alt" style="color: var(--primary-color); width: 20px;"></i>
+                                <div style="display: flex; align-items: center; gap: 0.5rem; flex: 1;">
+                                    <span style="font-size: 0.9rem;">${official.mobile}</span>
+                                    <a href="tel:${official.mobile}" style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: linear-gradient(135deg, #10b981, #059669); color: white; border-radius: 50%; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2); flex-shrink: 0;" onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 8px rgba(16, 185, 129, 0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 2px 4px rgba(16, 185, 129, 0.2)'">
+                                        <i class="fas fa-phone" style="font-size: 0.75rem;"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            ${official.officePhone ? `
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-phone" style="color: var(--primary-color); width: 20px;"></i>
+                                <div style="display: flex; align-items: center; gap: 0.5rem; flex: 1;">
+                                    <span style="font-size: 0.9rem;">${official.officePhone}</span>
+                                    <a href="tel:${official.officePhone}" style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: linear-gradient(135deg, #10b981, #059669); color: white; border-radius: 50%; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2); flex-shrink: 0;" onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 8px rgba(16, 185, 129, 0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 2px 4px rgba(16, 185, 129, 0.2)'">
+                                        <i class="fas fa-phone" style="font-size: 0.75rem;"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            ` : ''}
+                        </div>
+                    `;
+                    officialsContainer.appendChild(card);
+                });
+            }
+
+            // Render Police Staff Table
+            const staffTableBody = document.getElementById('policeStaffTableBody');
+            if (staffTableBody && policeData.staff) {
+                policeData.staff.forEach((staff, index) => {
+                    const row = document.createElement('tr');
+                    row.style.background = index % 2 === 0 ? 'rgba(16, 185, 129, 0.03)' : 'white';
+                    row.innerHTML = `
+                        <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">${staff.name}</td>
+                        <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">${staff.designation}</td>
+                        <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>${staff.mobile}</span>
+                                <a href="tel:${staff.mobile}" style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: linear-gradient(135deg, #10b981, #059669); color: white; border-radius: 50%; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2); flex-shrink: 0;" onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 8px rgba(16, 185, 129, 0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 2px 4px rgba(16, 185, 129, 0.2)'">
+                                    <i class="fas fa-phone" style="font-size: 0.75rem;"></i>
+                                </a>
+                            </div>
+                        </td>
+                    `;
+                    staffTableBody.appendChild(row);
+                });
+            }
+        }
+
+
     </script>
 
 </body>
