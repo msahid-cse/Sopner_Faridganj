@@ -1482,6 +1482,37 @@
                         background: white;
                     }
 
+
+                    /* Dark mode - Filter buttons styling */
+                    .dark-mode .day-filter-btn {
+                        background: #1e293b !important;
+                        border-color: #475569 !important;
+                        color: #e2e8f0 !important;
+                    }
+
+                    /* Active filter button - works in both light and dark mode */
+                    .day-filter-btn.active {
+                        background: var(--primary-color) !important;
+                        border-color: var(--primary-color) !important;
+                        color: white !important;
+                    }
+
+                    .dark-mode .day-filter-btn:hover:not(.active) {
+                        border-color: var(--primary-color) !important;
+                        color: var(--primary-color) !important;
+                    }
+
+                    .dark-mode #resetFilter {
+                        background: #1e293b !important;
+                        border-color: #ef4444 !important;
+                        color: #ef4444 !important;
+                    }
+
+                    .dark-mode #resetFilter:hover {
+                        background: #ef4444 !important;
+                        color: white !important;
+                    }
+
                     /* Mobile Responsive */
                     @media (max-width: 768px) {
                         .table-responsive {
@@ -1982,59 +2013,85 @@
         const visibleCountSpan = document.getElementById('visibleCount');
         const marketTableRows = document.querySelectorAll('#markets table tbody tr');
 
-        let activeFilter = null;
+        let activeFilters = []; // Changed to array for multiple selections
 
         // Search functionality
         if (marketSearch) {
             marketSearch.addEventListener('input', function () {
                 const searchTerm = this.value.trim().toLowerCase();
-                filterMarkets(searchTerm, activeFilter);
+                filterMarkets(searchTerm, activeFilters);
             });
         }
 
-        // Day filter functionality
+        // Helper function to check if dark mode is active
+        function isDarkMode() {
+            return document.body.classList.contains('dark-mode');
+        }
+
+        // Helper function to get default button styles
+        function getDefaultButtonStyles() {
+            if (isDarkMode()) {
+                return {
+                    background: '#1e293b',
+                    color: '#e2e8f0',
+                    borderColor: '#475569'
+                };
+            } else {
+                return {
+                    background: 'white',
+                    color: 'var(--text-color)',
+                    borderColor: '#e5e7eb'
+                };
+            }
+        }
+
+        // Helper function to get active button styles
+        function getActiveButtonStyles() {
+            return {
+                background: 'var(--primary-color)',
+                color: 'white',
+                borderColor: 'var(--primary-color)'
+            };
+        }
+
+        // Day filter functionality - Multiple selection support
         dayFilterBtns.forEach(btn => {
             btn.addEventListener('click', function () {
                 const day = this.getAttribute('data-day');
 
-                // Toggle active state
-                if (activeFilter === day) {
-                    // Deactivate if clicking the same button
-                    activeFilter = null;
-                    this.style.background = 'white';
-                    this.style.color = 'var(--text-color)';
-                    this.style.borderColor = '#e5e7eb';
+                // Toggle selection
+                const index = activeFilters.indexOf(day);
+                if (index > -1) {
+                    // Remove from active filters
+                    activeFilters.splice(index, 1);
+                    // Remove active class
+                    this.classList.remove('active');
                 } else {
-                    // Remove active state from all buttons
-                    dayFilterBtns.forEach(b => {
-                        b.style.background = 'white';
-                        b.style.color = 'var(--text-color)';
-                        b.style.borderColor = '#e5e7eb';
-                    });
-
-                    // Set active state for clicked button
-                    activeFilter = day;
-                    this.style.background = 'var(--primary-color)';
-                    this.style.color = 'white';
-                    this.style.borderColor = 'var(--primary-color)';
+                    // Add to active filters
+                    activeFilters.push(day);
+                    // Add active class
+                    this.classList.add('active');
                 }
 
                 const searchTerm = marketSearch ? marketSearch.value.trim().toLowerCase() : '';
-                filterMarkets(searchTerm, activeFilter);
+                filterMarkets(searchTerm, activeFilters);
             });
 
             // Hover effects
             btn.addEventListener('mouseenter', function () {
-                if (activeFilter !== this.getAttribute('data-day')) {
+                const day = this.getAttribute('data-day');
+                if (!activeFilters.includes(day)) {
                     this.style.borderColor = 'var(--primary-color)';
                     this.style.color = 'var(--primary-color)';
                 }
             });
 
             btn.addEventListener('mouseleave', function () {
-                if (activeFilter !== this.getAttribute('data-day')) {
-                    this.style.borderColor = '#e5e7eb';
-                    this.style.color = 'var(--text-color)';
+                const day = this.getAttribute('data-day');
+                if (!activeFilters.includes(day)) {
+                    // Remove inline styles to let CSS take over
+                    this.style.borderColor = '';
+                    this.style.color = '';
                 }
             });
         });
@@ -2047,18 +2104,16 @@
                     marketSearch.value = '';
                 }
 
-                // Clear active filter
-                activeFilter = null;
+                // Clear active filters
+                activeFilters = [];
 
-                // Reset all filter buttons
+                // Reset all filter buttons - remove active class
                 dayFilterBtns.forEach(btn => {
-                    btn.style.background = 'white';
-                    btn.style.color = 'var(--text-color)';
-                    btn.style.borderColor = '#e5e7eb';
+                    btn.classList.remove('active');
                 });
 
                 // Show all rows
-                filterMarkets('', null);
+                filterMarkets('', []);
             });
 
             // Hover effect for reset button
@@ -2068,13 +2123,17 @@
             });
 
             resetFilterBtn.addEventListener('mouseleave', function () {
-                this.style.background = 'white';
+                if (isDarkMode()) {
+                    this.style.background = '#1e293b';
+                } else {
+                    this.style.background = 'white';
+                }
                 this.style.color = '#ef4444';
             });
         }
 
         // Main filter function
-        function filterMarkets(searchTerm, dayFilter) {
+        function filterMarkets(searchTerm, dayFilters) {
             let visibleCount = 0;
 
             marketTableRows.forEach(row => {
@@ -2088,9 +2147,18 @@
                     showRow = false;
                 }
 
-                // Apply day filter
-                if (dayFilter && !marketDays.includes(dayFilter.toLowerCase())) {
-                    showRow = false;
+                // Apply day filters (show if market operates on ANY of the selected days)
+                if (dayFilters && dayFilters.length > 0) {
+                    let matchesAnyDay = false;
+                    for (let day of dayFilters) {
+                        if (marketDays.includes(day.toLowerCase())) {
+                            matchesAnyDay = true;
+                            break;
+                        }
+                    }
+                    if (!matchesAnyDay) {
+                        showRow = false;
+                    }
                 }
 
                 // Show or hide row with animation
