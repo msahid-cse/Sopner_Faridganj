@@ -17,9 +17,9 @@ const faridganjData = {
         villageCount: "১৮০ টি"
     },
     demographics: {
-        totalPopulation: "৩,৯৬,৬৮৩ জন (২০১১ আদমশুমারী)",
-        male: "১,৮২,৬৬০ জন",
-        female: "২,১৪,৩২৩ জন",
+        totalPopulation: "৪৩৩২৪৪ জন (২০২২ আদমশুমারী)",
+        male: "১৯৮৮৩৬ জন",
+        female: "২৩৪৪০৮৪ জন",
         density: "১৭১৩ জন/বর্গ কি.মি.",
         totalVoters: "২৯৫৬৩২ জন",
         maleVoters: "১৪৯৯৩০ জন",
