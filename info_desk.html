@@ -1374,512 +1374,572 @@
                 <p style="margin-bottom: 1.5rem; color: #666;">ফরিদগঞ্জ উপজেলার সকল হাট ও বাজারের তালিকা এবং তাদের
                     পরিচালনার নির্ধারিত বার।</p>
 
-                <!-- Search and Filter Controls -->
-                <div style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
-                    <!-- Search Box -->
-                    <div style="position: relative;">
-                        <input type="text" id="marketSearch" placeholder="বাজারের নাম খুঁজুন..."
-                            style="width: 100%; padding: 0.9rem 1rem 0.9rem 3rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: white; color: var(--text-color);"
-                            onfocus="this.style.borderColor='var(--primary-color)'; this.style.boxShadow='0 0 0 3px rgba(16, 185, 129, 0.1)'"
-                            onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none'">
-                        <i class="fas fa-search"
-                            style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #9ca3af; font-size: 1.1rem;"></i>
-                    </div>
-
-                    <!-- Day Filter Buttons -->
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;">
-                        <span
-                            style="font-weight: 600; color: var(--text-color); margin-right: 0.5rem; font-size: 0.95rem;">বার
-                            অনুযায়ী ফিল্টার:</span>
-                        <button class="day-filter-btn" data-day="শনিবার"
-                            style="padding: 0.5rem 1rem; border: 2px solid #e5e7eb; background: white; color: var(--text-color); border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">শনিবার</button>
-                        <button class="day-filter-btn" data-day="রবিবার"
-                            style="padding: 0.5rem 1rem; border: 2px solid #e5e7eb; background: white; color: var(--text-color); border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">রবিবার</button>
-                        <button class="day-filter-btn" data-day="সোমবার"
-                            style="padding: 0.5rem 1rem; border: 2px solid #e5e7eb; background: white; color: var(--text-color); border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">সোমবার</button>
-                        <button class="day-filter-btn" data-day="মঙ্গলবার"
-                            style="padding: 0.5rem 1rem; border: 2px solid #e5e7eb; background: white; color: var(--text-color); border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">মঙ্গলবার</button>
-                        <button class="day-filter-btn" data-day="বুধবার"
-                            style="padding: 0.5rem 1rem; border: 2px solid #e5e7eb; background: white; color: var(--text-color); border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">বুধবার</button>
-                        <button class="day-filter-btn" data-day="বৃহস্পতিবার"
-                            style="padding: 0.5rem 1rem; border: 2px solid #e5e7eb; background: white; color: var(--text-color); border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">বৃহস্পতিবার</button>
-                        <button class="day-filter-btn" data-day="শুক্রবার"
-                            style="padding: 0.5rem 1rem; border: 2px solid #e5e7eb; background: white; color: var(--text-color); border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">শুক্রবার</button>
-                        <button class="day-filter-btn" data-day="প্রতিদিন"
-                            style="padding: 0.5rem 1rem; border: 2px solid #e5e7eb; background: white; color: var(--text-color); border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">প্রতিদিন</button>
-                        <button id="resetFilter"
-                            style="padding: 0.5rem 1rem; border: 2px solid #ef4444; background: white; color: #ef4444; border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: all 0.3s ease; margin-left: 0.5rem;">
-                            <i class="fas fa-redo"></i> রিসেট
-                        </button>
-                    </div>
-
-                    <!-- Results Counter -->
-                    <div id="resultsCounter" style="font-size: 0.9rem; color: #6b7280; font-weight: 500;">
-                        মোট <span id="visibleCount">44</span>টি বাজার দেখানো হচ্ছে
-                    </div>
+                <!-- Load Data Button -->
+                <div id="marketsLoadButton" style="text-align: center; padding: 2rem;">
+                    <button onclick="loadMarkets()"
+                        style="background: linear-gradient(135deg, var(--primary-color), #059669); color: white; border: none; padding: 1rem 2.5rem; border-radius: 10px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(16, 185, 129, 0.3);"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 12px rgba(16, 185, 129, 0.4)'"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px rgba(16, 185, 129, 0.3)'">
+                        <i class="fas fa-download"></i>
+                        তথ্য লোড করুন (৪৪টি বাজার)
+                    </button>
+                    <p style="margin-top: 1rem; color: #6b7280; font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i> হাট ও বাজারের তথ্য দেখতে উপরের বাটনে ক্লিক করুন
+                    </p>
                 </div>
 
-                <div class="table-responsive">
-                    <table
-                        style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
-                        <thead>
-                            <tr class="market-table-header"
-                                style="background: linear-gradient(135deg, var(--primary-color), #059669);">
-                                <th
-                                    style="padding: 1rem; text-align: left; color: rgb(54, 43, 43); font-weight: 600; border: none;">
-                                    ক্রমিক নং</th>
-                                <th
-                                    style="padding: 1rem; text-align: left; color: rgb(69, 56, 56); font-weight: 600; border: none;">
-                                    হাট বাজারের নাম</th>
-                                <th
-                                    style="padding: 1rem; text-align: left; color: rgb(64, 51, 51); font-weight: 600; border: none;">
-                                    বাজার/হাট পরিচালনার নির্ধারিত বার</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    চান্দ্রা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
-                                    মঙ্গলবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    বাগড়া বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    শোশাইরচর বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
-                                    বৃহস্পতিবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৪</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    বাংলাদেশ বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">সোমবার ও
-                                    শুক্রবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৫</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    একতা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৬</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    বাঁশারা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
-                                    মঙ্গলবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৭</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    মনতলা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
-                                    সোমবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৮</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    মুন্সিরহাট বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
-                                    সোমবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৯</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    সাহার বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১০</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    কামতা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার, সোমবার
-                                    ও
-                                    বুধবার</td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১১</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    শোল্লা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
-                                    মঙ্গলবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১২</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    গোবরচিত্রা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
-                                    মঙ্গলবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৩</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    গল্লাক বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
-                                    মঙ্গলবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৪</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    আষ্টা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
-                                    বৃহস্পতিবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৫</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    ফকির বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
-                                    বৃহস্পতিবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৬</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    গুপ্টি বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;"><strong
-                                        style="color: var(--primary-color);">প্রতিদিন</strong></td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৭</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    খাজুরিয়া বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
-                                    সোমবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৮</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    লতিফগঞ্জ বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
-                                    সোমবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৯</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    পাইকপাড়া বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
-                                    সোমবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২০</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    চৌরাঙ্গী বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও বুধবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২১</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    শাহী বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার, সোমবার
-                                    ও
-                                    বুধবার</td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২২</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    গাজীপুর বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
-                                    সোমবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৩</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    কড়ৈতলী বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
-                                    বৃহস্পতিবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৪</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    আনন্দ বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
-                                    মঙ্গলবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৫</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    নয়ারহাট বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
-                                    সোমবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৬</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    ধানুয়া বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
-                                    মঙ্গলবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৭</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    রামপুর বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৮</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    গোয়ালভাওর বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
-                                    সোমবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৯</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    বেপারীর হাট</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
-                                    সোমবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩০</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    খেয়াঘাট বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
-                                    বৃহস্পতিবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩১</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    চৌরাস্তা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
-                                    সোমবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩২</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    বেড়ীর বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
-                                    বৃহস্পতিবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৩</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    ফিরোজপুর বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৪</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    চৌমুহনী বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
-                                    সোমবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৫</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    বিরামপুর বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
-                                    মঙ্গলবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৬</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    কালির বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
-                                    মঙ্গলবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৭</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    মদীনা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;"><strong
-                                        style="color: var(--primary-color);">প্রতিদিন</strong></td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৮</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    রূপসা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও বুধবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৯</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    রুস্তমপুর বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">সোমবার ও
-                                    বৃহস্পতিবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৪০</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    গৃদকালিন্দিয়া বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
-                                    বৃহস্পতিবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৪১</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    চৌমুহনী বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
-                                    মঙ্গলবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৪২</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    সাহেবগঞ্জ বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
-                                </td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৪৩</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
-                                    বর্ডার বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
-                                    মঙ্গলবার
-                                </td>
-                            </tr>
-                            <tr style="background: white; transition: all 0.3s ease;">
-                                <td style="padding: 0.9rem 1rem; border-bottom: none;">৪৪</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: none; font-weight: 500;">ফরিদগঞ্জ
-                                    বাজার
-                                </td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: none;">রবিবার ও বৃহস্পতিবার</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <!-- Data Container (Initially Hidden) -->
+                <div id="marketsDataContainer" style="display: none;">
+                    <!-- Search and Filter Controls -->
+                    <div style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                        <!-- Search Box -->
+                        <div style="position: relative;">
+                            <input type="text" id="marketSearch" placeholder="বাজারের নাম খুঁজুন..."
+                                style="width: 100%; padding: 0.9rem 1rem 0.9rem 3rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: white; color: var(--text-color);"
+                                onfocus="this.style.borderColor='var(--primary-color)'; this.style.boxShadow='0 0 0 3px rgba(16, 185, 129, 0.1)'"
+                                onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none'">
+                            <i class="fas fa-search"
+                                style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #9ca3af; font-size: 1.1rem;"></i>
+                        </div>
 
-                <style>
-                    /* Market Table Hover Effects */
-                    .table-responsive table tbody tr:hover {
-                        background: rgba(16, 185, 129, 0.1) !important;
-                        transform: translateX(3px);
-                        box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
-                    }
+                        <!-- Day Filter Buttons -->
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;">
+                            <span
+                                style="font-weight: 600; color: var(--text-color); margin-right: 0.5rem; font-size: 0.95rem;">বার
+                                অনুযায়ী ফিল্টার:</span>
+                            <button class="day-filter-btn" data-day="শনিবার"
+                                style="padding: 0.5rem 1rem; border: 2px solid #e5e7eb; background: white; color: var(--text-color); border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">শনিবার</button>
+                            <button class="day-filter-btn" data-day="রবিবার"
+                                style="padding: 0.5rem 1rem; border: 2px solid #e5e7eb; background: white; color: var(--text-color); border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">রবিবার</button>
+                            <button class="day-filter-btn" data-day="সোমবার"
+                                style="padding: 0.5rem 1rem; border: 2px solid #e5e7eb; background: white; color: var(--text-color); border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">সোমবার</button>
+                            <button class="day-filter-btn" data-day="মঙ্গলবার"
+                                style="padding: 0.5rem 1rem; border: 2px solid #e5e7eb; background: white; color: var(--text-color); border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">মঙ্গলবার</button>
+                            <button class="day-filter-btn" data-day="বুধবার"
+                                style="padding: 0.5rem 1rem; border: 2px solid #e5e7eb; background: white; color: var(--text-color); border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">বুধবার</button>
+                            <button class="day-filter-btn" data-day="বৃহস্পতিবার"
+                                style="padding: 0.5rem 1rem; border: 2px solid #e5e7eb; background: white; color: var(--text-color); border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">বৃহস্পতিবার</button>
+                            <button class="day-filter-btn" data-day="শুক্রবার"
+                                style="padding: 0.5rem 1rem; border: 2px solid #e5e7eb; background: white; color: var(--text-color); border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">শুক্রবার</button>
+                            <button class="day-filter-btn" data-day="প্রতিদিন"
+                                style="padding: 0.5rem 1rem; border: 2px solid #e5e7eb; background: white; color: var(--text-color); border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">প্রতিদিন</button>
+                            <button id="resetFilter"
+                                style="padding: 0.5rem 1rem; border: 2px solid #ef4444; background: white; color: #ef4444; border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: all 0.3s ease; margin-left: 0.5rem;">
+                                <i class="fas fa-redo"></i> রিসেট
+                            </button>
+                        </div>
 
-                    /* Dark Mode Support for Market Table */
-                    .dark-mode .table-responsive table {
-                        background: var(--card-bg);
-                    }
+                        <!-- Results Counter -->
+                        <div id="resultsCounter" style="font-size: 0.9rem; color: #6b7280; font-weight: 500;">
+                            মোট <span id="visibleCount">44</span>টি বাজার দেখানো হচ্ছে
+                        </div>
+                    </div>
 
-                    /* Dark mode header with better contrast */
-                    .dark-mode .market-table-header {
-                        background: linear-gradient(135deg, #047857, #065f46) !important;
-                    }
+                    <div class="table-responsive">
+                        <table
+                            style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
+                            <thead>
+                                <tr class="market-table-header"
+                                    style="background: linear-gradient(135deg, var(--primary-color), #059669);">
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: rgb(54, 43, 43); font-weight: 600; border: none;">
+                                        ক্রমিক নং</th>
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: rgb(69, 56, 56); font-weight: 600; border: none;">
+                                        হাট বাজারের নাম</th>
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: rgb(64, 51, 51); font-weight: 600; border: none;">
+                                        বাজার/হাট পরিচালনার নির্ধারিত বার</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        চান্দ্রা বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                        মঙ্গলবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        বাগড়া বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        শোশাইরচর বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
+                                        বৃহস্পতিবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৪</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        বাংলাদেশ বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">সোমবার ও
+                                        শুক্রবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৫</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        একতা বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৬</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        বাঁশারা বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                        মঙ্গলবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৭</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        মনতলা বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                        সোমবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৮</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        মুন্সিরহাট বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                        সোমবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৯</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        সাহার বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১০</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        কামতা বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার, সোমবার
+                                        ও
+                                        বুধবার</td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১১</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        শোল্লা বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                        মঙ্গলবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১২</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        গোবরচিত্রা বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                        মঙ্গলবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৩</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        গল্লাক বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                        মঙ্গলবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৪</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        আষ্টা বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
+                                        বৃহস্পতিবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৫</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        ফকির বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
+                                        বৃহস্পতিবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৬</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        গুপ্টি বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;"><strong
+                                            style="color: var(--primary-color);">প্রতিদিন</strong></td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৭</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        খাজুরিয়া বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                        সোমবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৮</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        লতিফগঞ্জ বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                        সোমবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৯</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        পাইকপাড়া বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                        সোমবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২০</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        চৌরাঙ্গী বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও বুধবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২১</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        শাহী বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার, সোমবার
+                                        ও
+                                        বুধবার</td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২২</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        গাজীপুর বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                        সোমবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৩</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        কড়ৈতলী বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
+                                        বৃহস্পতিবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৪</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        আনন্দ বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                        মঙ্গলবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৫</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        নয়ারহাট বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                        সোমবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৬</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        ধানুয়া বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                        মঙ্গলবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৭</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        রামপুর বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৮</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        গোয়ালভাওর বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                        সোমবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৯</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        বেপারীর হাট</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                        সোমবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩০</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        খেয়াঘাট বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
+                                        বৃহস্পতিবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩১</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        চৌরাস্তা বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                        সোমবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩২</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        বেড়ীর বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
+                                        বৃহস্পতিবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৩</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        ফিরোজপুর বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৪</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        চৌমুহনী বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                        সোমবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৫</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        বিরামপুর বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                        মঙ্গলবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৬</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        কালির বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                        মঙ্গলবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৭</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        মদীনা বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;"><strong
+                                            style="color: var(--primary-color);">প্রতিদিন</strong></td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৮</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        রূপসা বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও বুধবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৯</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        রুস্তমপুর বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">সোমবার ও
+                                        বৃহস্পতিবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৪০</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        গৃদকালিন্দিয়া বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
+                                        বৃহস্পতিবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৪১</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        চৌমুহনী বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                        মঙ্গলবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৪২</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        সাহেবগঞ্জ বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
+                                    </td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৪৩</td>
+                                    <td
+                                        style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                                        বর্ডার বাজার</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                        মঙ্গলবার
+                                    </td>
+                                </tr>
+                                <tr style="background: white; transition: all 0.3s ease;">
+                                    <td style="padding: 0.9rem 1rem; border-bottom: none;">৪৪</td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: none; font-weight: 500;">ফরিদগঞ্জ
+                                        বাজার
+                                    </td>
+                                    <td style="padding: 0.9rem 1rem; border-bottom: none;">রবিবার ও বৃহস্পতিবার</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                    .dark-mode .market-table-header th {
-                        color: #ffffff !important;
-                    }
-
-                    /* Dark mode table rows - better alternating colors */
-                    .dark-mode .table-responsive table tbody tr {
-                        background: #1e293b !important;
-                    }
-
-                    .dark-mode .table-responsive table tbody tr:nth-child(even) {
-                        background: #0f172a !important;
-                    }
-
-                    .dark-mode .table-responsive table tbody tr:hover {
-                        background: rgba(16, 185, 129, 0.2) !important;
-                    }
-
-                    .dark-mode .table-responsive table td {
-                        border-bottom-color: #334155 !important;
-                        color: #e2e8f0;
-                    }
-
-                    /* Light mode - better alternating colors */
-                    .table-responsive table tbody tr:nth-child(odd) {
-                        background: rgba(16, 185, 129, 0.03);
-                    }
-
-                    .table-responsive table tbody tr:nth-child(even) {
-                        background: white;
-                    }
-
-
-                    /* Dark mode - Filter buttons styling */
-                    .dark-mode .day-filter-btn {
-                        background: #1e293b !important;
-                        border-color: #475569 !important;
-                        color: #e2e8f0 !important;
-                    }
-
-                    /* Active filter button - works in both light and dark mode */
-                    .day-filter-btn.active {
-                        background: var(--primary-color) !important;
-                        border-color: var(--primary-color) !important;
-                        color: white !important;
-                    }
-
-                    .dark-mode .day-filter-btn:hover:not(.active) {
-                        border-color: var(--primary-color) !important;
-                        color: var(--primary-color) !important;
-                    }
-
-                    .dark-mode #resetFilter {
-                        background: #1e293b !important;
-                        border-color: #ef4444 !important;
-                        color: #ef4444 !important;
-                    }
-
-                    .dark-mode #resetFilter:hover {
-                        background: #ef4444 !important;
-                        color: white !important;
-                    }
-
-                    /* Mobile Responsive */
-                    @media (max-width: 768px) {
-                        .table-responsive {
-                            overflow-x: auto;
-                            -webkit-overflow-scrolling: touch;
+                    <style>
+                        /* Market Table Hover Effects */
+                        .table-responsive table tbody tr:hover {
+                            background: rgba(16, 185, 129, 0.1) !important;
+                            transform: translateX(3px);
+                            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
                         }
 
-                        .table-responsive table {
-                            min-width: 600px;
+                        /* Dark Mode Support for Market Table */
+                        .dark-mode .table-responsive table {
+                            background: var(--card-bg);
                         }
 
-                        .table-responsive table th,
-                        .table-responsive table td {
-                            padding: 0.7rem 0.8rem !important;
-                            font-size: 0.9rem;
+                        /* Dark mode header with better contrast */
+                        .dark-mode .market-table-header {
+                            background: linear-gradient(135deg, #047857, #065f46) !important;
                         }
-                    }
-                </style>
+
+                        .dark-mode .market-table-header th {
+                            color: #ffffff !important;
+                        }
+
+                        /* Dark mode table rows - better alternating colors */
+                        .dark-mode .table-responsive table tbody tr {
+                            background: #1e293b !important;
+                        }
+
+                        .dark-mode .table-responsive table tbody tr:nth-child(even) {
+                            background: #0f172a !important;
+                        }
+
+                        .dark-mode .table-responsive table tbody tr:hover {
+                            background: rgba(16, 185, 129, 0.2) !important;
+                        }
+
+                        .dark-mode .table-responsive table td {
+                            border-bottom-color: #334155 !important;
+                            color: #e2e8f0;
+                        }
+
+                        /* Light mode - better alternating colors */
+                        .table-responsive table tbody tr:nth-child(odd) {
+                            background: rgba(16, 185, 129, 0.03);
+                        }
+
+                        .table-responsive table tbody tr:nth-child(even) {
+                            background: white;
+                        }
+
+
+                        /* Dark mode - Filter buttons styling */
+                        .dark-mode .day-filter-btn {
+                            background: #1e293b !important;
+                            border-color: #475569 !important;
+                            color: #e2e8f0 !important;
+                        }
+
+                        /* Active filter button - works in both light and dark mode */
+                        .day-filter-btn.active {
+                            background: var(--primary-color) !important;
+                            border-color: var(--primary-color) !important;
+                            color: white !important;
+                        }
+
+                        .dark-mode .day-filter-btn:hover:not(.active) {
+                            border-color: var(--primary-color) !important;
+                            color: var(--primary-color) !important;
+                        }
+
+                        .dark-mode #resetFilter {
+                            background: #1e293b !important;
+                            border-color: #ef4444 !important;
+                            color: #ef4444 !important;
+                        }
+
+                        .dark-mode #resetFilter:hover {
+                            background: #ef4444 !important;
+                            color: white !important;
+                        }
+
+                        /* Mobile Responsive */
+                        @media (max-width: 768px) {
+                            .table-responsive {
+                                overflow-x: auto;
+                                -webkit-overflow-scrolling: touch;
+                            }
+
+                            .table-responsive table {
+                                min-width: 600px;
+                            }
+
+                            .table-responsive table th,
+                            .table-responsive table td {
+                                padding: 0.7rem 0.8rem !important;
+                                font-size: 0.9rem;
+                            }
+                        }
+                    </style>
+                </div> <!-- End of marketsDataContainer -->
             </div>
 
             <!-- Post Codes (Authentic) -->
@@ -2204,7 +2264,8 @@
             <div class="section" id="emergency-hotlines">
                 <h2 class="section-title"><i class="fas fa-phone-volume"></i> জাতীয় জরুরি হটলাইন</h2>
                 <p style="margin-bottom: 2rem; color: #666; line-height: 1.8;">
-                    বাংলাদেশ সরকারের বিভিন্ন মন্ত্রণালয় ও বিভাগ কর্তৃক পরিচালিত জরুরি সেবা হটলাইন নম্বরসমূহ। বিস্তারিত
+                    বাংলাদেশ সরকারের বিভিন্ন মন্ত্রণালয় ও বিভাগ কর্তৃক পরিচালিত জরুরি সেবা হটলাইন নম্বরসমূহ।
+                    বিস্তারিত
                     জানতে কার্ডে ক্লিক করুন।
                 </p>
 
@@ -2229,7 +2290,8 @@
                                             ৯৯৯</p>
                                     </div>
                                 </div>
-                                <p style="font-size: 0.85rem; color: #6b7280; margin: 0.5rem 0;">পুলিশ, ফায়ার সার্ভিস ও
+                                <p style="font-size: 0.85rem; color: #6b7280; margin: 0.5rem 0;">পুলিশ, ফায়ার
+                                    সার্ভিস ও
                                     অ্যাম্বুলেন্স</p>
                                 <a href="https://www.999.gov.bd/" target="_blank"
                                     style="font-size: 0.8rem; color: var(--primary-color); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 0.5rem;">
@@ -2241,7 +2303,8 @@
                         <div class="hotline-details"
                             style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
                             <p style="font-size: 0.85rem; line-height: 1.6; color: #374151;">
-                                যেকোনো পরিস্থিতিতে দেশের জাতীয় জরুরি সেবা নম্বর। যেকোনো দুর্ঘটনার মুখোমুখি হলে জরুরি
+                                যেকোনো পরিস্থিতিতে দেশের জাতীয় জরুরি সেবা নম্বর। যেকোনো দুর্ঘটনার মুখোমুখি হলে
+                                জরুরি
                                 সেবা পেতে দেশের যেকোনো স্থান থেকে এই নম্বরে ফোন করতে পারেন। পুলিশের অধীনে পরিচালিত।
                                 দিনরাত ২৪ ঘণ্টা সচল। যেকোনো ফোন থেকে বিনা মূল্যে কল করা যায়।
                             </p>
@@ -2278,8 +2341,10 @@
                             style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
                             <p style="font-size: 0.85rem; line-height: 1.6; color: #374151;">
                                 সরকারি সেবা প্রাপ্তির পদ্ধতি, জনপ্রতিনিধি ও সরকারি কর্মচারীদের যোগাযোগ তথ্য, পর্যটন
-                                স্থান এবং জেলা সম্পর্কিত বিস্তারিত তথ্য। প্রবাসীরা ০৯৬৬৬৭৮৯৩৩৩ নম্বরে কল করতে পারবেন।
-                                দুর্যোগের সময়ে সাহায্যের জন্য জেলা প্রশাসক ও উপজেলা নির্বাহী অফিসারের কাছে আবেদন করা
+                                স্থান এবং জেলা সম্পর্কিত বিস্তারিত তথ্য। প্রবাসীরা ০৯৬৬৬৭৮৯৩৩৩ নম্বরে কল করতে
+                                পারবেন।
+                                দুর্যোগের সময়ে সাহায্যের জন্য জেলা প্রশাসক ও উপজেলা নির্বাহী অফিসারের কাছে আবেদন
+                                করা
                                 যাবে। ২৪ ঘণ্টা সেবা।
                             </p>
                         </div>
@@ -2303,7 +2368,8 @@
                                             ১০২</p>
                                     </div>
                                 </div>
-                                <p style="font-size: 0.85rem; color: #6b7280; margin: 0.5rem 0;">ফায়ার সার্ভিস ও সিভিল
+                                <p style="font-size: 0.85rem; color: #6b7280; margin: 0.5rem 0;">ফায়ার সার্ভিস ও
+                                    সিভিল
                                     ডিফেন্স</p>
                                 <a href="https://fireservice.gov.bd/" target="_blank"
                                     style="font-size: 0.8rem; color: var(--primary-color); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
@@ -2315,8 +2381,10 @@
                         <div class="hotline-details"
                             style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
                             <p style="font-size: 0.85rem; line-height: 1.6; color: #374151;">
-                                ফায়ার সার্ভিস ও সিভিল ডিফেন্স অধিদফতরের ঢাকা কেন্দ্রীয় নিয়ন্ত্রণ কক্ষের হটলাইন। যেকোন
-                                জরুরি সেবা গ্রহণের জন্য সকল অপারেটর থেকে এই নম্বরে ফোন করা যাবে। জরুরি সময় সহজেই মনে
+                                ফায়ার সার্ভিস ও সিভিল ডিফেন্স অধিদফতরের ঢাকা কেন্দ্রীয় নিয়ন্ত্রণ কক্ষের হটলাইন।
+                                যেকোন
+                                জরুরি সেবা গ্রহণের জন্য সকল অপারেটর থেকে এই নম্বরে ফোন করা যাবে। জরুরি সময় সহজেই
+                                মনে
                                 রাখার জন্য ৩ ডিজিটের এই হটলাইন চালু করা হয়েছে। পূর্বের ০২২২৩৩৫৫৫৫৫ নম্বরও সচল আছে।
                             </p>
                         </div>
@@ -2351,7 +2419,8 @@
                             style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
                             <p style="font-size: 0.85rem; line-height: 1.6; color: #374151;">
                                 দুর্নীতি ও অনিয়মের তথ্য সরাসরি জানাতে দুর্নীতি দমন কমিশনের হটলাইন। বিনা খরচে যে কোন
-                                মোবাইল বা টেলিফোন থেকে এই নাম্বারে কল করে দুদককে দুর্নীতির তথ্য ও অভিযোগ জানানো যাবে।
+                                মোবাইল বা টেলিফোন থেকে এই নাম্বারে কল করে দুদককে দুর্নীতির তথ্য ও অভিযোগ জানানো
+                                যাবে।
                                 অফিস চলাকালীন সকাল ৯টা থেকে বিকাল ৫টা পর্যন্ত সেবা পাওয়া যাবে।
                             </p>
                         </div>
@@ -2388,7 +2457,8 @@
                             <p style="font-size: 0.85rem; line-height: 1.6; color: #374151;">
                                 বাংলাদেশ ও ডেনমার্ক সরকারের যৌথ উদ্যোগে পরিচালিত নারী নির্যাতন প্রতিরোধ হেল্পলাইন।
                                 নির্যাতনের শিকার নারী ও শিশুর সকল ধরনের সেবা ও সহায়তা প্রদান। আইনি দিক নির্দেশনা,
-                                মনোসামাজিক কাউন্সেলিং, আইন সহায়তা এবং বিশেষ পরিস্থিতিতে উদ্ধারে সহায়তা প্রদান করা হয়।
+                                মনোসামাজিক কাউন্সেলিং, আইন সহায়তা এবং বিশেষ পরিস্থিতিতে উদ্ধারে সহায়তা প্রদান করা
+                                হয়।
                             </p>
                         </div>
                     </div>
@@ -2423,8 +2493,10 @@
                         <div class="hotline-details"
                             style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
                             <p style="font-size: 0.85rem; line-height: 1.6; color: #374151;">
-                                টোল ফ্রি IVR পদ্ধতিতে দুর্যোগের আগাম বার্তা। ১ চাপলে সমুদ্রগামী জেলেদের আবহাওয়া বার্তা,
-                                ২ চাপলে নদী বন্দরের সতর্ক সংকেত, ৩ চাপলে দৈনন্দিন আবহাওয়া, ৪ চাপলে ঘূর্ণিঝড় সতর্কতা, ৫
+                                টোল ফ্রি IVR পদ্ধতিতে দুর্যোগের আগাম বার্তা। ১ চাপলে সমুদ্রগামী জেলেদের আবহাওয়া
+                                বার্তা,
+                                ২ চাপলে নদী বন্দরের সতর্ক সংকেত, ৩ চাপলে দৈনন্দিন আবহাওয়া, ৪ চাপলে ঘূর্ণিঝড়
+                                সতর্কতা, ৫
                                 চাপলে বন্যা ও নদীর পানি হ্রাসবৃদ্ধি সম্পর্কিত তথ্য পাওয়া যাবে।
                             </p>
                         </div>
@@ -2447,7 +2519,8 @@
                                             ১০৯৮</p>
                                     </div>
                                 </div>
-                                <p style="font-size: 0.85rem; color: #6b7280; margin: 0.5rem 0;">সমাজসেবা অধিদফতর</p>
+                                <p style="font-size: 0.85rem; color: #6b7280; margin: 0.5rem 0;">সমাজসেবা অধিদফতর
+                                </p>
                                 <a href="https://msw.portal.gov.bd/" target="_blank"
                                     style="font-size: 0.8rem; color: var(--primary-color); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
                                     <i class="fas fa-external-link-alt"></i> ওয়েবসাইট
@@ -2458,8 +2531,10 @@
                         <div class="hotline-details"
                             style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
                             <p style="font-size: 0.85rem; line-height: 1.6; color: #374151;">
-                                শিশুদের সুরক্ষায় ইউনিসেফের সহায়তায় চালু। যেকোনো শিশু সহিংসতা, নির্যাতন ও শোষণের শিকার
-                                হলে শিশু নিজে বা অন্য যে কেউ বিনামূল্যে কল করে সহায়তা চাইতে পারবেন। সরকারি ও সাপ্তাহিক
+                                শিশুদের সুরক্ষায় ইউনিসেফের সহায়তায় চালু। যেকোনো শিশু সহিংসতা, নির্যাতন ও শোষণের
+                                শিকার
+                                হলে শিশু নিজে বা অন্য যে কেউ বিনামূল্যে কল করে সহায়তা চাইতে পারবেন। সরকারি ও
+                                সাপ্তাহিক
                                 ছুটির দিনসহ ২৪ ঘণ্টা সেবা চালু। আগারগাঁওয়ে কেন্দ্রীয় কল সেন্টার স্থাপিত।
                             </p>
                         </div>
@@ -2482,7 +2557,8 @@
                                             ১৬১২২</p>
                                     </div>
                                 </div>
-                                <p style="font-size: 0.85rem; color: #6b7280; margin: 0.5rem 0;">ভূমি মন্ত্রণালয়</p>
+                                <p style="font-size: 0.85rem; color: #6b7280; margin: 0.5rem 0;">ভূমি মন্ত্রণালয়
+                                </p>
                                 <a href="https://land.gov.bd/" target="_blank"
                                     style="font-size: 0.8rem; color: var(--primary-color); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
                                     <i class="fas fa-external-link-alt"></i> ওয়েবসাইট
@@ -2493,8 +2569,10 @@
                         <div class="hotline-details"
                             style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
                             <p style="font-size: 0.85rem; line-height: 1.6; color: #374151;">
-                                নাগরিক ভূমিসেবা কেন্দ্র। ভূমি সম্পর্কিত আইনি পরামর্শ, ই-নামজারি, ভূমি উন্নয়ন কর ইত্যাদি
-                                সেবা। খতিয়ান ও ম্যাপের আবেদন, নামজারি ফি এবং ভূমি উন্নয়ন কর অনলাইনে প্রদান করা যায়।
+                                নাগরিক ভূমিসেবা কেন্দ্র। ভূমি সম্পর্কিত আইনি পরামর্শ, ই-নামজারি, ভূমি উন্নয়ন কর
+                                ইত্যাদি
+                                সেবা। খতিয়ান ও ম্যাপের আবেদন, নামজারি ফি এবং ভূমি উন্নয়ন কর অনলাইনে প্রদান করা
+                                যায়।
                                 বিদেশ থেকে +৮৮০ ৯৬১২৩ ১৬১২২ নম্বরে কল করতে পারবেন। ফেসবুক পেজেও সেবা পাওয়া যায়।
                             </p>
                         </div>
@@ -2520,7 +2598,8 @@
                                             ১৬৬৯৯</p>
                                     </div>
                                 </div>
-                                <p style="font-size: 0.85rem; color: #6b7280; margin: 0.5rem 0;">জাতীয় আইনগত সহায়তা
+                                <p style="font-size: 0.85rem; color: #6b7280; margin: 0.5rem 0;">জাতীয় আইনগত
+                                    সহায়তা
                                     প্রদান সংস্থা</p>
                                 <a href="https://nlaso.gov.bd/" target="_blank"
                                     style="font-size: 0.8rem; color: var(--primary-color); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
@@ -2532,7 +2611,8 @@
                         <div class="hotline-details"
                             style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
                             <p style="font-size: 0.85rem; line-height: 1.6; color: #374151;">
-                                অসহায়, দরিদ্র, নির্যাতিত সকল শ্রেণী-পেশার মানুষের আইনগত অধিকার প্রতিষ্ঠায় সম্পূর্ণ টোল
+                                অসহায়, দরিদ্র, নির্যাতিত সকল শ্রেণী-পেশার মানুষের আইনগত অধিকার প্রতিষ্ঠায় সম্পূর্ণ
+                                টোল
                                 ফ্রি হেল্পলাইন। সরকারি অর্থায়নে পরিচালিত। লংকোড নম্বর: +৮৮০৯৬১২৩১৬৪৩০। জাতীয় আইনগত
                                 সহায়তা প্রদান সংস্থার কেন্দ্রীয় কার্যালয়ে কল সেন্টার স্থাপিত।
                             </p>
@@ -2568,8 +2648,10 @@
                         <div class="hotline-details"
                             style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
                             <p style="font-size: 0.85rem; line-height: 1.6; color: #374151;">
-                                প্রবাসী কর্মচারী ও তাদের পরিবারের সমস্যা সমাধানে টোল ফ্রি হটলাইন। বৈদেশিক কর্মসংস্থান ও
-                                ঋণ সহায়তা সংক্রান্ত তথ্য, সমস্যা সমাধান এবং প্রয়োজনীয় সহায়তা প্রদান। ২৪ ঘন্টা সেবা।
+                                প্রবাসী কর্মচারী ও তাদের পরিবারের সমস্যা সমাধানে টোল ফ্রি হটলাইন। বৈদেশিক
+                                কর্মসংস্থান ও
+                                ঋণ সহায়তা সংক্রান্ত তথ্য, সমস্যা সমাধান এবং প্রয়োজনীয় সহায়তা প্রদান। ২৪ ঘন্টা
+                                সেবা।
                                 বিদেশ থেকে: +8809610102030
                             </p>
                         </div>
@@ -3605,6 +3687,19 @@
                 madrashaLoaded = true;
                 // Scroll to the data
                 document.getElementById('madrashaDataContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Load Markets Data
+        let marketsLoaded = false;
+
+        function loadMarkets() {
+            if (!marketsLoaded) {
+                document.getElementById('marketsLoadButton').style.display = 'none';
+                document.getElementById('marketsDataContainer').style.display = 'block';
+                marketsLoaded = true;
+                // Scroll to the data
+                document.getElementById('marketsDataContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
     </script>
