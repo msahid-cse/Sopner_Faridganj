@@ -1850,6 +1850,34 @@
                 </div>
             </div>
 
+            <!-- Post Codes Section -->
+            <div class="section" id="post-codes">
+                <h2 class="section-title"><i class="fas fa-envelope"></i> পোস্ট কোডসমূহ</h2>
+                <p>ফরিদগঞ্জ উপজেলার বিভিন্ন এলাকার পোস্ট অফিস ও তাদের কোড নিম্নরূপ:</p>
+
+                <div class="table-responsive">
+                    <table id="postalCodesTable"
+                        style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
+                        <thead>
+                            <tr style="background: linear-gradient(135deg, var(--primary-color), #059669);">
+                                <th
+                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                    পোস্ট কোড</th>
+                                <th
+                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                    পোস্ট অফিস</th>
+                                <th
+                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                    এলাকাসমূহ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="postalCodesTableBody">
+                            <!-- Data will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <!-- Economy and Agriculture (Authentic) -->
             <div class="section" id="economy">
                 <h2 class="section-title"><i class="fas fa-seedling"></i> অর্থনীতি ও কৃষি</h2>
@@ -2520,6 +2548,7 @@
     <script src="primary_schools_data.js"></script>
     <script src="schools_data.js"></script>
     <script src="madrasha_data.js"></script>
+    <script src="faridganj_Upazila_Data.js"></script>
     <script src="faridganj_thana.js"></script>
     <script>
 
@@ -2785,6 +2814,195 @@
         }
 
 
+        // Render Upazila Overview Data
+        if (typeof faridganjData !== 'undefined') {
+            const overviewGrid = document.querySelector('#overview .info-grid');
+            if (overviewGrid) {
+                overviewGrid.innerHTML = ''; // Clear existing static content
+
+                // Helper to create card
+                const createCard = (title, icon, dataHtml) => {
+                    const card = document.createElement('div');
+                    card.className = 'info-card';
+                    card.innerHTML = `
+                        <div class="icon"><i class="fas ${icon}"></i></div>
+                        <h3>${title}</h3>
+                        ${dataHtml}
+                    `;
+                    return card;
+                };
+
+                // 1. Basic Info & Location
+                const basicInfo = faridganjData.basicInfo;
+                if (basicInfo) {
+                    overviewGrid.appendChild(createCard('অবস্থান ও আয়তন', 'fa-map-marked-alt', `
+                        <p>${basicInfo.district} জেলার অন্তর্গত ${basicInfo.upazilaName} উপজেলা।</p>
+                        <ul style="list-style: none; padding: 0; margin-top: 10px; font-size: 0.9rem; opacity: 0.9;">
+                            <li><strong>আয়তন:</strong> ${basicInfo.areaSqKm} (${basicInfo.areaAcres})</li>
+                            <li><strong>স্থলভাগ:</strong> ${basicInfo.landArea}</li>
+                            <li><strong>নদী এলাকা:</strong> ${basicInfo.riverArea}</li>
+                        </ul>
+                    `));
+
+                    overviewGrid.appendChild(createCard('প্রশাসনিক ইউনিট', 'fa-network-wired', `
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; font-size: 0.9rem;">
+                            <div>পৌরসভা: ${basicInfo.municipalityCount}</div>
+                            <div>ইউনিয়ন: ${basicInfo.unionCount}</div>
+                            <div>মৌজা: ${basicInfo.mouzaCount}</div>
+                            <div>গ্রাম: ${basicInfo.villageCount}</div>
+                        </div>
+                    `));
+                }
+
+                // 2. Demographics
+                const demo = faridganjData.demographics;
+                if (demo) {
+                    overviewGrid.appendChild(createCard('জনসংখ্যা ও ভোটার', 'fa-users', `
+                        <p><strong>মোট জনসংখ্যা:</strong> ${demo.totalPopulation}</p>
+                        <div style="font-size: 0.85rem; margin-top: 5px; opacity: 0.9;">
+                            <span>পুরুষ: ${demo.male}</span> | <span>নারী: ${demo.female}</span>
+                        </div>
+                        <hr style="margin: 8px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.1);">
+                        <p><strong>মোট ভোটার:</strong> ${demo.totalVoters}</p>
+                        <div style="font-size: 0.85rem; opacity: 0.9;">
+                            <span>পুরুষ: ${demo.maleVoters}</span> | <span>নারী: ${demo.femaleVoters}</span>
+                        </div>
+                        <p style="margin-top: 8px; font-size: 0.9rem;"><strong>স্বাক্ষরতার হার:</strong> ${demo.literacyRate?.average || ''} (পুরুষ ${demo.literacyRate?.male}, নারী ${demo.literacyRate?.female})</p>
+                    `));
+                }
+
+                // 3. Education
+                const edu = faridganjData.education;
+                if (edu) {
+                    overviewGrid.appendChild(createCard('শিক্ষা প্রতিষ্ঠান', 'fa-graduation-cap', `
+                        <ul style="list-style: circle; padding-left: 1.2rem; margin-top: 5px; font-size: 0.9rem;">
+                            <li>কলেজ: ${edu.college?.total || 'N/A'} (ডিগ্রি ${edu.college?.degree})</li>
+                            <li>মাধ্যমিক বিদ্যালয়: ${edu.secondary?.highSchools || 'N/A'}</li>
+                            <li>প্রাথমিক বিদ্যালয় (সরকারি): ${edu.primary?.govt || 'N/A'}</li>
+                            <li>মাদ্রাসা: কামিল ${edu.madrasa?.kamil}, ফাজিল ${edu.madrasa?.fazil}, আলিম ${edu.madrasa?.alim}, দাখিল ${edu.madrasa?.dakhil}</li>
+                            <li>টেকনিক্যাল ইনস্টিটিউট: ${edu.technicalInstitutes || 'N/A'}</li>
+                        </ul>
+                    `));
+                }
+
+                // 4. Health
+                const health = faridganjData.health?.facilities;
+                if (health) {
+                    overviewGrid.appendChild(createCard('স্বাস্থ্য সেবা', 'fa-heartbeat', `
+                        <div style="font-size: 0.9rem;">
+                            <div>উপজেলা স্বাস্থ্য কমপ্লেক্স: ${health.upazilaHealthComplex}</div>
+                            <div>কমিউনিটি ক্লিনিক: ${health.communityClinics}</div>
+                            <div>পরিবার কল্যাণ কেন্দ্র: ${health.familyWelfareCenters}</div>
+                            <div>ডায়াগনস্টিক সেন্টার: ${health.diagnosticCenters}</div>
+                        </div>
+                    `));
+                }
+
+                // 5. Agriculture
+                const agri = faridganjData.agriculture;
+                if (agri) {
+                    overviewGrid.appendChild(createCard('কৃষি ও জমি', 'fa-seedling', `
+                        <div style="font-size: 0.9rem;">
+                            <div>মোট জমি: ${agri.totalLand}</div>
+                            <div>আবাদী জমি: ${agri.cultivableLand}</div>
+                            <div>সেচকৃত জমি: ${agri.irrigatedLand}</div>
+                            <div style="margin-top: 5px;"><strong>কৃষক পরিবার:</strong> ${agri.farmerFamilies?.totalFarmHouseholds || ''}</div>
+                        </div>
+                    `));
+                }
+
+                // 6. Infrastructure
+                const infra = faridganjData.infrastructure;
+                if (infra) {
+                    overviewGrid.appendChild(createCard('যোগাযোগ ব্যবস্থা', 'fa-road', `
+                        <div style="font-size: 0.9rem;">
+                            <div>পাকা রাস্তা: ${infra.roads?.paved}</div>
+                            <div>কাঁচা রাস্তা: ${infra.roads?.mud}</div>
+                            <div>ব্রীজ/কালভার্ট: ${infra.structures?.bridges}/${infra.structures?.culverts}</div>
+                            <div>পোস্ট অফিস: ${infra.communication?.postOffices}</div>
+                        </div>
+                    `));
+                }
+
+                // 7. Religious
+                const misc = faridganjData.miscellaneous;
+                if (misc) {
+                    overviewGrid.appendChild(createCard('ধর্মীয় প্রতিষ্ঠান', 'fa-mosque', `
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; font-size: 0.9rem;">
+                            <div>মসজিদ: ${misc.mosques}</div>
+                            <div>মন্দির: ${misc.temples}</div>
+                            <div>ঈদগাহ: ${misc.eidgahs}</div>
+                            <div>মাদ্রাসা: হেফজ ${faridganjData.education?.madrasa?.hafiziya || ''}, নূরানী ${faridganjData.education?.madrasa?.nurani || ''}</div>
+                        </div>
+                    `));
+                }
+
+                // 8. Municipality Special
+                const muni = faridganjData.municipality;
+                if (muni) {
+                    overviewGrid.appendChild(createCard('ফরিদগঞ্জ পৌরসভা', 'fa-building', `
+                        <p style="font-size: 0.9rem;"><strong>প্রতিষ্ঠিত:</strong> ${muni.established} (শ্রেণী: ${muni.class})</p>
+                        <p style="font-size: 0.9rem;"><strong>আয়তন:</strong> ${muni.area}</p>
+                        <p style="font-size: 0.9rem;"><strong>জনসংখ্যা:</strong> ${muni.population?.total}</p>
+                        <div style="margin-top: 5px; font-size: 0.85rem;">ওয়ার্ড: ${muni.wards}, মহল্লা: ${muni.mahallas}</div>
+                    `));
+                }
+
+                // 9. Heritage (List)
+                if (faridganjData.heritage && faridganjData.heritage.length > 0) {
+                    overviewGrid.appendChild(createCard('ঐতিহ্য ও দর্শনীয় স্থান', 'fa-landmark', `
+                        <ul style="list-style: none; padding: 0; font-size: 0.9rem;">
+                            ${faridganjData.heritage.map(item => `<li><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 5px; font-size: 0.8rem;"></i>${item}</li>`).join('')}
+                        </ul>
+                    `));
+                }
+
+                // 10. UNO Administration (Special Card with Border)
+                const adminCard = document.createElement('div');
+                adminCard.className = 'info-card';
+                adminCard.id = 'admin';
+                adminCard.style.borderLeft = '4px solid var(--secondary-color)';
+                adminCard.innerHTML = `
+                    <div class="icon"><i class="fas fa-user-tie"></i></div>
+                    <h3>উপজেলা প্রশাসন</h3>
+                    <p><strong>ইউএনও:</strong> মৌলি মন্ডল</p>
+                    <p style="font-size: 0.8rem; margin-top: 5px;">ইমেইল: unofaridgonjchandpur@gmail.com</p>
+                    <a href="https://faridgonj.chandpur.gov.bd/" target="_blank"
+                        style="font-size: 0.8rem; color: var(--primary-color); text-decoration: none; margin-top: 5px; display: inline-block;">অফিসিয়াল
+                        ওয়েবসাইট <i class="fas fa-external-link-alt"></i></a>
+                `;
+                overviewGrid.appendChild(adminCard);
+            }
+        }
+
+        // Render Postal Codes Table
+        if (typeof faridganjData !== 'undefined' && faridganjData.postalCodes) {
+            const postalCodesTableBody = document.getElementById('postalCodesTableBody');
+            if (postalCodesTableBody) {
+                faridganjData.postalCodes.forEach((postal, index) => {
+                    const row = document.createElement('tr');
+                    row.style.background = index % 2 === 0 ? 'rgba(16, 185, 129, 0.03)' : 'white';
+                    row.style.transition = 'all 0.3s ease';
+
+                    // Format areas list
+                    const areasText = postal.areas && postal.areas.length > 0
+                        ? postal.areas.join(', ')
+                        : 'সকল এলাকা';
+
+                    row.innerHTML = `
+                        <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 600; color: var(--primary-color);">${postal.code}</td>
+                        <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">${postal.office}</td>
+                        <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-size: 0.9rem;">${areasText}</td>
+                    `;
+
+                    // Add hover effect
+                    row.onmouseover = function () { this.style.background = 'rgba(16, 185, 129, 0.08)'; };
+                    row.onmouseout = function () { this.style.background = index % 2 === 0 ? 'rgba(16, 185, 129, 0.03)' : 'white'; };
+
+                    postalCodesTableBody.appendChild(row);
+                });
+            }
+        }
     </script>
 
 </body>
