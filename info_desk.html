@@ -494,11 +494,11 @@
         }
 
         tr:hover {
-            background: #f9fafb;
+            background: rgba(16, 185, 129, 0.04);
         }
 
         .dark-mode tr:hover {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(30, 58, 70, 0.5);
         }
 
         body {
@@ -1037,166 +1037,221 @@
             <div class="section" id="education">
                 <h2 class="section-title"><i class="fas fa-graduation-cap"></i> মাধ্যমিক বিদ্যালয়সমূহ</h2>
 
-                <!-- Search Bar -->
-                <div style="margin-bottom: 1.5rem;">
-                    <div style="position: relative;">
-                        <input type="text" id="schoolSearch" placeholder="প্রতিষ্ঠান বা প্রধানের নাম খুঁজুন..."
-                            style="width: 100%; padding: 0.9rem 1rem 0.9rem 3rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: white; color: var(--text-color);"
-                            onfocus="this.style.borderColor='var(--primary-color)'; this.style.boxShadow='0 0 0 3px rgba(16, 185, 129, 0.1)'"
-                            onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none'">
-                        <i class="fas fa-search"
-                            style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #9ca3af; font-size: 1.1rem;"></i>
-                    </div>
-                    <div id="schoolCounter"
-                        style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b7280; font-weight: 500;">
-                        মোট <span id="schoolVisibleCount">50</span>টি প্রতিষ্ঠান দেখানো হচ্ছে
-                    </div>
+                <!-- Load Data Button -->
+                <div id="secondaryLoadButton" style="text-align: center; padding: 2rem;">
+                    <button onclick="loadSecondarySchools()"
+                        style="padding: 1rem 2rem; background: linear-gradient(135deg, var(--primary-color), #059669); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 600; cursor: pointer; box-shadow: 0 4px 6px rgba(16, 185, 129, 0.3); transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem;"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 12px rgba(16, 185, 129, 0.4)'"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px rgba(16, 185, 129, 0.3)'">
+                        <i class="fas fa-download"></i>
+                        তথ্য লোড করুন (৫০টি প্রতিষ্ঠান)
+                    </button>
+                    <p style="margin-top: 1rem; color: #6b7280; font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i> মাধ্যমিক বিদ্যালয়ের তথ্য দেখতে উপরের বাটনে ক্লিক করুন
+                    </p>
                 </div>
 
-                <div class="table-responsive">
-                    <table id="schoolTable"
-                        style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
-                        <thead>
-                            <tr style="background: linear-gradient(135deg, var(--primary-color), #059669);">
-                                <th
-                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
-                                    ক্রমিক</th>
-                                <th
-                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
-                                    শিক্ষা প্রতিষ্ঠানের নাম</th>
-                                <th
-                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
-                                    প্রতিষ্ঠান প্রধানের নাম</th>
-                                <th
-                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
-                                    মোবাইল নং</th>
-                            </tr>
-                        </thead>
-                        <tbody id="schoolTableBody"></tbody>
-                    </table>
+                <!-- Data Container (Initially Hidden) -->
+                <div id="secondaryDataContainer" style="display: none;">
+                    <!-- Search Bar -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="position: relative;">
+                            <input type="text" id="schoolSearch" placeholder="প্রতিষ্ঠান বা প্রধানের নাম খুঁজুন..."
+                                style="width: 100%; padding: 0.9rem 1rem 0.9rem 3rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: white; color: var(--text-color);"
+                                onfocus="this.style.borderColor='var(--primary-color)'; this.style.boxShadow='0 0 0 3px rgba(16, 185, 129, 0.1)'"
+                                onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none'">
+                            <i class="fas fa-search"
+                                style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #9ca3af; font-size: 1.1rem;"></i>
+                        </div>
+                        <div id="schoolCounter"
+                            style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b7280; font-weight: 500;">
+                            মোট <span id="schoolVisibleCount">50</span>টি প্রতিষ্ঠান দেখানো হচ্ছে
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="schoolTable"
+                            style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
+                            <thead>
+                                <tr style="background: linear-gradient(135deg, var(--primary-color), #059669);">
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                        ক্রমিক</th>
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                        শিক্ষা প্রতিষ্ঠানের নাম</th>
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                        প্রতিষ্ঠান প্রধানের নাম</th>
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                        মোবাইল নং</th>
+                                </tr>
+                            </thead>
+                            <tbody id="schoolTableBody"></tbody>
+                        </table>
+                    </div>
                 </div>
+                <!-- End Secondary Data Container -->
             </div>
 
             <!-- Primary Schools Section -->
             <div class="section" id="primary-education">
                 <h2 class="section-title"><i class="fas fa-school"></i> প্রাথমিক বিদ্যালয়সমূহ</h2>
 
-                <!-- Search and Filters -->
-                <div style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
-                    <!-- Search Box -->
-                    <div style="position: relative;">
-                        <input type="text" id="primarySearch" placeholder="বিদ্যালয় বা প্রধান শিক্ষকের নাম খুঁজুন..."
-                            style="width: 100%; padding: 0.9rem 1rem 0.9rem 3rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: white; color: var(--text-color);"
-                            onfocus="this.style.borderColor='var(--primary-color)'; this.style.boxShadow='0 0 0 3px rgba(16, 185, 129, 0.1)'"
-                            onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none'">
-                        <i class="fas fa-search"
-                            style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #9ca3af; font-size: 1.1rem;"></i>
-                    </div>
-
-                    <!-- Filter Dropdowns -->
-                    <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
-                        <div style="flex: 1; min-width: 200px;">
-                            <label
-                                style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-color); font-size: 0.9rem;">
-                                <i class="fas fa-layer-group"></i> ক্লাষ্টার অনুযায়ী
-                            </label>
-                            <select id="clusterFilter"
-                                style="width: 100%; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 0.95rem; background: white; color: var(--text-color); cursor: pointer; transition: all 0.3s ease;">
-                                <option value="">সকল ক্লাষ্টার</option>
-                            </select>
-                        </div>
-                        <div style="flex: 1; min-width: 200px;">
-                            <label
-                                style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-color); font-size: 0.9rem;">
-                                <i class="fas fa-map-marker-alt"></i> ঠিকানা অনুযায়ী
-                            </label>
-                            <select id="addressFilter"
-                                style="width: 100%; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 0.95rem; background: white; color: var(--text-color); cursor: pointer; transition: all 0.3s ease;">
-                                <option value="">সকল ঠিকানা</option>
-                            </select>
-                        </div>
-                        <button id="resetPrimaryFilter"
-                            style="padding: 0.75rem 1.5rem; border: 2px solid #ef4444; background: white; color: #ef4444; border-radius: 8px; cursor: pointer; font-size: 0.95rem; font-weight: 600; transition: all 0.3s ease; margin-top: auto;">
-                            <i class="fas fa-redo"></i> রিসেট
-                        </button>
-                    </div>
-
-                    <!-- Results Counter -->
-                    <div id="primaryCounter" style="font-size: 0.9rem; color: #6b7280; font-weight: 500;">
-                        মোট <span id="primaryVisibleCount">190</span>টি বিদ্যালয় দেখানো হচ্ছে
-                    </div>
+                <!-- Load Data Button -->
+                <div id="primaryLoadButton" style="text-align: center; padding: 2rem;">
+                    <button onclick="loadPrimarySchools()"
+                        style="padding: 1rem 2rem; background: linear-gradient(135deg, var(--primary-color), #059669); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 600; cursor: pointer; box-shadow: 0 4px 6px rgba(16, 185, 129, 0.3); transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem;"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 12px rgba(16, 185, 129, 0.4)'"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px rgba(16, 185, 129, 0.3)'">
+                        <i class="fas fa-download"></i>
+                        তথ্য লোড করুন (১৮৯টি প্রতিষ্ঠান)
+                    </button>
+                    <p style="margin-top: 1rem; color: #6b7280; font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i> প্রাথমিক বিদ্যালয়ের তথ্য দেখতে উপরের বাটনে ক্লিক করুন
+                    </p>
                 </div>
 
-                <div class="table-responsive">
-                    <table id="primaryTable"
-                        style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
-                        <thead>
-                            <tr style="background: linear-gradient(135deg, var(--primary-color), #059669);">
-                                <th
-                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
-                                    ক্রমিক</th>
-                                <th
-                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
-                                    বিদ্যালয়ের নাম</th>
-                                <th
-                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
-                                    ঠিকানা ও ক্লাস্টার</th>
-                                <th
-                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
-                                    প্রধান শিক্ষক</th>
-                                <th
-                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
-                                    মোবাইল নং</th>
-                            </tr>
-                        </thead>
-                        <tbody id="primaryTableBody"></tbody>
-                    </table>
+                <!-- Data Container (Initially Hidden) -->
+                <div id="primaryDataContainer" style="display: none;">
+                    <!-- Search and Filters -->
+                    <div style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                        <!-- Search Box -->
+                        <div style="position: relative;">
+                            <input type="text" id="primarySearch"
+                                placeholder="বিদ্যালয় বা প্রধান শিক্ষকের নাম খুঁজুন..."
+                                style="width: 100%; padding: 0.9rem 1rem 0.9rem 3rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: white; color: var(--text-color);"
+                                onfocus="this.style.borderColor='var(--primary-color)'; this.style.boxShadow='0 0 0 3px rgba(16, 185, 129, 0.1)'"
+                                onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none'">
+                            <i class="fas fa-search"
+                                style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #9ca3af; font-size: 1.1rem;"></i>
+                        </div>
+
+                        <!-- Filter Dropdowns -->
+                        <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
+                            <div style="flex: 1; min-width: 200px;">
+                                <label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-color); font-size: 0.9rem;">
+                                    <i class="fas fa-layer-group"></i> ক্লাষ্টার অনুযায়ী
+                                </label>
+                                <select id="clusterFilter"
+                                    style="width: 100%; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 0.95rem; background: white; color: var(--text-color); cursor: pointer; transition: all 0.3s ease;">
+                                    <option value="">সকল ক্লাষ্টার</option>
+                                </select>
+                            </div>
+                            <div style="flex: 1; min-width: 200px;">
+                                <label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-color); font-size: 0.9rem;">
+                                    <i class="fas fa-map-marker-alt"></i> ঠিকানা অনুযায়ী
+                                </label>
+                                <select id="addressFilter"
+                                    style="width: 100%; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 0.95rem; background: white; color: var(--text-color); cursor: pointer; transition: all 0.3s ease;">
+                                    <option value="">সকল ঠিকানা</option>
+                                </select>
+                            </div>
+                            <button id="resetPrimaryFilter"
+                                style="padding: 0.75rem 1.5rem; border: 2px solid #ef4444; background: white; color: #ef4444; border-radius: 8px; cursor: pointer; font-size: 0.95rem; font-weight: 600; transition: all 0.3s ease; margin-top: auto;">
+                                <i class="fas fa-redo"></i> রিসেট
+                            </button>
+                        </div>
+
+                        <!-- Results Counter -->
+                        <div id="primaryCounter" style="font-size: 0.9rem; color: #6b7280; font-weight: 500;">
+                            মোট <span id="primaryVisibleCount">190</span>টি বিদ্যালয় দেখানো হচ্ছে
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="primaryTable"
+                            style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
+                            <thead>
+                                <tr style="background: linear-gradient(135deg, var(--primary-color), #059669);">
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                        ক্রমিক</th>
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                        বিদ্যালয়ের নাম</th>
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                        ঠিকানা ও ক্লাস্টার</th>
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                        প্রধান শিক্ষক</th>
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                        মোবাইল নং</th>
+                                </tr>
+                            </thead>
+                            <tbody id="primaryTableBody"></tbody>
+                        </table>
+                    </div>
                 </div>
+                <!-- End Primary Data Container -->
             </div>
 
             <!-- Madrasha Section -->
             <div class="section" id="madrasha-education">
                 <h2 class="section-title"><i class="fas fa-mosque"></i> মাদ্রাসা সমূহ</h2>
 
-                <!-- Search Box -->
-                <div style="margin-bottom: 1.5rem;">
-                    <div style="position: relative;">
-                        <input type="text" id="madrashaSearch" placeholder="মাদ্রাসার নাম বা EIIN খুঁজুন..."
-                            style="width: 100%; padding: 0.9rem 1rem 0.9rem 3rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: white; color: var(--text-color);"
-                            onfocus="this.style.borderColor='var(--primary-color)'; this.style.boxShadow='0 0 0 3px rgba(16, 185, 129, 0.1)'"
-                            onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none'">
-                        <i class="fas fa-search"
-                            style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #9ca3af; font-size: 1.1rem;"></i>
-                    </div>
-                    <!-- Results Counter -->
-                    <div id="madrashaCounter"
-                        style="margin-top: 0.75rem; font-size: 0.9rem; color: #6b7280; font-weight: 500;">
-                        মোট <span id="madrashaVisibleCount">52</span>টি মাদ্রাসা দেখানো হচ্ছে
-                    </div>
+                <!-- Load Data Button -->
+                <div id="madrashaLoadButton" style="text-align: center; padding: 2rem;">
+                    <button onclick="loadMadrashas()"
+                        style="padding: 1rem 2rem; background: linear-gradient(135deg, var(--primary-color), #059669); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 600; cursor: pointer; box-shadow: 0 4px 6px rgba(16, 185, 129, 0.3); transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem;"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 12px rgba(16, 185, 129, 0.4)'"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px rgba(16, 185, 129, 0.3)'">
+                        <i class="fas fa-download"></i>
+                        তথ্য লোড করুন (৫২টি মাদ্রাসা)
+                    </button>
+                    <p style="margin-top: 1rem; color: #6b7280; font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i> মাদ্রাসার তথ্য দেখতে উপরের বাটনে ক্লিক করুন
+                    </p>
                 </div>
 
-                <div class="table-responsive">
-                    <table id="madrashaTable"
-                        style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
-                        <thead>
-                            <tr style="background: linear-gradient(135deg, var(--primary-color), #059669);">
-                                <th
-                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
-                                    ক্রমিক</th>
-                                <th
-                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
-                                    EIIN</th>
-                                <th
-                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
-                                    মাদ্রাসার নাম</th>
-                                <th
-                                    style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
-                                    মোবাইল নং</th>
-                            </tr>
-                        </thead>
-                        <tbody id="madrashaTableBody"></tbody>
-                    </table>
+                <!-- Data Container (Initially Hidden) -->
+                <div id="madrashaDataContainer" style="display: none;">
+                    <!-- Search Box -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="position: relative;">
+                            <input type="text" id="madrashaSearch" placeholder="মাদ্রাসার নাম বা EIIN খুঁজুন..."
+                                style="width: 100%; padding: 0.9rem 1rem 0.9rem 3rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: white; color: var(--text-color);"
+                                onfocus="this.style.borderColor='var(--primary-color)'; this.style.boxShadow='0 0 0 3px rgba(16, 185, 129, 0.1)'"
+                                onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none'">
+                            <i class="fas fa-search"
+                                style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #9ca3af; font-size: 1.1rem;"></i>
+                        </div>
+                        <!-- Results Counter -->
+                        <div id="madrashaCounter"
+                            style="margin-top: 0.75rem; font-size: 0.9rem; color: #6b7280; font-weight: 500;">
+                            মোট <span id="madrashaVisibleCount">52</span>টি মাদ্রাসা দেখানো হচ্ছে
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="madrashaTable"
+                            style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
+                            <thead>
+                                <tr style="background: linear-gradient(135deg, var(--primary-color), #059669);">
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                        ক্রমিক</th>
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                        EIIN</th>
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                        মাদ্রাসার নাম</th>
+                                    <th
+                                        style="padding: 1rem; text-align: left; color: white; font-weight: 600; border: none;">
+                                        মোবাইল নং</th>
+                                </tr>
+                            </thead>
+                            <tbody id="madrashaTableBody"></tbody>
+                        </table>
+                    </div>
                 </div>
+                <!-- End Madrasha Data Container -->
             </div>
 
             <!-- Faridganj Thana Section -->
@@ -1260,7 +1315,8 @@
                         style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
                         <div
                             style="background: rgba(255,255,255,0.1); padding: 1.2rem; border-radius: 8px; backdrop-filter: blur(10px);">
-                            <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 0.5rem;">জাতীয় জরুরি সেবা</div>
+                            <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 0.5rem;">জাতীয় জরুরি সেবা
+                            </div>
                             <a href="tel:999"
                                 style="font-size: 2rem; font-weight: 700; color: white; text-decoration: none; display: block;">৯৯৯</a>
                         </div>
@@ -1385,102 +1441,117 @@
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     চান্দ্রা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও মঙ্গলবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                    মঙ্গলবার
                                 </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     বাগড়া বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার</td>
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
+                                </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     শোশাইরচর বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বৃহস্পতিবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
+                                    বৃহস্পতিবার
                                 </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৪</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     বাংলাদেশ বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">সোমবার ও শুক্রবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">সোমবার ও
+                                    শুক্রবার
                                 </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৫</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     একতা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার</td>
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
+                                </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৬</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     বাঁশারা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও মঙ্গলবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                    মঙ্গলবার
                                 </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৭</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     মনতলা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও সোমবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                    সোমবার
                                 </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৮</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     মুন্সিরহাট বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও সোমবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                    সোমবার
                                 </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৯</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     সাহার বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার</td>
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
+                                </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১০</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     কামতা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার, সোমবার ও
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার, সোমবার
+                                    ও
                                     বুধবার</td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১১</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     শোল্লা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও মঙ্গলবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                    মঙ্গলবার
                                 </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১২</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     গোবরচিত্রা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও মঙ্গলবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                    মঙ্গলবার
                                 </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৩</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     গল্লাক বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও মঙ্গলবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                    মঙ্গলবার
                                 </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৪</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     আষ্টা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বৃহস্পতিবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
+                                    বৃহস্পতিবার
                                 </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৫</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     ফকির বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বৃহস্পতিবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
+                                    বৃহস্পতিবার
                                 </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
@@ -1494,137 +1565,157 @@
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৭</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     খাজুরিয়া বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও সোমবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                    সোমবার
                                 </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৮</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     লতিফগঞ্জ বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও সোমবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                    সোমবার
                                 </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">১৯</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     পাইকপাড়া বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও সোমবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                    সোমবার
                                 </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২০</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     চৌরাঙ্গী বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও বুধবার</td>
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও বুধবার
+                                </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২১</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     শাহী বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার, সোমবার ও
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার, সোমবার
+                                    ও
                                     বুধবার</td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২২</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     গাজীপুর বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও সোমবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                    সোমবার
                                 </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৩</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     কড়ৈতলী বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বৃহস্পতিবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
+                                    বৃহস্পতিবার
                                 </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৪</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     আনন্দ বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও মঙ্গলবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                    মঙ্গলবার
                                 </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৫</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     নয়ারহাট বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও সোমবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                    সোমবার
                                 </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৬</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     ধানুয়া বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও মঙ্গলবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                    মঙ্গলবার
                                 </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৭</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     রামপুর বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার</td>
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
+                                </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৮</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     গোয়ালভাওর বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও সোমবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                    সোমবার
                                 </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">২৯</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     বেপারীর হাট</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও সোমবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                    সোমবার
                                 </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩০</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     খেয়াঘাট বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বৃহস্পতিবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
+                                    বৃহস্পতিবার
                                 </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩১</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     চৌরাস্তা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও সোমবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                    সোমবার
                                 </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩২</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     বেড়ীর বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বৃহস্পতিবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
+                                    বৃহস্পতিবার
                                 </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৩</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     ফিরোজপুর বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার</td>
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
+                                </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৪</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     চৌমুহনী বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও সোমবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শুক্রবার ও
+                                    সোমবার
                                 </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৫</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     বিরামপুর বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও মঙ্গলবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                    মঙ্গলবার
                                 </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৬</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     কালির বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও মঙ্গলবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                    মঙ্গলবার
                                 </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
@@ -1638,45 +1729,52 @@
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৮</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     রূপসা বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও বুধবার</td>
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও বুধবার
+                                </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৩৯</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     রুস্তমপুর বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">সোমবার ও বৃহস্পতিবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">সোমবার ও
+                                    বৃহস্পতিবার
                                 </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৪০</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     গৃদকালিন্দিয়া বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বৃহস্পতিবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও
+                                    বৃহস্পতিবার
                                 </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৪১</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     চৌমুহনী বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও মঙ্গলবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                    মঙ্গলবার
                                 </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৪২</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     সাহেবগঞ্জ বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার</td>
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">রবিবার ও বুধবার
+                                </td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.03); transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">৪৩</td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
                                     বর্ডার বাজার</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও মঙ্গলবার
+                                <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">শনিবার ও
+                                    মঙ্গলবার
                                 </td>
                             </tr>
                             <tr style="background: white; transition: all 0.3s ease;">
                                 <td style="padding: 0.9rem 1rem; border-bottom: none;">৪৪</td>
-                                <td style="padding: 0.9rem 1rem; border-bottom: none; font-weight: 500;">ফরিদগঞ্জ বাজার
+                                <td style="padding: 0.9rem 1rem; border-bottom: none; font-weight: 500;">ফরিদগঞ্জ
+                                    বাজার
                                 </td>
                                 <td style="padding: 0.9rem 1rem; border-bottom: none;">রবিবার ও বৃহস্পতিবার</td>
                             </tr>
@@ -1785,7 +1883,7 @@
             </div>
 
             <!-- Post Codes (Authentic) -->
-            <div class="section" id="post-codes">
+            <!-- <div class="section" id="post-codes">
                 <h2 class="section-title"><i class="fas fa-envelope"></i> পোস্ট কোডসমূহ</h2>
                 <div class="table-responsive">
                     <table>
@@ -1827,19 +1925,21 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Banks and Financial Institutions (Authentic) -->
             <div class="section" id="banks">
                 <h2 class="section-title"><i class="fas fa-university"></i> ব্যাংক ও আর্থিক প্রতিষ্ঠান</h2>
-                <p style="margin-bottom: 1rem; color: #666;">ফরিদগঞ্জ উপজেলায় সরকারি ও বেসরকারি বেশ কিছু ব্যাংকের শাখা
+                <p style="margin-bottom: 1rem; color: #666;">ফরিদগঞ্জ উপজেলায় সরকারি ও বেসরকারি বেশ কিছু ব্যাংকের
+                    শাখা
                     রয়েছে।</p>
                 <div class="list-section">
                     <ul>
                         <li><i class="fas fa-money-check-alt"></i> সোনালী ব্যাংক লিমিটেড (ফরিদগঞ্জ শাখা)</li>
                         <li><i class="fas fa-money-check-alt"></i> জনতা ব্যাংক লিমিটেড</li>
                         <li><i class="fas fa-money-check-alt"></i> অগ্রণী ব্যাংক লিমিটেড (বালিথুবা শাখা)</li>
-                        <li><i class="fas fa-money-check-alt"></i> ইসলামী ব্যাংক বাংলাদেশ লিঃ (ফরিদগঞ্জ ও রূপসা শাখা)
+                        <li><i class="fas fa-money-check-alt"></i> ইসলামী ব্যাংক বাংলাদেশ লিঃ (ফরিদগঞ্জ ও রূপসা
+                            শাখা)
                         </li>
                         <li><i class="fas fa-money-check-alt"></i> আল-আরাফাহ ইসলামী ব্যাংক পিএলসি</li>
                         <li><i class="fas fa-money-check-alt"></i> ডাচ-বাংলা ব্যাংক (সাব-ব্রাঞ্চ)</li>
@@ -1881,7 +1981,8 @@
             <!-- Economy and Agriculture (Authentic) -->
             <div class="section" id="economy">
                 <h2 class="section-title"><i class="fas fa-seedling"></i> অর্থনীতি ও কৃষি</h2>
-                <p>ফরিদগঞ্জ উপজেলার অর্থনীতি মূলত কৃষি নির্ভর। জনগোষ্ঠীর একটি বিশাল অংশ কৃষি কাজের সাথে সম্পৃক্ত।</p>
+                <p>ফরিদগঞ্জ উপজেলার অর্থনীতি মূলত কৃষি নির্ভর। জনগোষ্ঠীর একটি বিশাল অংশ কৃষি কাজের সাথে সম্পৃক্ত।
+                </p>
                 <div class="info-grid">
                     <div class="info-card">
                         <div class="icon"><i class="fas fa-wheat"></i></div>
@@ -1891,14 +1992,16 @@
                     <div class="info-card">
                         <div class="icon"><i class="fas fa-industry"></i></div>
                         <h3>শিল্প ও বাণিজ্য</h3>
-                        <p>এখানে চাল কল, বরফ কল, আইসক্রিম ফ্যাক্টরি এবং ওয়েল্ডিং কারখানা রয়েছে। এছাড়া কুটির শিল্পের
+                        <p>এখানে চাল কল, বরফ কল, আইসক্রিম ফ্যাক্টরি এবং ওয়েল্ডিং কারখানা রয়েছে। এছাড়া কুটির
+                            শিল্পের
                             মধ্যে
                             মৃৎশিল্প, স্বর্ণশিল্প এবং বাঁশ ও বেতের কাজ উল্লেখযোগ্য।</p>
                     </div>
                     <div class="info-card">
                         <div class="icon"><i class="fas fa-fish"></i></div>
                         <h3>মৎস্য ও পশুপালন</h3>
-                        <p>উপজেলায় অসংখ্য মৎস্য খামার এবং পোল্ট্রি ফার্ম গড়ে উঠেছে যা স্থানীয় আমিষের চাহিদা পূরণ করে
+                        <p>উপজেলায় অসংখ্য মৎস্য খামার এবং পোল্ট্রি ফার্ম গড়ে উঠেছে যা স্থানীয় আমিষের চাহিদা পূরণ
+                            করে
                             অর্থনীতিতে অবদান রাখছে।</p>
                     </div>
                 </div>
@@ -1912,7 +2015,8 @@
                 </p>
                 <div class="list-section">
                     <ul>
-                        <li><i class="fas fa-users"></i> <strong>ফরিদগঞ্জ ইয়ুথ সোসাইটি:</strong> যুব সমাজের উন্নয়নে
+                        <li><i class="fas fa-users"></i> <strong>ফরিদগঞ্জ ইয়ুথ সোসাইটি:</strong> যুব সমাজের
+                            উন্নয়নে
                             কর্মরত।</li>
                         <li><i class="fas fa-hand-holding-heart"></i> <strong>হাজী আব্দুল আহাদ জনকল্যাণ
                                 ট্রাস্ট:</strong>
@@ -1920,7 +2024,8 @@
                         <li><i class="fas fa-building"></i> <strong>উপজেলা সমাজসেবা কার্যালয়:</strong> সরকারিভাবে
                             দুঃস্থ,
                             বিধবা ও প্রতিবন্ধীদের সহায়তা প্রদান করে।</li>
-                        <li><i class="fas fa-users-cog"></i> ফরিদগঞ্জে প্রায় ৪৮টি নিবন্ধিত ক্লাব এবং বিভিন্ন নারী সংগঠন
+                        <li><i class="fas fa-users-cog"></i> ফরিদগঞ্জে প্রায় ৪৮টি নিবন্ধিত ক্লাব এবং বিভিন্ন নারী
+                            সংগঠন
                             সক্রিয় রয়েছে।</li>
                     </ul>
                 </div>
@@ -1946,7 +2051,8 @@
                 <h2 class="section-title"><i class="fas fa-guitar"></i> সংস্কৃতি ও ক্রীড়া</h2>
                 <div class="list-section">
                     <ul>
-                        <li><i class="fas fa-music"></i> ফরিদগঞ্জে একাধিক সাংস্কৃতিক সংগঠন, লাইব্রেরি এবং ক্লাব রয়েছে
+                        <li><i class="fas fa-music"></i> ফরিদগঞ্জে একাধিক সাংস্কৃতিক সংগঠন, লাইব্রেরি এবং ক্লাব
+                            রয়েছে
                             যা
                             সুস্থ সংস্কৃতি চর্চায় ভূমিকা রাখছে।</li>
                         <li><i class="fas fa-futbol"></i> খেলাধুলার মধ্যে ফুটবল, ক্রিকেট এবং ব্যাডমিন্টন জনপ্রিয়।
@@ -1979,7 +2085,8 @@
                     <div class="info-card">
                         <div class="icon"><i class="fas fa-taxi"></i></div>
                         <h3>স্থানীয় পরিবহন</h3>
-                        <p>উপজেলার অভ্যন্তরে যাতায়াতের জন্য সিএনজি, অটোরিক্সা এবং রিক্সা প্রধান মাধ্যম। ফরিদগঞ্জ বাস
+                        <p>উপজেলার অভ্যন্তরে যাতায়াতের জন্য সিএনজি, অটোরিক্সা এবং রিক্সা প্রধান মাধ্যম। ফরিদগঞ্জ
+                            বাস
                             স্ট্যান্ড থেকে বিভিন্ন ইউনিয়নে সহজেই যাতায়াত করা যায়।</p>
                     </div>
                 </div>
@@ -2006,7 +2113,8 @@
                     <div class="info-card">
                         <div class="icon"><i class="fas fa-history"></i></div>
                         <h3>নীলকুঠি (সাহেবগঞ্জ)</h3>
-                        <p>ব্রিটিশ শাসনামলে নীল চাষের সাক্ষী হিসেবে সাহেবগঞ্জে নীলকুঠির ধ্বংসাবশেষ আজও ইতিহাসের সাক্ষী
+                        <p>ব্রিটিশ শাসনামলে নীল চাষের সাক্ষী হিসেবে সাহেবগঞ্জে নীলকুঠির ধ্বংসাবশেষ আজও ইতিহাসের
+                            সাক্ষী
                             হয়ে
                             দাঁড়িয়ে আছে।</p>
                     </div>
@@ -2023,14 +2131,16 @@
                 <h2 class="section-title"><i class="fas fa-star"></i> ফরিদগঞ্জের কৃতি সন্তান</h2>
                 <div class="list-section">
                     <ul>
-                        <li><i class="fas fa-user-tie"></i> <strong>হাশেম খান:</strong> একুশে পদক ও স্বাধীনতা পুরস্কার
+                        <li><i class="fas fa-user-tie"></i> <strong>হাশেম খান:</strong> একুশে পদক ও স্বাধীনতা
+                            পুরস্কার
                             প্রাপ্ত বিখ্যাত চিত্রশিল্পী।</li>
                         <li><i class="fas fa-user-shield"></i> <strong>লেফট্যানেন্ট কর্নেল (অব.) আবু ওসমান
                                 চৌধুরী:</strong>
                             ৫নং সেক্টর কমান্ডার, মহান মুক্তিযুদ্ধ ১৯৭১।</li>
                         <li><i class="fas fa-user-graduate"></i> <strong>ড. এম শামসুল হক ভুঁইয়া:</strong> বিশিষ্ট
                             শিক্ষাবিদ, রাজনীতিবিদ এবং সমাজসেবক।</li>
-                        <li><i class="fas fa-baseball-ball"></i> <strong>মাহমুদুল হাসান জয়:</strong> বাংলাদেশ জাতীয়
+                        <li><i class="fas fa-baseball-ball"></i> <strong>মাহমুদুল হাসান জয়:</strong> বাংলাদেশ
+                            জাতীয়
                             ক্রিকেট দলের উদীয়মান তারকা খেলোয়াড়।</li>
                         <li><i class="fas fa-pen-fancy"></i> <strong>শান্তনু কায়সার:</strong> বিশিষ্ট সাহিত্যিক ও
                             গবেষক।
@@ -2060,12 +2170,14 @@
                                 <td><strong>০১৭১৩-৩৭৩৬১৭</strong></td>
                             </tr>
                             <tr>
-                                <td><i class="fas fa-fire-extinguisher" style="color: #ef4444;"></i> ফায়ার সার্ভিস</td>
+                                <td><i class="fas fa-fire-extinguisher" style="color: #ef4444;"></i> ফায়ার সার্ভিস
+                                </td>
                                 <td>স্টেশন অফিসার, ফরিদগঞ্জ</td>
                                 <td><strong>০১৯০১-০২১৭৭২</strong></td>
                             </tr>
                             <tr>
-                                <td><i class="fas fa-ambulance" style="color: #3b82f6;"></i> উপজেলা স্বাস্থ্য কমপ্লেক্স
+                                <td><i class="fas fa-ambulance" style="color: #3b82f6;"></i> উপজেলা স্বাস্থ্য
+                                    কমপ্লেক্স
                                 </td>
                                 <td>জরুরি বিভাগ (হটলাইন)</td>
                                 <td><strong>০১৭৩০-৩২৪৮৩০</strong></td>
@@ -2076,7 +2188,8 @@
                                 <td><strong>০১৭৫৫-৫৮০৯১০</strong> (সম্ভাব্য)</td>
                             </tr>
                             <tr>
-                                <td><i class="fas fa-phone-volume" style="color: var(--text-color);"></i> জাতীয় জরুরি
+                                <td><i class="fas fa-phone-volume" style="color: var(--text-color);"></i> জাতীয়
+                                    জরুরি
                                     সেবা
                                 </td>
                                 <td>পুলিশ, ফায়ার সার্ভিস ও অ্যাম্বুলেন্স</td>
@@ -2099,7 +2212,8 @@
                 <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
                 <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
             </div>
-            <p style="margin-top: 2rem; font-size: 0.8rem; opacity: 0.6;">© ২০২৫ স্বপ্নের ফরিদগঞ্জ। সর্বস্বত্ব সংরক্ষিত।
+            <p style="margin-top: 2rem; font-size: 0.8rem; opacity: 0.6;">© ২০২৫ স্বপ্নের ফরিদগঞ্জ। সর্বস্বত্ব
+                সংরক্ষিত।
             </p>
         </div>
     </footer>
@@ -2975,7 +3089,7 @@
             }
         }
 
-        // Render Postal Codes Table
+        // Render Postal Codes Table (Interactive)
         if (typeof faridganjData !== 'undefined' && faridganjData.postalCodes) {
             const postalCodesTableBody = document.getElementById('postalCodesTableBody');
             if (postalCodesTableBody) {
@@ -2983,24 +3097,112 @@
                     const row = document.createElement('tr');
                     row.style.background = index % 2 === 0 ? 'rgba(16, 185, 129, 0.03)' : 'white';
                     row.style.transition = 'all 0.3s ease';
+                    row.style.cursor = 'pointer';
 
-                    // Format areas list
-                    const areasText = postal.areas && postal.areas.length > 0
-                        ? postal.areas.join(', ')
-                        : 'সকল এলাকা';
+                    // Create unique ID for this postal code
+                    const rowId = `postal-${postal.code}`;
+
+                    // Check if there are areas to show
+                    const hasAreas = postal.areas && postal.areas.length > 0;
+                    const areasCount = hasAreas ? postal.areas.length : 0;
 
                     row.innerHTML = `
-                        <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 600; color: var(--primary-color);">${postal.code}</td>
-                        <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">${postal.office}</td>
-                        <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-size: 0.9rem;">${areasText}</td>
+                        <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 600; color: var(--primary-color); font-size: 1.1rem;">${postal.code}</td>
+                        <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-chevron-right" id="icon-${rowId}" style="font-size: 0.8rem; color: var(--primary-color); transition: transform 0.3s ease;"></i>
+                                <span>${postal.office}</span>
+                                ${hasAreas ? `<span style="font-size: 0.75rem; background: var(--primary-color); color: white; padding: 0.2rem 0.5rem; border-radius: 10px; margin-left: 0.5rem;">${areasCount} এলাকা</span>` : ''}
+                            </div>
+                        </td>
+                        <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-size: 0.9rem;">
+                            <div id="areas-${rowId}" style="display: none; margin-top: 0.5rem;">
+                                ${hasAreas ? `
+                                    <div style="background: rgba(16, 185, 129, 0.05); padding: 0.8rem; border-radius: 8px; border-left: 3px solid var(--primary-color);">
+                                        <ul style="margin: 0; padding-left: 1.5rem; list-style: none;">
+                                            ${postal.areas.map(area => `<li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-map-marker-alt" style="color: var(--primary-color); font-size: 0.8rem;"></i>${area}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                ` : '<span style="color: #6b7280; font-style: italic;">সকল এলাকা</span>'}
+                            </div>
+                            <span id="placeholder-${rowId}" style="color: #6b7280; font-size: 0.85rem;">
+                                ${hasAreas ? 'এলাকা দেখতে ক্লিক করুন' : 'সকল এলাকা'}
+                            </span>
+                        </td>
                     `;
 
+                    // Add click event to toggle areas
+                    row.onclick = function () {
+                        if (!hasAreas) return; // Don't toggle if no areas
+
+                        const areasDiv = document.getElementById(`areas-${rowId}`);
+                        const placeholder = document.getElementById(`placeholder-${rowId}`);
+                        const icon = document.getElementById(`icon-${rowId}`);
+
+                        if (areasDiv.style.display === 'none') {
+                            // Show areas
+                            areasDiv.style.display = 'block';
+                            placeholder.style.display = 'none';
+                            icon.style.transform = 'rotate(90deg)';
+                            this.style.background = 'rgba(16, 185, 129, 0.12)';
+                        } else {
+                            // Hide areas
+                            areasDiv.style.display = 'none';
+                            placeholder.style.display = 'inline';
+                            icon.style.transform = 'rotate(0deg)';
+                            this.style.background = index % 2 === 0 ? 'rgba(16, 185, 129, 0.03)' : 'white';
+                        }
+                    };
+
                     // Add hover effect
-                    row.onmouseover = function () { this.style.background = 'rgba(16, 185, 129, 0.08)'; };
-                    row.onmouseout = function () { this.style.background = index % 2 === 0 ? 'rgba(16, 185, 129, 0.03)' : 'white'; };
+                    row.onmouseover = function () {
+                        if (document.getElementById(`areas-${rowId}`).style.display === 'none') {
+                            this.style.background = 'rgba(16, 185, 129, 0.08)';
+                        }
+                    };
+                    row.onmouseout = function () {
+                        if (document.getElementById(`areas-${rowId}`).style.display === 'none') {
+                            this.style.background = index % 2 === 0 ? 'rgba(16, 185, 129, 0.03)' : 'white';
+                        }
+                    };
 
                     postalCodesTableBody.appendChild(row);
                 });
+            }
+        }
+
+        // Load Functions for Educational Sections
+        let secondaryLoaded = false;
+        let primaryLoaded = false;
+        let madrashaLoaded = false;
+
+        function loadSecondarySchools() {
+            if (!secondaryLoaded) {
+                document.getElementById('secondaryLoadButton').style.display = 'none';
+                document.getElementById('secondaryDataContainer').style.display = 'block';
+                secondaryLoaded = true;
+                // Scroll to the data
+                document.getElementById('secondaryDataContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function loadPrimarySchools() {
+            if (!primaryLoaded) {
+                document.getElementById('primaryLoadButton').style.display = 'none';
+                document.getElementById('primaryDataContainer').style.display = 'block';
+                primaryLoaded = true;
+                // Scroll to the data
+                document.getElementById('primaryDataContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function loadMadrashas() {
+            if (!madrashaLoaded) {
+                document.getElementById('madrashaLoadButton').style.display = 'none';
+                document.getElementById('madrashaDataContainer').style.display = 'block';
+                madrashaLoaded = true;
+                // Scroll to the data
+                document.getElementById('madrashaDataContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
     </script>
