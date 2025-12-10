@@ -2334,6 +2334,11 @@
         `;
         document.head.appendChild(style);
 
+        // Load primary schools data from external file
+    </script>
+    <script src="primary_schools_data.js"></script>
+    <script>
+
         // School Data from CSV
         const schoolData = [
             { no: 1, name: "ফরিদগঞ্জ এ আর পাইলট সরকারী উচ্চ বিদ্যালয়", principal: "মোঃ রফিকুল আমিন কাজল", mobile: "1712672662" },
@@ -2425,23 +2430,31 @@
             });
         }
 
-        // Primary Schools Data
-        const primaryData = [
-            { no: 1, name: "সেকদী সরকারী প্রাথমিক বিদ্যালয়", address: "বালিথুবা ক্লাষ্টার, ১নং বালিথুবা", principal: "লুৎফুন নাহার বেগম", mobile: "1717193148" },
-            { no: 2, name: "পালতালুক সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ১নং বালিথুবা", principal: "তৃপ্তি চক্রবর্তী", mobile: "1717535894" },
-            { no: 3, name: "সকদিরামপুর সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ১নং বালিথুবা", principal: "শরীফ হোসাইন", mobile: "1719099036" },
-            { no: 4, name: "খাড়খাদিয়া সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ১নং বালিথুবা", principal: "মন্টু চন্দ্র দেবনাথ", mobile: "1818929856" },
-            { no: 5, name: "মদনেরগাওঁ সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ১নং বালিথুবা", principal: "মোসাম্মৎ রোকেয়া খানম", mobile: "1813033581" },
-            { no: 6, name: "লোহাগড় সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ১নং বালিথুবা", principal: "মোসাম্মৎ সায়েকা সুলতানা", mobile: "1719210310" },
-            { no: 7, name: "উঃ সকদিরামপুর সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ১নং বালিথুবা", principal: "মোহাম্মদ জাকির হোসেন", mobile: "1818850273" },
-            { no: 8, name: "চান্দ্রা বাজার সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ১নং বালিথুবা", principal: "মোঃ ফখরউদ্দিন তালুকদার", mobile: "1925139654" },
-            { no: 9, name: "দেবীপুর সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ২নং বালিথুবা", principal: "দিল্রুবা খানম", mobile: "1717881332" },
-            { no: 10, name: "মানিকরাজ সপ্রাবি", address: "বালিথুবা ক্লাষ্টার, ২নং বালিথুবা", principal: "মনির হোসেন", mobile: "1716119018" }
-        ];
+        // Primary Schools Data - Load from external file
+        const primaryData = typeof allPrimaryData !== 'undefined' ? allPrimaryData : [];
 
         // Parse CSV data to extract unique clusters and addresses
         const clusters = [...new Set(primaryData.map(s => s.address.split(',')[0].trim()))].sort();
-        const addresses = [...new Set(primaryData.map(s => s.address.split(',')[1]?.trim() || ''))].filter(a => a).sort();
+
+        // Specific address/union list as requested
+        const addresses = [
+            '১নং বালিথুবা',
+            '২নং বালিথুবা',
+            '৩নং সুবিদপুর',
+            '৪নং সুবিদপুর',
+            '৫নং গুপ্টি',
+            '৬নং গুপ্টি',
+            '৭নং পাইকপাড়া ইউনিয়ন',
+            '৮নং পাইকপাড়া ইউনিয়ন',
+            '৯নং গোবিন্দপুর ইউনিয়ন',
+            '১০নং গোবিন্দপুর ইউনিয়ন',
+            '১১নং চরদুঃখিয়া ইউনিয়ন',
+            '১২নং চরদুঃখিয়া ইউনিয়ন',
+            'ফরিদগঞ্জ পৌরসভা',
+            '১৪নং ফরিদগঞ্জ',
+            '১৫নং রূপসা',
+            '১৬ নং রূপসা'
+        ];
 
         // Populate filter dropdowns
         const clusterFilter = document.getElementById('clusterFilter');
@@ -2473,7 +2486,12 @@
                     <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; font-weight: 500;">${school.name}</td>
                     <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">${school.address}</td>
                     <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">${school.principal}</td>
-                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6;">${school.mobile}</td>
+                    <td style="padding: 0.9rem 1rem; border-bottom: 1px solid #f3f4f6; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>${school.mobile}</span>
+                        <a href="tel:${school.mobile}" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: linear-gradient(135deg, #10b981, #059669); color: white; border-radius: 50%; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);" onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 8px rgba(16, 185, 129, 0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 2px 4px rgba(16, 185, 129, 0.2)'">
+                            <i class="fas fa-phone" style="font-size: 0.85rem;"></i>
+                        </a>
+                    </td>
                 `;
                 tbody.appendChild(row);
             });
