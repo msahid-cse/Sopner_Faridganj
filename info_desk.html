@@ -646,6 +646,157 @@
                 font-size: 1rem;
             }
         }
+
+        /* Mobile Menu Button (3 dots) */
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: 1px solid #ddd;
+            color: var(--text-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        /* Mobile Sidebar Overlay */
+        .mobile-sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .mobile-sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Mobile Sidebar */
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 350px;
+            height: 100vh;
+            background-color: var(--header-bg);
+            box-shadow: -2px 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .mobile-sidebar.active {
+            right: 0;
+        }
+
+        .mobile-sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .mobile-sidebar-header h3 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .mobile-sidebar-close {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-sidebar-close:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+
+        .mobile-sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-sidebar-nav li {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .dark-mode .mobile-sidebar-nav li {
+            border-bottom-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .mobile-sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .mobile-sidebar-nav a:hover {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary-color);
+            padding-left: 2rem;
+        }
+
+        .mobile-sidebar-nav a i {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        /* Show mobile menu button and sidebar on mobile */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .mobile-sidebar {
+                display: block;
+            }
+
+            /* Hide desktop sidebar on mobile */
+            .sidebar {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 
@@ -664,7 +815,10 @@
                 <a href="index.html" class="home-btn">
                     <i class="fas fa-home"></i> হোম
                 </a>
-
+                <!-- Mobile Menu Button (3 dots) -->
+                <button class="mobile-menu-btn" id="mobileSidebarToggle" title="মেনু">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
             </div>
         </div>
     </header>
@@ -705,6 +859,41 @@
                 <li><a href="#contacts"><i class="fas fa-phone-alt"></i> জরুরি যোগাযোগ</a></li>
             </ul>
         </aside>
+
+        <!-- Mobile Sidebar -->
+        <div id="mobileSidebar" class="mobile-sidebar">
+            <div class="mobile-sidebar-header">
+                <h3><i class="fas fa-list-ul"></i> দ্রুত খুঁজুন</h3>
+                <button id="mobileSidebarClose" class="mobile-sidebar-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="mobile-sidebar-nav">
+                <li><a href="#overview"><i class="fas fa-map-marked-alt"></i> এক নজরে ফরিদগঞ্জ</a></li>
+                <li><a href="#admin"><i class="fas fa-user-tie"></i> উপজেলা প্রশাসন</a></li>
+                <li><a href="#naming-history"><i class="fas fa-book-open"></i> নামকরণের ইতিহাস</a></li>
+                <li><a href="#liberation-war"><i class="fas fa-flag"></i> মুক্তিযুদ্ধ ও ফরিদগঞ্জ</a></li>
+                <li><a href="#unions"><i class="fas fa-sitemap"></i> ইউনিয়ন ও পৌরসভা</a></li>
+                <li><a href="#education"><i class="fas fa-graduation-cap"></i> শিক্ষা প্রতিষ্ঠান</a></li>
+                <li><a href="#markets"><i class="fas fa-shopping-basket"></i> হাট ও বাজার</a></li>
+                <li><a href="#post-codes"><i class="fas fa-envelope"></i> পোস্ট কোডসমূহ</a></li>
+                <li><a href="#banks"><i class="fas fa-university"></i> ব্যাংক ও আর্থিক</a></li>
+                <li><a href="#economy"><i class="fas fa-seedling"></i> অর্থনীতি ও কৃষি</a></li>
+                <li><a href="#social"><i class="fas fa-hands-helping"></i> সামাজিক সংগঠন</a></li>
+                <li><a href="#map"><i class="fas fa-map"></i> ফরিদগঞ্জ মানচিত্র</a></li>
+                <li><a href="#culture"><i class="fas fa-guitar"></i> সংস্কৃতি ও ক্রীড়া</a></li>
+                <li><a href="#transport"><i class="fas fa-bus"></i> যোগাযোগ ও যাতায়াত</a></li>
+                <li><a href="#places"><i class="fas fa-landmark"></i> ঐতিহাসিক স্থান</a></li>
+                <li><a href="#personalities"><i class="fas fa-star"></i> কৃতি সন্তান</a></li>
+                <li><a href="#contacts"><i class="fas fa-phone-alt"></i> জরুরি যোগাযোগ</a></li>
+                <li><a href="index.html"><i class="fas fa-home"></i> হোম পেজ</a></li>
+                <li><a href="blood_bank.html"><i class="fas fa-tint"></i> ব্লাড ব্যাংক</a></li>
+                <li><a href="scholarship_exam.html"><i class="fas fa-award"></i> বৃত্তি পরিক্ষা</a></li>
+            </ul>
+        </div>
+
+        <!-- Mobile Sidebar Overlay -->
+        <div id="mobileSidebarOverlay" class="mobile-sidebar-overlay"></div>
 
         <div class="content-area">
             <!-- Overview Section with Authentic Data -->
@@ -1317,6 +1506,48 @@
                 e.stopPropagation();
             });
         }
+
+        // New Mobile Sidebar Toggle (3-dot menu)
+        const mobileSidebarToggle = document.getElementById('mobileSidebarToggle');
+        const mobileSidebar = document.getElementById('mobileSidebar');
+        const mobileSidebarClose = document.getElementById('mobileSidebarClose');
+        const mobileSidebarOverlay = document.getElementById('mobileSidebarOverlay');
+
+        function toggleMobileSidebar() {
+            mobileSidebar.classList.toggle('active');
+            mobileSidebarOverlay.classList.toggle('active');
+            // Lock/unlock body scroll
+            document.body.style.overflow = mobileSidebar.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function closeMobileSidebar() {
+            mobileSidebar.classList.remove('active');
+            mobileSidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Toggle sidebar when clicking 3-dot button
+        if (mobileSidebarToggle) {
+            mobileSidebarToggle.addEventListener('click', toggleMobileSidebar);
+        }
+
+        // Close sidebar when clicking close button
+        if (mobileSidebarClose) {
+            mobileSidebarClose.addEventListener('click', closeMobileSidebar);
+        }
+
+        // Close sidebar when clicking overlay
+        if (mobileSidebarOverlay) {
+            mobileSidebarOverlay.addEventListener('click', closeMobileSidebar);
+        }
+
+        // Close sidebar when clicking any link
+        const mobileSidebarLinks = document.querySelectorAll('.mobile-sidebar-nav a');
+        mobileSidebarLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                setTimeout(closeMobileSidebar, 300); // Delay to allow smooth scroll
+            });
+        });
     </script>
 </body>
 
