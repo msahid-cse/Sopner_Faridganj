@@ -60,17 +60,31 @@ themeToggleMobile.addEventListener('click', toggleTheme);
 const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 const mobileMenu = document.getElementById('mobileMenu');
 const hamburgerIcon = document.getElementById('hamburgerIcon');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
 
 mobileMenuToggle.addEventListener('click', () => {
     mobileMenu.classList.toggle('active');
+    sidebarOverlay.classList.toggle('active');
     hamburgerIcon.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+    // Prevent body scroll when sidebar is open
+    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+});
+
+// Close sidebar when clicking overlay
+sidebarOverlay.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+    sidebarOverlay.classList.remove('active');
+    hamburgerIcon.textContent = '☰';
+    document.body.style.overflow = '';
 });
 
 // Close mobile menu when clicking on a link
 document.querySelectorAll('.mobile-nav-link').forEach(link => {
     link.addEventListener('click', () => {
         mobileMenu.classList.remove('active');
+        sidebarOverlay.classList.remove('active');
         hamburgerIcon.textContent = '☰';
+        document.body.style.overflow = '';
     });
 });
 
