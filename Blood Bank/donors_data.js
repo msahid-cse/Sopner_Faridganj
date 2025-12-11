@@ -12,6 +12,17 @@ const donors = [
         lastDonation: "নতুন দাতা",
         contactMethods: "Whatsapp, Imo, Call, Message",
         facebookUrl: "https://www.facebook.com/msahid.cse"
+    },
+    {
+        id: 102,
+        name: "Md. Arman",
+        group: "A+",
+        zila: "Chandpur",
+        upazila: "ফরিদগঞ্জ",
+        phone: "01871351876",
+        lastDonation: "23/11/2025",
+        contactMethods: "Whatsapp",
+        facebookUrl:
     }
     // Add more donors here
     // Example:
