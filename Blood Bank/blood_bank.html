@@ -868,6 +868,9 @@
         <p>© ২০২৪ স্বপ্নের ফরিদগঞ্জ। সর্বস্বত্ব সংরক্ষিত।</p>
     </footer>
 
+    <!-- Donor Data -->
+    <script src="donors_data.js"></script>
+
     <script>
         // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
@@ -981,21 +984,7 @@
             }
         }
 
-        // Sample Donor Data
-        // Real Donor Data
-        const donors = [
-            {
-                id: 101,
-                name: "Md. Sahid",
-                group: "B+",
-                zila: "Chandpur",
-                upazila: "ফরিদগঞ্জ",
-                phone: "01407531529",
-                lastDonation: "নতুন দাতা",
-                contactMethods: "Whatsapp, Imo, Call, Message",
-                facebookUrl: "https://www.facebook.com/msahid.cse"
-            }
-        ];
+        // Donor data is now loaded from external file: donors_data.js
 
         const grid = document.getElementById('donorsGrid');
         const countLabel = document.getElementById('resultCount');
