@@ -82,16 +82,71 @@
 ```
 Sopner_Faridganj/
 │
-├── index.html                 # Main HTML file
-├── styles.css                 # Main stylesheet
+├── index.html                 # Main landing page
+├── styles.css                 # Main stylesheet (shared across pages)
 ├── script.js                  # Main JavaScript file
 ├── advisor-position.css       # Advisor card styling
 ├── manifest.json              # PWA manifest
 ├── robots.txt                 # SEO robots file
+├── sitemap.xml                # SEO sitemap
+├── logo.png                   # Organization logo
 ├── README.md                  # Project documentation
 │
-└── assets/                    # Images and media (external CDN)
+├── Blood Bank/                # Blood donation system
+│   └── blood_bank.html        # Blood bank page with donor search
+│
+├── Info Desk/                 # Information portal
+│   ├── info_desk.html         # Main info desk page
+│   ├── faridganj_hero.png     # Hero section image
+│   ├── faridganj_thana.js     # Police station data
+│   ├── faridganj_Upazila_Data.js  # Upazila information
+│   ├── madrasha_data.js       # Madrasha data
+│   ├── primary_schools_data.js    # Primary schools data
+│   └── schools_data.js        # Schools data
+│
+├── scholarship_exam/          # Scholarship examination
+│   ├── scholarship_exam.html  # Exam information page
+│   ├── calendar.js            # Calendar integration
+│   └── ics_download.js        # ICS file download functionality
+│
+└── Data File/                 # Data storage
+    ├── new_donar_info.csv     # Blood donor information
+    ├── faridganj_upzila_bazar_list_with_working_days.csv
+    └── other data files...
 ```
+
+### 📁 File Organization
+
+**Root Level:**
+- Main landing page (`index.html`) with shared resources
+- Global styles and scripts used across all pages
+
+**Blood Bank:**
+- Comprehensive blood donor search system
+- District and upazila-based filtering
+- Direct call/WhatsApp/Facebook integration
+- Google Form for new donor registration
+
+**Info Desk:**
+- Complete information about Faridganj Upazila
+- Educational institutions database
+- Market information with working days
+- Emergency contacts and services
+- Historical and cultural information
+
+**Scholarship Exam:**
+- Scholarship exam 2025 details
+- Calendar integration (Google Calendar + ICS download)
+- Syllabus and form downloads
+- Sponsor information
+
+### 🔗 File Connections
+
+All HTML files use **relative paths** to connect with each other:
+
+- **From subdirectories to root:** `../index.html`, `../styles.css`
+- **From root to subdirectories:** `Blood Bank/blood_bank.html`, `Info Desk/info_desk.html`, `scholarship_exam/scholarship_exam.html`
+- **Between subdirectories:** `../Blood Bank/blood_bank.html`, `../Info Desk/info_desk.html`
 
 ---
 
