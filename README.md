@@ -29,30 +29,107 @@
 
 ## ✨ Features
 
-### 🎨 Modern & Responsive Design
+### 🏠 Main Website (index.html)
+
+#### 🎨 Modern & Responsive Design
 - **Fully Responsive**: Optimized for all devices (mobile, tablet, desktop)
 - **Dark/Light Theme**: Toggle between themes with smooth transitions
 - **Beautiful UI**: Modern gradient backgrounds and smooth animations
 - **Bangla Typography**: Native Bangla font support (Hind Siliguri)
 
-### 🚀 Interactive Components
+#### 🚀 Interactive Components
 - **Hero Carousel**: Auto-rotating background images
 - **Gallery Modal**: Advanced image gallery with lightbox viewer
 - **Founding Members Scroll**: Draggable horizontal scroll with touch support
 - **Advisor Carousel**: Auto-playing carousel with manual controls
 - **Mobile Menu**: Smooth slide-down navigation for mobile devices
 
-### 💰 Donation System
+#### 💰 Donation System
 - **Multiple Payment Methods**: bKash, Nagad, Rocket integration
 - **QR Code**: Easy scan-to-pay functionality
 - **Quick Donate Buttons**: Preset amounts for faster donations
 - **Copy to Clipboard**: One-click number copying
 
-### 📅 Scholarship Exam 2025
-- **Event Information**: Complete details about the scholarship exam
-- **Add to Calendar**: ICS file download with reminders
-- **Syllabus Access**: Direct download link for exam syllabus
-- **Notice Board**: Scrolling marquee for important announcements
+### 🩸 Blood Bank (blood_bank.html)
+
+#### 🔍 Advanced Search System
+- **Multi-filter Search**: Filter by blood group, district, and upazila
+- **All Bangladesh Coverage**: Complete district and upazila database
+- **Real-time Results**: Instant donor search results
+
+#### 📱 Contact Integration
+- **Direct Call**: One-click phone call functionality
+- **WhatsApp Integration**: Direct WhatsApp messaging
+- **Facebook Profile**: Quick access to donor's Facebook profile
+- **Donor Cards**: Beautiful card design with all donor information
+
+#### 📝 Donor Registration
+- **Google Form Integration**: Easy new donor registration
+- **Embedded Form**: Seamless registration experience
+- **Data Collection**: Comprehensive donor information
+
+#### 🎨 Blood Bank Features
+- **Dark/Light Theme**: Consistent theme support
+- **Blood Group Badges**: Visual blood group indicators
+- **Responsive Design**: Mobile-first approach
+- **Organization Links**: Red Crescent, BADHAN, and other blood donation organizations
+
+### 📚 Info Desk (info_desk.html)
+
+#### 🏛️ Comprehensive Information Portal
+- **Upazila Overview**: Complete information about Faridganj
+- **Historical Data**: Naming history and liberation war information
+- **Administrative Info**: Upazila administration details
+
+#### 🎓 Educational Institutions
+- **Schools Database**: Complete list of schools with contact info
+- **Madrashas**: Islamic educational institutions
+- **Primary Schools**: Primary education centers
+- **Interactive Data**: Searchable and filterable lists
+
+#### 🏪 Market Information
+- **Market List**: All markets in Faridganj
+- **Working Days**: Market operating days
+- **Filter by Day**: Find markets open on specific days
+- **Search Function**: Quick market search
+
+#### 📞 Emergency Services
+- **National Hotlines**: Complete emergency contact numbers
+- **Police Station**: Faridganj Thana information
+- **Healthcare**: Hospital and clinic details
+- **Government Services**: Important government contacts
+
+#### 🗺️ Additional Information
+- **Post Codes**: Complete postal code list
+- **Banks**: Banking and financial institutions
+- **Transport**: Communication and transport info
+- **Cultural Sites**: Historical and cultural places
+- **Notable Personalities**: Famous people from Faridganj
+
+### 🎓 Scholarship Exam 2025 (scholarship_exam.html)
+
+#### 📅 Event Information
+- **Complete Details**: Exam date, time, and venue
+- **Registration Info**: Form submission and fees
+- **Eligibility**: Class 3-8 students
+- **Prize Money**: Top Talent, Talent Pool, and General Grade awards
+
+#### 📥 Downloads & Integration
+- **Syllabus Download**: Direct PDF download link
+- **Registration Form**: Downloadable application form
+- **Google Calendar**: Add to Google Calendar with one click
+- **ICS File Download**: Download calendar file for all calendar apps
+- **Multiple Reminders**: 3 days, 1 day, 3 hours, 1 hour before exam
+
+#### 📢 Notice Board
+- **Scrolling Marquee**: Important announcements
+- **Real-time Updates**: Latest information display
+- **Mobile Optimized**: Readable on all devices
+
+#### 🏆 Sponsor Section
+- **Sponsor Information**: Away Scholars BD
+- **Clickable Links**: Direct website access
+- **Professional Design**: Premium sponsor showcase
 
 ---
 
@@ -386,17 +463,29 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ## 📈 Roadmap
 
-### Upcoming Features
+### ✅ Completed Features
+- [x] Blood Bank System with donor search
+- [x] Info Desk with comprehensive Faridganj information
+- [x] Scholarship Exam page with calendar integration
+- [x] Dark/Light theme toggle
+- [x] Mobile-responsive design
+- [x] Multi-page navigation system
+- [x] File organization into subdirectories
+
+### 🔜 Upcoming Features
 - [ ] Member Registration System
 - [ ] Event Booking System
 - [ ] Blog Section
 - [ ] Newsletter Subscription
-- [ ] Multi-language Support
-- [ ] Progressive Web App (PWA)
-- [ ] Admin Dashboard
-- [ ] Payment Gateway Integration
+- [ ] Multi-language Support (English/Bangla)
+- [ ] Progressive Web App (PWA) full implementation
+- [ ] Admin Dashboard for content management
+- [ ] Payment Gateway Integration for donations
 - [ ] Social Media Feed Integration
 - [ ] Volunteer Management System
+- [ ] Real-time notification system
+- [ ] Advanced analytics dashboard
+- [ ] Mobile app (React Native/Flutter)
 
 ---
 
@@ -435,6 +524,34 @@ If you like this project, please consider:
 ---
 
 ## 📜 Changelog
+
+### Version 1.1.0 (December 11, 2024)
+- 🗂️ **File Reorganization**: Organized files into subdirectories
+  - Created `Blood Bank/` directory for blood donation system
+  - Created `Info Desk/` directory for information portal
+  - Created `scholarship_exam/` directory for scholarship exam
+- 🔗 **Fixed File Connections**: Updated all relative paths
+  - Fixed CSS links from subdirectories to root
+  - Fixed navigation links between pages
+  - Ensured proper file referencing across all HTML files
+- 📚 **Info Desk Enhancements**:
+  - Added comprehensive Faridganj information
+  - Integrated educational institutions database
+  - Added market information with working days filter
+  - Included emergency services and contacts
+- 🩸 **Blood Bank Features**:
+  - All Bangladesh district and upazila coverage
+  - Multi-filter search system
+  - Direct call/WhatsApp/Facebook integration
+  - Google Form for donor registration
+- 🎓 **Scholarship Exam Updates**:
+  - Google Calendar integration
+  - ICS file download with multiple reminders
+  - Sponsor section with Away Scholars BD
+- 📱 **Mobile Optimizations**:
+  - Improved mobile sidebar navigation
+  - Better responsive design across all pages
+  - Enhanced touch interactions
 
 ### Version 1.0.0 (December 2024)
 - ✨ Initial release
