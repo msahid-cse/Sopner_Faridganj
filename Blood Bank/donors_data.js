@@ -6,7 +6,7 @@ const donors = [
         id: 101,
         name: "Md. Sahid",
         group: "B+",
-        zila: "চাঁদপুর",
+        zila: "Chandpur",
         upazila: "ফরিদগঞ্জ",
         phone: "01407531529",
         lastDonation: "নতুন দাতা",
