@@ -22,19 +22,6 @@ const donors = [
         phone: "01871351876",
         lastDonation: "23/11/2025",
         contactMethods: "Whatsapp",
-        facebookUrl:
+        facebookUrl: ""
     }
-    // Add more donors here
-    // Example:
-    // {
-    //     id: 102,
-    //     name: "Donor Name",
-    //     group: "A+",
-    //     zila: "Dhaka",
-    //     upazila: "ধানমন্ডি",
-    //     phone: "01XXXXXXXXX",
-    //     lastDonation: "১ মাস আগে",
-    //     contactMethods: "Whatsapp, Call",
-    //     facebookUrl: "https://www.facebook.com/username"
-    // }
 ];
