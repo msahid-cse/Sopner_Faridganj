@@ -191,6 +191,32 @@ const galleryData = {
             'https://i.imghippo.com/files/sgw2017gpI.jpg'
         ]
     },
+    'scholarship_exam_2025': {
+        name: 'বৃত্তি পরীক্ষা -2025',
+        description: 'বৃত্তি পরীক্ষা -2025 এর কিছু বিশেষ মুহূর্ত।',
+        images: [
+            'https://i.imghippo.com/files/XNWo8443A.jpg',
+            'https://i.imghippo.com/files/UmMI3913gw.jpg',
+            'https://i.imghippo.com/files/AnN4500YKI.jpg',
+            'https://i.imghippo.com/files/nUJ6362lUE.jpg',
+            'https://i.imghippo.com/files/phuV9977j.jpg',
+            'https://i.imghippo.com/files/sxqF7049cbM.jpg',
+            'https://i.imghippo.com/files/TnXa7083EhM.jpg',
+            'https://i.imghippo.com/files/fTM5734hM.jpg',
+            'https://i.imghippo.com/files/ZNv1904Bfk.jpg',
+            'https://i.imghippo.com/files/WqW4279bcE.jpg'
+        ]
+    },
+    'scholarship_exam_2025_news': {
+        name: 'বৃত্তি পরীক্ষা-2025 News',
+        description: 'বৃত্তি পরীক্ষা -2025 সম্পৰ্কীত নিউজ কাটিং ও অন্যান্য খবর।',
+        images: [
+            'https://i.imghippo.com/files/Bflo4176KBo.jpg',
+            'https://i.imghippo.com/files/RTcW7749HM.jpg',
+            'https://i.imghippo.com/files/Lz6722KsM.jpg',
+            'https://i.imghippo.com/files/dmES2461GFU.jpg'
+        ]
+    },
     // 2024 Gallery
     'education2024': {
         name: 'শিক্ষা সহায়তা',
@@ -335,23 +361,7 @@ function showLeadershipYear(year) {
     document.getElementById('leaderYear' + year).className = 'px-8 py-2 bg-emerald-500 text-white hover:bg-emerald-600 transition-colors rounded-lg font-semibold shadow-lg';
 }
 
-// Splash Screen Functions
-function closeSplash() {
-    const splashScreen = document.getElementById('splashScreen');
-    splashScreen.classList.add('fade-out');
 
-    // Remove from DOM after animation completes
-    setTimeout(() => {
-        splashScreen.style.display = 'none';
-    }, 500);
-}
-
-// Auto-close splash screen after 3 seconds
-window.addEventListener('load', function () {
-    setTimeout(() => {
-        closeSplash();
-    }, 1500);
-});
 
 // Make 2025 active by default when page loads
 window.addEventListener('load', function () {

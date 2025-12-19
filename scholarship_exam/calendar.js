@@ -30,18 +30,4 @@ function addToCalendar() {
     alert('✅ Google Calendar খুলছে!\n\n📝 স্বপ্নের ফরিদগঞ্জ বৃত্তি পরীক্ষা ২০২৫\n📅 তারিখ: ১৯ ডিসেম্বর ২০২৫\n⏰ সময়: সকাল ৯টা\n📍 স্থান: ফরিদগঞ্জ সরকারি ডিগ্রি কলেজ\n\n💡 Google Calendar এ "Save" বাটনে ক্লিক করুন');
 }
 
-// Splash Screen Close Function
-function closeSplashScreen() {
-    const splashScreen = document.getElementById('splashScreen');
-    if (splashScreen) {
-        splashScreen.style.opacity = '0';
-        setTimeout(() => {
-            splashScreen.style.display = 'none';
-        }, 300);
-    }
-}
 
-// Auto-close splash screen after 3 seconds
-window.addEventListener('load', function () {
-    setTimeout(closeSplashScreen, 3000);
-});
