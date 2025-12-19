@@ -149,6 +149,7 @@ function showYear(year) {
 let currentImageIndex = 0;
 
 // Gallery data with descriptions
+// Gallery data with descriptions
 const galleryData = {
     // 2025 Gallery
     'education': {
@@ -242,6 +243,8 @@ const galleryData = {
 let currentGalleryImages = [];
 let currentGalleryIndex = 0;
 
+
+// Gallery Modal Logic with Static HTML
 function openGalleryModal(galleryId) {
     const data = galleryData[galleryId];
     if (!data) return;
@@ -249,34 +252,44 @@ function openGalleryModal(galleryId) {
     currentGalleryImages = data.images;
     currentGalleryIndex = 0;
 
-    const modalHTML = `
-        <div id="galleryModal" class="gallery-modal active">
-            <div class="gallery-modal-content">
-                <div class="flex justify-between items-center mb-6">
-                    <div>
-                        <h2 class="text-3xl font-bold text-white mb-2">${data.name}</h2>
-                        <p class="text-gray-300">${data.description}</p>
-                    </div>
-                    <button onclick="closeGalleryModal()" class="text-white text-4xl hover:text-gray-300 w-12 h-12 flex items-center justify-center">&times;</button>
-                </div>
-                <div class="grid md:grid-cols-3 gap-4">
-                    ${data.images.map((img, idx) => `
-                        <div class="cursor-pointer" onclick="openFullImage(${idx})">
-                            <img src="${img}" alt="${data.name} ${idx + 1}" class="w-full h-64 object-cover rounded-lg hover:opacity-80 transition-opacity">
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        </div>
-    `;
+    // Get static modal elements
+    const modal = document.getElementById('galleryModal');
+    const modalTitle = document.getElementById('galleryModalTitle');
+    const galleryGrid = document.getElementById('galleryGrid');
 
-    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    if (!modal || !modalTitle || !galleryGrid) {
+        console.error('Gallery modal elements not found in DOM');
+        return;
+    }
+
+    // Set title
+    modalTitle.textContent = data.name;
+
+    // clear previous grid content
+    galleryGrid.innerHTML = '';
+
+    // Generate new grid items
+    data.images.forEach((img, idx) => {
+        const div = document.createElement('div');
+        div.className = 'cursor-pointer gallery-item-container';
+        div.innerHTML = `
+            <img src="${img}" alt="${data.name} ${idx + 1}" class="w-full h-48 md:h-56 object-cover rounded-lg hover:opacity-90 transition-opacity border-2 border-transparent hover:border-emerald-500">
+        `;
+        div.onclick = () => openFullImage(idx);
+        galleryGrid.appendChild(div);
+    });
+
+    // Show modal
+    modal.classList.remove('hidden');
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
 }
 
 function closeGalleryModal() {
     const modal = document.getElementById('galleryModal');
     if (modal) {
-        modal.remove();
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
     }
 }
 
