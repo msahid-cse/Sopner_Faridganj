@@ -7,7 +7,13 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // CORS Configuration
-const allowedOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [];
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+    ? process.env.ALLOWED_ORIGINS.split(',')
+    : [
+        'https://shwapner-faridganj.netlify.app',
+        'https://sopner-faridganj.netlify.app',
+        'http://localhost:3000'
+    ];
 // Add standard local development ports and 'null' for local file access
 const devOrigins = ['http://localhost:5500', 'http://127.0.0.1:5500', 'null'];
 const allOrigins = [...allowedOrigins, ...devOrigins];
@@ -86,8 +92,16 @@ const createTables = async () => {
         await client.query(donorsQuery);
         await client.query(adminsQuery);
         console.log('Tables created or already exist');
+
+        // Seed Admin User if not exists
+        const adminCheck = await client.query('SELECT * FROM admins WHERE username = $1', ['admin']);
+        if (adminCheck.rows.length === 0) {
+            const hashedPassword = await bcrypt.hash('admin123', 10);
+            await client.query('INSERT INTO admins (username, password) VALUES ($1, $2)', ['admin', hashedPassword]);
+            console.log('Default admin user seeded');
+        }
     } catch (err) {
-        console.error('Error creating tables', err);
+        console.error('Error creating/seeding tables', err);
     }
 };
 
@@ -112,7 +126,7 @@ app.get('/', (req, res) => {
     res.send('Welcome to Sopner Faridganj API Server is Running!');
 });
 
-// Admin Login
+// Admin Login (POST)
 app.post('/api/admin/login', async (req, res) => {
     const { username, password } = req.body;
     try {
@@ -132,6 +146,11 @@ app.post('/api/admin/login', async (req, res) => {
         console.error(err);
         res.status(500).json({ error: 'Server error' });
     }
+});
+
+// Admin Login (GET) - For browser testing friendliness
+app.get('/api/admin/login', (req, res) => {
+    res.send('This endpoint is for POST requests (Login). Please use the Admin Panel UI.');
 });
 
 // Get all donors (Public)
