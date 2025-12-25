@@ -869,13 +869,15 @@
     </footer>
 
     <!-- Donor Data -->
-    <script src="donors_data.js"></script>
+    <!-- Donor Data script removed -->
+
 
     <script>
         // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = themeToggle.querySelector('i');
         const body = document.body;
+        let donors = []; // Initialize donors array
 
         // Check saved theme
         const savedTheme = localStorage.getItem('bloodBankTheme');
@@ -1153,7 +1155,22 @@
         }
 
         // Initial Load
-        renderDonors(donors);
+        async function fetchDonors() {
+            try {
+                const response = await fetch('https://sopner-faridganj-api.vercel.app/api/blood-bank/donors');
+                if (!response.ok) throw new Error('Failed to fetch');
+                donors = await response.json();
+                renderDonors(donors);
+            } catch (error) {
+                console.error('Error loading donors:', error);
+                // Optional: showing error in UI
+                const grid = document.getElementById('donorsGrid');
+                if (grid) grid.innerHTML = '<div style="text-align:center; padding:2rem; color:red;">তথ্য লোড করা যাচ্ছে না। অনুগ্রহ করে পরে আবার চেষ্টা করুন।</div>';
+            }
+        }
+
+        fetchDonors();
+
     </script>
 </body>
 
