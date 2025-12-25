@@ -8,14 +8,25 @@ const PORT = process.env.PORT || 5000;
 
 // CORS Configuration
 const allowedOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [];
+// Add standard local development ports and 'null' for local file access
+const devOrigins = ['http://localhost:5500', 'http://127.0.0.1:5500', 'null'];
+const allOrigins = [...allowedOrigins, ...devOrigins];
+
 app.use(cors({
     origin: function (origin, callback) {
         if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
-            var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-            return callback(new Error(msg), false);
+
+        // Check if origin is in our allowed list
+        // We compare directly or need to handle "null" string/value carefully
+        if (allOrigins.indexOf(origin) !== -1 || allOrigins.indexOf(String(origin)) !== -1) {
+            return callback(null, true);
         }
-        return callback(null, true);
+
+        // Optional: Allow all localhost ports for dev friendliness? 
+        // For now, sticking to specific list + env vars
+        console.log('Blocked CORS for:', origin);
+        var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+        return callback(new Error(msg), false);
     },
     credentials: true
 }));
@@ -95,6 +106,11 @@ const authenticateToken = (req, res, next) => {
 };
 
 // Routes
+
+// Default Root Route
+app.get('/', (req, res) => {
+    res.send('Welcome to Sopner Faridganj API Server is Running!');
+});
 
 // Admin Login
 app.post('/api/admin/login', async (req, res) => {
