@@ -93,6 +93,18 @@ const createTables = async () => {
         await client.query(adminsQuery);
         console.log('Tables created or already exist');
 
+        // Schema Migration: Add missing columns if they don't exist
+        try {
+            await client.query(`
+                ALTER TABLE donors 
+                ADD COLUMN IF NOT EXISTS facebook_url VARCHAR(255),
+                ADD COLUMN IF NOT EXISTS contact_methods VARCHAR(255);
+            `);
+            console.log('Schema migration completed: Checked/Added facebook_url and contact_methods');
+        } catch (migErr) {
+            console.error('Migration error (non-fatal):', migErr);
+        }
+
         // Seed Admin User if not exists
         const adminCheck = await client.query('SELECT * FROM admins WHERE username = $1', ['admin']);
         if (adminCheck.rows.length === 0) {
